@@ -1,0 +1,7 @@
+We want have split the dataset into three major parts:
+            (i) Training = {(800,defective), (800,non-defective)} 
+            (ii) Validation = {(800,defective), (800,non-defective)} = Augmented Copy of Training set
+            (iii) Test = {(25,defective), (25,non-defective)} 
+
+Since we are attempting to slightly overfit the model delibrating for testing sake we will check whether post training, the weights work almost exactly on the validation set which is the copy of the training set.
+
