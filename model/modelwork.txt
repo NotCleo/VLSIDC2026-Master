@@ -1,0 +1,368 @@
+How to count parameters and model (pth) file size (in Bytes) (assume x86-64 bit machine) in any (CNN) neural network (pytorch)?
+
+----------------------------------------------------------------------------------------------------------------------------------------
+
+
+We made the cardboard boxes and now we wish to proceed as follows
+----------------------------------------------------------------------------------------------------------------------------------------
+
+1) Make two broad classes {defective, non defective}
+2) For the non-defective class, we stuck a printed a 1.25cmx1.25cm QR code on the surface (ensuring only 9% surface usage) and flatten image to avoid synthetic artifact, or overlay effects on inference)
+3) Then while generating the defective class dataset, we will need to actually print out those 1.25cmx1.25cm QR's, stick them, produce different kinds of damages
+4) Then we do parallel training; (a) transfer learning on trained ResNet 34 and (b) cold training an untrained ResNet 34 
+5) Point to note is, both the broad classes must have same amount of photos, like we need to do this split for the size of dataset (the split is given below)
+----------------------------------------------------------------------------------------------------------------------------------------
+
+(although we do not want to risk this photoshopping qr idea, so im printing them out in case)
+----------------------------------------------------------------------------------------------------------------------------------------
+Now we will have to do a mass testing of whether the QR we added in each image is being decoded accurately + robustly in different poses and lighting (both of which vary by tiny margins) -----> So BIG realization : Shravan Made the dataset for the Non-Defective Class and he took 100 image; 50 with flash and 50 without
+I tested the images with flash using the code in qr-detector.py and it did not work because flash distorts the QR, worked great for non-flash images 
+Essentially that python script does three things ; (1) Makes the crop of the cardboard box (2) Makes the crop of the QR code (3) Decodes the QR from the QR crop
+----------------------------------------------------------------------------------------------------------------------------------------
+
+DATASET SPLIT : 
+
+Image
+|
+|
+|________Training (100)
+            |
+            |
+            |______Non-defective (100) ---------------------------------------> 50 Non-flash DONE (50 remaining)
+            |
+            |
+            |______Defective (120)
+                        |
+                        |______Side Face Dents (not on QR) (15)
+                        |
+                        |______Side Face Tears (not on QR) (15)
+                        |
+                        |______Main Face Dents (not on QR) (15)
+                        |
+                        |______Main Face Tears (not on QR) (15)
+                        |
+                        |______Side Face Dents (on QR) (15)
+                        |
+                        |______Side Face Tears (on QR) (15)
+                        |
+                        |______Main Face Dents (on QR) (15)
+                        |
+                        |______Main Face Tears (on QR) (15)
+|
+|
+|________Validation (100)
+            |
+            |
+            |______Non-defective (100)
+            |
+            |
+            |______Defective (120)
+                        |
+                        |______Side Face Dents (not on QR) (15)
+                        |
+                        |______Side Face Tears (not on QR) (15)
+                        |
+                        |______Main Face Dents (not on QR) (15)
+                        |
+                        |______Main Face Tears (not on QR) (15)
+                        |
+                        |______Side Face Dents (on QR) (15)
+                        |
+                        |______Side Face Tears (on QR) (15)
+                        |
+                        |______Main Face Dents (on QR) (15)
+                        |
+                        |______Main Face Tears (on QR) (15)
+|
+|
+|_________Testing (30)
+            |
+            |
+            |______Non-defective (14)
+            |
+            |
+            |______Defective (16)
+                        |
+                        |______Side Face Dents (not on QR) (2)
+                        |
+                        |______Side Face Tears (not on QR) (2)
+                        |
+                        |______Main Face Dents (not on QR) (2)
+                        |
+                        |______Main Face Tears (not on QR) (2)
+                        |
+                        |______Side Face Dents (on QR) (2)
+                        |
+                        |______Side Face Tears (on QR) (2)
+                        |
+                        |______Main Face Dents (on QR) (2)
+                        |
+                        |______Main Face Tears (on QR) (2)
+
+We do not want to attempt multi-class damage training and inference because short on time!!!!
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+Summary of doubts
+(in regards to this pipeline; make 5cmx5xmx2cm (LxBxH) cardboard boxes, make (generate via a python script) and stick QR codes that encode {product ID, product fragility type} in which we only have 5 product ID's and 2 levels of fragility ; {{1,2,3,4,5}, {low, high}}, QR codes would generally be present in any one of the four corners, then we defined different defect classes as follows; first we can have two kinds {dent, tear} at the positions; {side (border of the top face along the boundary, not to be confused by side faces), face tear (the top face captured)} and also can occur on QR or not, then once we have plenty images all taken in almost same lighting conditions and height, I guess we will try very hard to keep the camera height, angle, and zoom fixed during data collection and similar during deployment, now we have all the images, now i guess we will have to train a raw untrained resnet on our images, or even run transfer learning training in parallel and check which one works, so save the trained model(models) as onnx, then in the bash file as seen for the SDK, replace with our model, and caliberation dataset and it should do the rest i believe....)
+----------------------------------------------------------------------------------------------------------------------------------------
+1) Our conveyor dimensions are 70mm width and 270mm length
+2) We need to ensure our cardboard boxes are 50mmX50mmx20mm (LxBxH) dimensions which we are making of our own
+3) we aim to have defect detection, then a classification, within it there are sub categories 
+4) We have QR codes on the top face which will encode product type (like level of fragility)and product ID (to help us flag it)
+5) We ideally need to place the camera at 15 cm mark (putting 2 conveyor belts back to back gives us 54cm length)
+6) Once camera captures the first box, it has roughly 50-15cm = 35cm - 2cm buffer = 33cm length to travel while inference occurs 
+7) We will have a linear velocity of the belt somehow to be 5cm/s so we will get roughly 3-6 seconds to make an inference and make the servo active based on the decision
+----------------------------------------------------------------------------------------------------------------------------------------
+
+what problems we faced while discussing, 
+
+1) what if QR code gets damaged, how will we proceed? whats the fallback/ way to flag it?
+
+2) What should our dataset size be, for non defective and defective so that resnet can decently learn a variety of features and classify accurately
+
+3) How big should the dataset of the "non defective" class be, because after all the boxes are of same face dimensions, under same lighting conditons, only the orientation (along z axis) is different and non defective in itself is straightforward right?, but regarding the defective class we have the following classes {dents, tears} and of two forms {side, face}, making around {side dent only, side tear only, face dent only, face tear only, side tear face dent,...} so how do i approach about this? and i have not mentioned yet, we need to consider QR damage, which too would come in two forms; tear on QR and dent on QR. so in totality we will have these many labels, let QR be on on any one of the corner part of the box, so many labels is that??
+
+      SIDE DENT (QR NOT AFFECTED) 
+      SIDE TEAR (QR NOT AFFECTED)
+      FACE DENT (QR NOT AFFECTED)
+      FACE TEAR (QR NOT AFFECTED)
+      QR DENT ONLY
+      QR TEAR ONLY
+      SIDE DENT + FACE DENT (QR NOT AFFECTED)
+      SIDE TEAR + FACE TEAR (QR NOT AFFECTED)
+      SIDE DENT + FACE TEAR (QR NOT AFFECTED)
+      SIDE TEAR + FACE DENT (QR NOT AFFECTED)
+      SIDE DENT + QR DENT
+      SIDE TEAR + QR TEAR
+      FACE DENT + QR DENT
+      FACE TEAR + QR TEAR
+      SIDE DENT + QR TEAR (QR AFFECTED BY TEAR, SIDE BY DENT)
+      SIDE TEAR + QR DENT (QR AFFECTED BY DENT, SIDE BY TEAR)
+      FACE DENT + QR TEAR
+      FACE TEAR + QR DENT
+      SIDE DENT + FACE DENT + QR DENT
+      SIDE TEAR + FACE TEAR + QR TEAR
+      SIDE DENT + FACE TEAR + QR DENT
+      SIDE DENT + FACE TEAR + QR TEAR
+      SIDE TEAR + FACE DENT + QR DENT
+      SIDE TEAR + FACE DENT + QR TEAR
+      SIDE DENT AFFECTING QR + FACE TEAR NOT AFFECTING QR
+      SIDE TEAR AFFECTING QR + FACE DENT NOT AFFECTING QR
+
+----------------------------------------------------------------------------------------------------------------------------------------
+
+Just to be clear what these labels physically mean : 
+
+Common aspect : A perfect top view image of a cardboard face, with only one face, with the QR code present in the top left corner of the cardboard face placed on a blue background, we are taking the images on an iPhone 13+ device with 2x zoom.
+            
+            1) Side Dent : The cardboard face from top appears as a 5cmx5cm square so any one edge will be pressed on appearing like a dent
+            2) Side Tear : The cardboard face from top appears as a 5cmx5cm square so any one edge will be made a cut on appearing like a tear
+            3) Face Dent : The cardboard face from top appears as a 5cmx5cm square so we will press on the face to make a depression on the surface
+            4) Face Tear : The cardboard face from top appears as a 5cmx5cm square so we will cut on the face to make a tear on the surface
+
+----------------------------------------------------------------------------------------------------------------------------------------
+NOTE : Regarding QR codes, we need to figure out on what our fallback is, I suppose it should be that whether QR was found or not we can set that as a flag in itself
+NOTE : Regarding QR Codes, we need to set up what amount of damage is acceptable even on QR codes 
+
+A very hard question; How to introduce a mapping between degree of damage and product fragility information? without explicitly having different labels while training and physcially creating it on the boxes?
+
+----------------------------------------------------------------------------------------------------------------------------------------
+
+ROUGH PIPELINE STAGING : 
+
+TAKE IMAGE --> PROCESS TO HAVE JUST TOP FACE CARDBOARD --> MODEL CHECKS IF DAMAGE IS THERE OR NOT, IF DAMAGE FOUND, WHAT KIND/KINDS OF DAMAGE?, [THEN WHAT LEVEL OF DAMAGE OR DEGREE OF DAMAGES; IGNORE THIS] --> GIVE A SCORE --> COMPARE WITH THRESHOLD FOR DIFFERENT KIND/KINDS AND APPLY THE INTERRUPT TO REJECT ACCORDINGLY VIA THE SERVO MOTOR
+
+----------------------------------------------------------------------------------------------------------------------------------------
+WE ORIGINALLY WANTED TO TRY THE VERY COMPLICATED MAPPING BETWEEN "WHAT KINDS OF DAMAGE ON THE BOX" V/S "HOW MUCH % OF DAMAGE IN EACH KIND" V/S "WHAT'S THE PRODUCT'S FRAGILITY STATUS INSIDE THE BOX"!!!
+----------------------------------------------------------------------------------------------------------------------------------------
+
+Another serious doubt; say we are making a dataset from scratch and i use my phone camera to take pictures of cardboard boxes, while doing so i set some zoom like 2x to try to capture majority of the cardboard face in the frame, then i fixed the phone at 2m lets say and kept taking pictures then train the model with these images, then when i give it an image which was taken in these conditions, where i didnt do zoom but 1x and physically moved the camera closer to mimic "try to capture majority of the cardboard face in the frame" so how does that affect the inference? so regarding this;
+
+"So your model trained on the “zoomed” images will see different geometric relationships (less perspective, flatter surface), whereas the test images shot closer will have different spatial distortions — even if both occupy same area in frame."
+    
+    I guess we will have to "Keep camera height, angle, and zoom fixed during data collection and deployment."
+    
+    For small zoom changes (1× ↔ 1.2×) and distances ~10–30 cm, CNNs usually tolerate it fine — especially if you include augmentation (random scaling, cropping).
+    But a change from 2× optical to 1× close-up can be equivalent to 20–30 % difference in perspective distortion, which is noticeable unless the network saw both cases in training.
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+Now comes the parameters that are fixed and variable, which I think would affect how we construct the dataset itself 
+
+Fixed parameters/Conditions : 
+
+            1) Speed at which the conveyor moves, we will add a motor driver (need to do some wire trimings lmao)
+            2) Our cardboard box dimension is fixed
+            3) Our camera's height and zoom, in the sense the zoom and height at which camera is placed is fixed 
+            4) The combination of defects we produce on the training and validation dataset
+            5) The orientation in which the boxes flow on the belt, all of them would be ideally be perfectly aligned to be straight always
+
+Variable Parameters/Condtions :
+
+            1) just the orientation of how the boxes are along the z -axis (like rotation)
+
+For now we are time constrained so we are not feeding degree of defect classes to the model just defect type classes, so how do we proceed?
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Primary Task : Post Packaging Quality Control (Rejection based on (degree of) damage)
+
+How are we approaching it?
+
+if i have a custom dataset of just top view images of cardboard boxes
+ 
+1) each image has one cardboard box from top view (90 degree) top down
+2) cardboard may or may not be in same orientation in terms of rotation along z-axis
+3) cardboard boxes are off same dimensions (5cm x 5cm) (in terms of length and breadth of top face when observed from top)
+4) the face of box which the camera captures will not have some text/printed illustration on it, just a plain cardboard box
+5) the top left corner of the cardboard box has a 1.25cmx1.25cm QR code on it
+6) We have taken images in extremely stable lighting coditions (it does not vary too much across the images) with iPhone 13 at 2x zoom ensuring the cardboard box occupies a major chunk of the image with a blue background that takes up a small portion along the perimeter of the image.
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+The task : (According to the dataset which we plan to make)
+
+ROUGH PIPELINE STAGING : 
+
+TAKE IMAGE --> PROCESS TO HAVE JUST CROP THE TOP FACE CARDBOARD --> CROP OUT THE QR STICKER --> CHECK IF QR WAS DECODED SUCCESSFULLY OR NOT --> IF DECODED SUCCESSFULLY, THE CLASSIFICATION ARCH MODEL (RESNET34) CHECKS IF DEFECT IS THERE OR NOT, IF DEFECT FOUND, WHAT KIND/KINDS OF DEFECT CLASS/SUBCLASS?, [THEN WHAT LEVEL OF DAMAGE OR DEGREE OF DAMAGES; IGNORE THIS FOR NOW] --> GIVE A SCORE --> COMPARE WITH THRESHOLD FOR DIFFERENT KIND/KINDS AND APPLY THE INTERRUPT TO REJECT ACCORDINGLY VIA THE SERVO MOTOR
+
+HOW MUCH DID WE DO SO FAR? 
+
+WE HAVE MADE ONLY A DECENT PORTION OF THE NON-DEFECTIVE CLASS (NON FLASH IMAGES)
+SO,
+(a) TOOK IMAGE (LOL)
+(b) COULD GENERATE A CROP FOR THE NON-DEFECTIVE (NON FLASH) IMAGE, CROP OF THE CARDBOARD FACE
+(c) COULD GENERATE A CROP FOR THE NON-DEFECTIVE (NON FLASH) IMAGE, CROP OF THE QR
+
+NOW WE ARE LEFT TO DO;
+(d) MAKE THE DATASET FOR THE DEFECTIVE-CLASS
+(e) NEED TO THEN TEST BOTH PATHS (BECAUSE WE DO NOT HAVE A BIG DATASET, WE WILL FORCE IT TO OVERFIT DELIBRATELY); 
+            PATH I : DO TRANSFER LEARNING ON A TRAINED RESNET34
+            PATH II : DO COLD TRAINING ON AN UNTRAINED RESENET 34
+(f) TEST BOTH (OVERFIT) MODELS AND CHECK WHICH ONE PROVIDES BEST INFERENCE
+(g) SAVE THE BEST MODEL AS ONNX
+(h) CREATE A CALIBERATION DATASET .NPY FILE FROM - https://github.com/Microchip-Vectorblox/VectorBlox-SDK/blob/master/python/vbx/vbx/generate/generate_npy.py
+(i) RUN THE VECTORBLOX SDK FOR RESNET 34
+(j) RUN THE VNNX/HEX FILES MADE ON THE MICROCHIP SOC POLARFIRE BOARD
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+FUTURE TASK ---> f : (types of damages found, degree of fragility of product) -> (rejection decision)
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+We have a vectorblox SDK which performs PTQ of fp16-> int8 on popular TF models and in that we want to proceed with ONNX models that will run in our Microchip FPGA
+
+Source | Tutorial | Input (H,W,C) | V1000 FPS | Task | Metric | TFLITE | VNNX
+onnx |onnx_resnet18-v1| [224, 224, 3] |32.7| classification |Top1 |69.3| 68.8
+onnx |onnx_resnet34-v1 |[224, 224, 3] |17.8 |classification |Top1 |72.6 |72.2
+onnx |onnx_squeezenet1.1| [224, 224, 3]| 132.6| classification| Top1 |54.0 |54.8
+onnx |scrfd_500m_bnkps |[288, 512, 3] |85.8 |face detection|x |x |x
+onnx |yolov7 |[640, 640, 3] |1.0 |object detection |mAP⁵⁰⁻⁹⁵ |x|x
+onnx |yolov9-s| [640, 640, 3] |3.9 | object detection| mAP⁵⁰⁻⁹⁵| x|x
+onnx |yolov9-m| [640, 640, 3] |1.2 |object detection |mAP⁵⁰⁻⁹⁵ |x|x
+
+Here's an example from the SDK, does for yolov7;
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+##########################################################
+# _ __ __ ____ __ #
+# | | / /__ _____/ /_____ _____/ __ )/ /___ _ __ #
+# | | / / _ \/ ___/ __/ __ \/ ___/ __ / / __ \| |/_/ #
+# | |/ / __/ /__/ /_/ /_/ / / / /_/ / / /_/ /> < #
+# |___/\___/\___/\__/\____/_/ /_____/_/\____/_/|_| #
+# #
+# https://github.com/Microchip-Vectorblox/VectorBlox-SDK #
+# v2.0 #
+# #
+##########################################################
+
+set -e
+echo "Checking and activating VBX Python Environment..."
+if [ -z $VBX_SDK ]; then
+echo "\$VBX_SDK not set. Please run 'source setup_vars.sh' from the SDK's root folder" && exit 1
+fi
+source $VBX_SDK/vbx_env/bin/activate
+
+<we need to set up calibration data file for our dataset here, by using the generate_npy python script>
+echo "Checking for Numpy calibration data file..."
+if [ ! -f $VBX_SDK/tutorials/imagenetv2_rgb_norm_20x224x224x3.npy ]; then
+generate_npy $VBX_SDK/tutorials/imagenetv2_rgb_20x224x224x3.npy -o $VBX_SDK/tutorials/imagenetv2_rgb_norm_20x224x224x3.npy -s 224 224 --norm
+fi
+
+<we need to then give our onnx resnet here, either the untrained one trained from scratch or the transfer learning learnt model, we will test and take the best onnx>
+echo "Checking for onnx_resnet18-v1 files..."
+if [ ! -f onnx_resnet18-v1.tflite ]; then
+# model details @ https://github.com/onnx/models/tree/main/validated/vision/classification/resnet
+wget -q --no-check-certificate https://media.githubusercontent.com/media/onnx/models/main/validated/vision/classification/resnet/model/resnet18-v1-7.onnx
+fi
+
+if [ ! -f onnx_resnet18-v1.tflite ]; then
+echo "Running ONNX2TF..."
+onnx2tf -cind data $VBX_SDK/tutorials/imagenetv2_rgb_norm_20x224x224x3.npy [[[[0.485,0.456,0.406]]]] [[[[0.229,0.224,0.225]]]] \
+-i resnet18-v1-7.onnx \
+--output_signaturedefs \
+--output_integer_quantized_tflite
+cp saved_model/resnet18-v1-7_full_integer_quant.tflite onnx_resnet18-v1.tflite
+fi
+if [ -f onnx_resnet18-v1.tflite ]; then
+tflite_preprocess onnx_resnet18-v1.tflite --mean 123.675 116.28 103.53 --scale 58.4 57.1 57.38
+fi
+
+if [ -f onnx_resnet18-v1.pre.tflite ]; then
+echo "Generating VNNX for V1000 configuration..."
+vnnx_compile -c V1000 -t onnx_resnet18-v1.pre.tflite -o onnx_resnet18-v1.vnnx
+fi
+
+if [ -f onnx_resnet18-v1.vnnx ]; then
+echo "Running Simulation..."
+python $VBX_SDK/example/python/classifier.py onnx_resnet18-v1.vnnx $VBX_SDK/tutorials/test_images/oreo.jpg
+echo "C Simulation Command:"
+echo '$VBX_SDK/example/sim-c/sim-run-model onnx_resnet18-v1.vnnx $VBX_SDK/tutorials/test_images/oreo.jpg CLASSIFY'
+fi
+
+deactivate
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+In short we have the following actions happening,
+
+SDK Downloads and converts a trained YOLOv7 model to ONNX → TensorFlow → TFLite → VNNX.
+
+So the following doubts;
+
+1) What model fits our specific task the best? or do you suggest a different model altogether? -> resnet34
+2) how to generate NumPy calibration data file for quantization, which is custom to our dataset and not ImageNet/Coco dataset on which the models have been trained? -> refer the SDK
+3) I think we need to first train yolo/resnet with our dataset and save it as a onnx, then apply the bash file, updated wget with our trained model, and then update the calibration dataset (.npy file) tailored for our dataset 
+
+
+How to generate the vectorblox IP (V500!)
+        1) ssh into our container
+        2) at /home/joeld, the VectorBlox SDK has already been cloned 
+        3) cd into /home/joeld/VectorBlox-SDK/ and run "bash install_dependencies.sh"
+        4) In the same directory run "source setup_vars.sh"
+        5) Confirm whether the virtual environment has been configured and activated
+        6) cd $VBX_SDK/tutorials/{network_source}/{network} (for example; cd $VBX_SDK/tutorials/onnx/yolov7)
+        7) bash {network}.sh (for example; bash yolov7.sh) 
+        8) before running (7) we need to ensure our build flags is set to V500
+The VBXIP gets compiled and creates .vnnx, .hex and a lot many files
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Now I believe I need to do the following;
+
+1) Find the .py file for the model, but before that what model do i choose see the table .....?? and match it to our task
+answer) I believe, It is ResNet-34 and here are the specifications
+
+                         Source | Tutorial | Input (H,W,C) | V1000 FPS | Task | Metric | TFLITE | VNNX
+                         onnx |onnx_resnet34-v1 | [224, 224, 3] |17.8 | classification  | Top1  |72.6 |72.2
+
+2) Train the .py of just the bare ResNet untrained model with the dataset we make  
+3) Then save the trained model as onnx
+4) Take a subset of the dataset and run the calibration python script from here - https://github.com/Microchip-Vectorblox/VectorBlox-SDK/blob/master/python/vbx/vbx/generate/generate_npy.py
+5) proceed with the VBX bash file where ill have to edit in the paths/files with the calibrated numpy file and the model trained on our kaggle dataset, then it will auto proceed with the onnx-tf-tflite-vnnx conversion i hope
+6) We need to fix up our dataset by having both defective and normal in order to classify (but again how many of what kinds?)
+
+Important reference files : 
+1) https://github.com/Microchip-Vectorblox/VectorBlox-SDK/blob/master/python/vbx/vbx/generate/generate_npy.py
+2) https://github.com/Microchip-Vectorblox/VectorBlox-SDK/blob/master/tutorials/onnx/onnx_resnet34-v1/onnx_resnet34-v1.sh
+ 
