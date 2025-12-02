@@ -1,0 +1,1726 @@
+{\rtf1\ansi\ansicpg1252\deff0\deflang1033{\fonttbl{\f0\fmodern Consolas;}{\f1\fmodern\fcharset0 Consolas;}{\f2\fnil\fcharset129 Courier New;}}
+{\colortbl ;\red20\green20\blue20;\red142\green142\blue142;\red238\green237\blue136;\red9\green118\blue72;\red170\green64\blue64;\red85\green85\blue85;\red170\green51\blue170;}
+\viewkind4\uc1\pard\f0\fs20 DDR training ...\cf1\highlight2 
+\par \cf0\highlight0    20% [\highlight3           \highlight0 ........................................]\cf1\highlight2 
+\par \cf0\highlight0 DDR training ... Passed ( 2943 ms)\cf1\highlight2 
+\par \cf4\highlight0 [3.37527]\cf0  DDR-Lo size is   32 MiB\cf1\highlight2 
+\par \cf4\highlight0 [3.42111]\cf0  DDR-Hi size is 1888 MiB\cf1\highlight2 
+\par 
+\par \cf0\highlight0 OpenSBI v1.2\cf1\highlight2 
+\par \cf0\highlight0    ____                    _____ ____ _____\cf1\highlight2 
+\par \cf0\highlight0   / __ \\                  / ____|  _ \\_   _|\cf1\highlight2 
+\par \cf0\highlight0  | |  | |_ __   ___ _ __ | (___ | |_) || |\cf1\highlight2 
+\par \cf0\highlight0  | |  | | '_ \\ / _ \\ '_ \\ \\___ \\|  _ < | |\cf1\highlight2 
+\par \cf0\highlight0  | |__| | |_) |  __/ | | |____) | |_) || |_\cf1\highlight2 
+\par \cf0\highlight0   \\____/| .__/ \\___|_| |_|_____/|____/_____|\cf1\highlight2 
+\par \cf0\highlight0         | |\cf1\highlight2 
+\par \cf0\highlight0         |_|\cf1\highlight2 
+\par 
+\par \cf0\highlight0 Platform Name             : Microchip PolarFire(R) SoC\cf1\highlight2 
+\par \cf0\highlight0 Platform Features         : medeleg\cf1\highlight2 
+\par \cf0\highlight0 Platform HART Count       : 5\cf1\highlight2 
+\par \cf0\highlight0 Platform IPI Device       : aclint-mswi\cf1\highlight2 
+\par \cf0\highlight0 Platform Timer Device     : aclint-mtimer @ 1000000Hz\cf1\highlight2 
+\par \cf0\highlight0 Platform Console Device   : mmuart\cf1\highlight2 
+\par \cf0\highlight0 Platform HSM Device       : mpfs_hsm\cf1\highlight2 
+\par \cf0\highlight0 Platform PMU Device       : ---\cf1\highlight2 
+\par \cf0\highlight0 Platform Reboot Device    : mpfs_reset\cf1\highlight2 
+\par \cf0\highlight0 Platform Shutdown Device  : mpfs_reset\cf1\highlight2 
+\par \cf0\highlight0 Firmware Base             : 0xa000000\cf1\highlight2 
+\par \cf0\highlight0 Firmware Size             : 149 KB\cf1\highlight2 
+\par \cf0\highlight0 Runtime SBI Version       : 1.0\cf1\highlight2 
+\par 
+\par \cf0\highlight0 Domain0 Name              : root\cf1\highlight2 
+\par \cf0\highlight0 Domain0 Boot HART         : 1\cf1\highlight2 
+\par \cf0\highlight0 Domain0 HARTs             : 1,2,3,4\cf1\highlight2 
+\par \cf0\highlight0 Domain0 Region00          : 0x0000000002008000-0x000000000200bfff (I)\cf1\highlight2 
+\par \cf0\highlight0 Domain0 Region01          : 0x0000000002000000-0x0000000002007fff (I)\cf1\highlight2 
+\par \cf0\highlight0 Domain0 Region02          : 0x000000000a000000-0x000000000a03ffff ()\cf1\highlight2 
+\par \cf0\highlight0 Domain0 Region03          : 0x0000000000000000-0xffffffffffffffff (R,W,X)\cf1\highlight2 
+\par \cf0\highlight0 Domain0 Next Address      : 0x0000000080200000\cf1\highlight2 
+\par \cf0\highlight0 Domain0 Next Arg1         : 0x000000000a0267d0\cf1\highlight2 
+\par \cf0\highlight0 Domain0 Next Mode         : S-mode\cf1\highlight2 
+\par \cf0\highlight0 Domain0 SysReset          : yes\cf1\highlight2 
+\par 
+\par \cf0\highlight0 Domain1 Name              : u-boot.bin\cf1\highlight2 
+\par \cf0\highlight0 Domain1 Boot HART         : 1\cf1\highlight2 
+\par \cf0\highlight0 Domain1 HARTs             : 1*,2*,3*,4*\cf1\highlight2 
+\par \cf0\highlight0 Domain1 Region00          : 0x000000000a000000-0x000000000a03ffff ()\cf1\highlight2 
+\par \cf0\highlight0 Domain1 Region01          : 0x0000000000000000-0xffffffffffffffff (R,W,X)\cf1\highlight2 
+\par \cf0\highlight0 Domain1 Next Address      : 0x0000000080200000\cf1\highlight2 
+\par \cf0\highlight0 Domain1 Next Arg1         : 0x000000000a0267d0\cf1\highlight2 
+\par \cf0\highlight0 Domain1 Next Mode         : S-mode\cf1\highlight2 
+\par \cf0\highlight0 Domain1 SysReset          : yes\cf1\highlight2 
+\par 
+\par \cf0\highlight0 Boot HART ID              : 1\cf1\highlight2 
+\par \cf0\highlight0 Boot HART Domain          : u-boot.bin\cf1\highlight2 
+\par \cf0\highlight0 Boot HART Priv Version    : v1.10\cf1\highlight2 
+\par \cf0\highlight0 Boot HART Base ISA        : rv64imafdc\cf1\highlight2 
+\par \cf0\highlight0 Boot HART ISA Extensions  : none\cf1\highlight2 
+\par \cf0\highlight0 Boot HART PMP Count       : 16\cf1\highlight2 
+\par \cf0\highlight0 Boot HART PMP Granularity : 4\cf1\highlight2 
+\par \cf0\highlight0 Boot HART PMP Address Bits: 36\cf1\highlight2 
+\par \cf0\highlight0 Boot HART MHPM Count      : 2\cf1\highlight2 
+\par \cf0\highlight0 Boot HART MIDELEG         : 0x0000000000000222\cf1\highlight2 
+\par \cf0\highlight0 Boot HART MEDELEG         : 0x000000000000b109\cf1\highlight2 
+\par 
+\par 
+\par \cf0\highlight0 U-Boot 2022.01-linux4microchip+fpga-2023.06 (Jun 28 2023 - 07:35:32 +0000)\cf1\highlight2 
+\par 
+\par \cf0\highlight0 CPU:   rv64imafdc\cf1\highlight2 
+\par \cf0\highlight0 Model: Microchip PolarFire-SoC Icicle Kit\cf1\highlight2 
+\par \cf0\highlight0 DRAM:  1.8 GiB\cf1\highlight2 
+\par \cf0\highlight0 MMC:   mmc@20008000: 0\cf1\highlight2 
+\par \cf0\highlight0 Loading Environment from nowhere... OK\cf1\highlight2 
+\par \cf0\highlight0 In:    serial@20100000\cf1\highlight2 
+\par \cf0\highlight0 Out:   serial@20100000\cf1\highlight2 
+\par \cf0\highlight0 Err:   serial@20100000\cf1\highlight2 
+\par \cf0\highlight0 Net:   eth0: ethernet@20112000\cf1\highlight2 
+\par \cf0\highlight0 Hit any key to stop autoboot:  0\cf1\highlight2 
+\par \cf0\highlight0 Trying to boot from QSPI...\cf1\highlight2 
+\par \cf0\highlight0 Could not find a valid device for spi-nand0\cf1\highlight2 
+\par \cf0\highlight0 List of MTD devices:\cf1\highlight2 
+\par \cf0\highlight0 No MTD device found\cf1\highlight2 
+\par \cf0\highlight0 switch to partitions #0, OK\cf1\highlight2 
+\par \cf0\highlight0 mmc0(part 0) is current device\cf1\highlight2 
+\par \cf0\highlight0 Scanning mmc 0:1...\cf1\highlight2 
+\par \cf0\highlight0 Found U-Boot script /boot.scr.uimg\cf1\highlight2 
+\par \cf0\highlight0 2109 bytes read in 38 ms (53.7 KiB/s)\cf1\highlight2 
+\par \cf0\highlight0 ## Executing script at 8e000000\cf1\highlight2 
+\par \cf0\highlight0 5123492 bytes read in 94 ms (52 MiB/s)\cf1\highlight2 
+\par \cf0\highlight0 ## Loading kernel from FIT Image at 8e000000 ...\cf1\highlight2 
+\par \cf0\highlight0    Using 'conf-microchip_mpfs-icicle-kit.dtb' configuration\cf1\highlight2 
+\par \cf0\highlight0    Trying 'kernel-1' kernel subimage\cf1\highlight2 
+\par \cf0\highlight0      Description:  Linux kernel\cf1\highlight2 
+\par \cf0\highlight0      Type:         Kernel Image\cf1\highlight2 
+\par \cf0\highlight0      Compression:  gzip compressed\cf1\highlight2 
+\par \cf0\highlight0      Data Start:   0x8e0000fc\cf1\highlight2 
+\par \cf0\highlight0      Data Size:    5097549 Bytes = 4.9 MiB\cf1\highlight2 
+\par \cf0\highlight0      Architecture: RISC-V\cf1\highlight2 
+\par \cf0\highlight0      OS:           Linux\cf1\highlight2 
+\par \cf0\highlight0      Load Address: 0x80200000\cf1\highlight2 
+\par \cf0\highlight0      Entry Point:  0x80200000\cf1\highlight2 
+\par \cf0\highlight0      Hash algo:    sha256\cf1\highlight2 
+\par \cf0\highlight0      Hash value:   d9263254b270a0561f35dbddc49acf66cd824b3e2c068d98fd334eb57b12fa2c\cf1\highlight2 
+\par \cf0\highlight0    Verifying Hash Integrity ... sha256+ OK\cf1\highlight2 
+\par \cf0\highlight0 ## Loading fdt from FIT Image at 8e000000 ...\cf1\highlight2 
+\par \cf0\highlight0    Using 'conf-microchip_mpfs-icicle-kit.dtb' configuration\cf1\highlight2 
+\par \cf0\highlight0    Trying 'fdt-microchip_mpfs-icicle-kit.dtb' fdt subimage\cf1\highlight2 
+\par \cf0\highlight0      Description:  Flattened Device Tree blob\cf1\highlight2 
+\par \cf0\highlight0      Type:         Flat Device Tree\cf1\highlight2 
+\par \cf0\highlight0      Compression:  uncompressed\cf1\highlight2 
+\par \cf0\highlight0      Data Start:   0x8e4dca6c\cf1\highlight2 
+\par \cf0\highlight0      Data Size:    20466 Bytes = 20 KiB\cf1\highlight2 
+\par \cf0\highlight0      Architecture: RISC-V\cf1\highlight2 
+\par \cf0\highlight0      Load Address: 0x8a000000\cf1\highlight2 
+\par \cf0\highlight0      Hash algo:    sha256\cf1\highlight2 
+\par \cf0\highlight0      Hash value:   28363deef55e16e50b58a9a94a3a656a9fd543a8a652eafc0adfce7b221e9a23\cf1\highlight2 
+\par \cf0\highlight0    Verifying Hash Integrity ... sha256+ OK\cf1\highlight2 
+\par \cf0\highlight0    Loading fdt from 0x8e4dca6c to 0x8a000000\cf1\highlight2 
+\par \cf0\highlight0    Booting using the fdt blob at 0x8a000000\cf1\highlight2 
+\par \cf0\highlight0    Uncompressing Kernel Image\cf1\highlight2 
+\par \cf0\highlight0    Using Device Tree in place at 000000008a000000, end 000000008a007ff1\cf1\highlight2 
+\par 
+\par \cf0\highlight0 Starting kernel ...\cf1\highlight2 
+\par 
+\par \cf0\highlight0 [    0.000000] Linux version 6.1.33-linux4microchip+fpga-2023.06 (oe-user@oe-host) (riscv64-oe-linux-gcc (GCC) 11.3.0, GNU ld (GNU Binutils) 2.38.20220708) #1 SMP Wed Jun 28 07:02:12 UTC 2023\cf1\highlight2 
+\par \cf0\highlight0 [    0.000000] OF: fdt: Ignoring memory range 0x80000000 - 0x80200000\cf1\highlight2 
+\par \cf0\highlight0 [    0.000000] Machine model: Microchip PolarFire-SoC Icicle Kit\cf1\highlight2 
+\par \cf0\highlight0 [    0.000000] efi: UEFI not found.\cf1\highlight2 
+\par \cf0\highlight0 [    0.000000] Reserved memory: region for default DMA coherent area is redefined\cf1\highlight2 
+\par \cf0\highlight0 [    0.000000] Reserved memory: created DMA memory pool at 0x00000000c4000000, size 64 MiB\cf1\highlight2 
+\par \cf0\highlight0 [    0.000000] OF: reserved mem: initialized node non-cached-low-buffer, compatible id shared-dma-pool\cf1\highlight2 
+\par \cf0\highlight0 [    0.000000] Reserved memory: region for default DMA coherent area is redefined\cf1\highlight2 
+\par \cf0\highlight0 [    0.000000] Reserved memory: created DMA memory pool at 0x0000001412000000, size 256 MiB\cf1\highlight2 
+\par \cf0\highlight0 [    0.000000] OF: reserved mem: initialized node non-cached-high-buffer, compatible id shared-dma-pool\cf1\highlight2 
+\par \cf0\highlight0 [    0.000000] Reserved memory: created DMA memory pool at 0x0000000088000000, size 32 MiB\cf1\highlight2 
+\par \cf0\highlight0 [    0.000000] OF: reserved mem: initialized node buffer@88000000, compatible id shared-dma-pool\cf1\highlight2 
+\par \cf0\highlight0 [    0.000000] Reserved memory: created DMA memory pool at 0x00000000c8000000, size 32 MiB\cf1\highlight2 
+\par \cf0\highlight0 [    0.000000] OF: reserved mem: initialized node buffer@c8000000, compatible id shared-dma-pool\cf1\highlight2 
+\par \cf0\highlight0 [    0.000000] Reserved memory: created DMA memory pool at 0x00000000d8000000, size 32 MiB\cf1\highlight2 
+\par \cf0\highlight0 [    0.000000] OF: reserved mem: initialized node buffer@d8000000, compatible id shared-dma-pool\cf1\highlight2 
+\par \cf0\highlight0 [    0.000000] Reserved memory: created DMA memory pool at 0x000000103fc00000, size 4 MiB\cf1\highlight2 
+\par \cf0\highlight0 [    0.000000] OF: reserved mem: initialized node hss-buffer@103fc00000, compatible id shared-dma-pool\cf1\highlight2 
+\par \cf0\highlight0 [    0.000000] Zone ranges:\cf1\highlight2 
+\par \cf0\highlight0 [    0.000000]   DMA32    [mem 0x0000000080200000-0x00000000ffffffff]\cf1\highlight2 
+\par \cf0\highlight0 [    0.000000]   Normal   [mem 0x0000000100000000-0x0000001421ffffff]\cf1\highlight2 
+\par \cf0\highlight0 [    0.000000] Movable zone start for each node\cf1\highlight2 
+\par \cf0\highlight0 [    0.000000] Early memory node ranges\cf1\highlight2 
+\par \cf0\highlight0 [    0.000000]   node   0: [mem 0x0000000080200000-0x0000000083ffffff]\cf1\highlight2 
+\par \cf0\highlight0 [    0.000000]   node   0: [mem 0x000000008a000000-0x0000000091ffffff]\cf1\highlight2 
+\par \cf0\highlight0 [    0.000000]   node   0: [mem 0x00000000c4000000-0x00000000c9ffffff]\cf1\highlight2 
+\par \cf0\highlight0 [    0.000000]   node   0: [mem 0x0000001022000000-0x000000103fbfffff]\cf1\highlight2 
+\par \cf0\highlight0 [    0.000000]   node   0: [mem 0x000000103fc00000-0x000000103fffffff]\cf1\highlight2 
+\par \cf0\highlight0 [    0.000000]   node   0: [mem 0x0000001040000000-0x000000107fffffff]\cf1\highlight2 
+\par \cf0\highlight0 [    0.000000]   node   0: [mem 0x0000001412000000-0x0000001421ffffff]\cf1\highlight2 
+\par \cf0\highlight0 [    0.000000] Initmem setup node 0 [mem 0x0000000080200000-0x0000001421ffffff]\cf1\highlight2 
+\par \cf0\highlight0 [    0.000000] On node 0, zone DMA32: 512 pages in unavailable ranges\cf1\highlight2 
+\par \cf0\highlight0 [    0.000000] On node 0, zone DMA32: 24576 pages in unavailable ranges\cf1\highlight2 
+\par \cf0\highlight0 [    0.000000] On node 0, zone DMA32: 40960 pages in unavailable ranges\cf1\highlight2 
+\par \cf0\highlight0 [    0.000000] On node 0, zone Normal: 32768 pages in unavailable ranges\cf1\highlight2 
+\par \cf0\highlight0 [    0.000000] On node 0, zone Normal: 8192 pages in unavailable ranges\cf1\highlight2 
+\par \cf0\highlight0 [    0.000000] On node 0, zone Normal: 24576 pages in unavailable ranges\cf1\highlight2 
+\par \cf0\highlight0 [    0.000000] SBI specification v1.0 detected\cf1\highlight2 
+\par \cf0\highlight0 [    0.000000] SBI implementation ID=0x8 Version=0x10002\cf1\highlight2 
+\par \cf0\highlight0 [    0.000000] SBI TIME extension detected\cf1\highlight2 
+\par \cf0\highlight0 [    0.000000] SBI IPI extension detected\cf1\highlight2 
+\par \cf0\highlight0 [    0.000000] SBI RFENCE extension detected\cf1\highlight2 
+\par \cf0\highlight0 [    0.000000] SBI SRST extension detected\cf1\highlight2 
+\par \cf0\highlight0 [    0.000000] SBI HSM extension detected\cf1\highlight2 
+\par \cf0\highlight0 [    0.000000] CPU with hartid=0 is not available\cf1\highlight2 
+\par \cf0\highlight0 [    0.000000] CPU with hartid=0 is not available\cf1\highlight2 
+\par \cf0\highlight0 [    0.000000] CPU with hartid=0 is not available\cf1\highlight2 
+\par \cf0\highlight0 [    0.000000] riscv: base ISA extensions acdfim\cf1\highlight2 
+\par \cf0\highlight0 [    0.000000] riscv: ELF capabilities acdfim\cf1\highlight2 
+\par \cf0\highlight0 [    0.000000] percpu: Embedded 17 pages/cpu s30632 r8192 d30808 u69632\cf1\highlight2 
+\par \cf0\highlight0 [    0.000000] Built 1 zonelists, mobility grouping on.  Total pages: 516615\cf1\highlight2 
+\par \cf0\highlight0 [    0.000000] Kernel command line: earlycon=sbi root=/dev/mmcblk0p3 rootwait uio_pdrv_genirq.of_id=generic-uio\cf1\highlight2 
+\par \cf0\highlight0 [    0.000000] Dentry cache hash table entries: 262144 (order: 9, 2097152 bytes, linear)\cf1\highlight2 
+\par \cf0\highlight0 [    0.000000] Inode-cache hash table entries: 131072 (order: 8, 1048576 bytes, linear)\cf1\highlight2 
+\par \cf0\highlight0 [    0.000000] mem auto-init: stack:off, heap alloc:off, heap free:off\cf1\highlight2 
+\par \cf0\highlight0 [    0.000000] software IO TLB: area num 4.\cf1\highlight2 
+\par \cf0\highlight0 [    0.000000] software IO TLB: mapped [mem 0x000000008c500000-0x0000000090500000] (64MB)\cf1\highlight2 
+\par \cf0\highlight0 [    0.000000] Memory: 1587964K/2095104K available (6165K kernel code, 4822K rwdata, 4096K rodata, 2144K init, 384K bss, 507140K reserved, 0K cma-reserved)\cf1\highlight2 
+\par \cf0\highlight0 [    0.000000] SLUB: HWalign=64, Order=0-3, MinObjects=0, CPUs=4, Nodes=1\cf1\highlight2 
+\par \cf0\highlight0 [    0.000000] rcu: Hierarchical RCU implementation.\cf1\highlight2 
+\par \cf0\highlight0 [    0.000000] rcu:     RCU event tracing is enabled.\cf1\highlight2 
+\par \cf0\highlight0 [    0.000000] rcu:     RCU restricting CPUs from NR_CPUS=64 to nr_cpu_ids=4.\cf1\highlight2 
+\par \cf0\highlight0 [    0.000000]  Tracing variant of Tasks RCU enabled.\cf1\highlight2 
+\par \cf0\highlight0 [    0.000000] rcu: RCU calculated value of scheduler-enlistment delay is 25 jiffies.\cf1\highlight2 
+\par \cf0\highlight0 [    0.000000] rcu: Adjusting geometry for rcu_fanout_leaf=16, nr_cpu_ids=4\cf1\highlight2 
+\par \cf0\highlight0 [    0.000000] NR_IRQS: 64, nr_irqs: 64, preallocated irqs: 0\cf1\highlight2 
+\par \cf0\highlight0 [    0.000000] CPU with hartid=0 is not available\cf1\highlight2 
+\par \cf0\highlight0 [    0.000000] riscv-intc: unable to find hart id for /cpus/cpu@0/interrupt-controller\cf1\highlight2 
+\par \cf0\highlight0 [    0.000000] riscv-intc: 64 local interrupts mapped\cf1\highlight2 
+\par \cf0\highlight0 [    0.000000] plic: interrupt-controller@c000000: mapped 186 interrupts with 4 handlers for 9 contexts.\cf1\highlight2 
+\par \cf0\highlight0 [    0.000000] rcu: srcu_init: Setting srcu_struct sizes based on contention.\cf1\highlight2 
+\par \cf0\highlight0 [    0.000000] riscv-timer: riscv_timer_init_dt: Registering clocksource cpuid [0] hartid [1]\cf1\highlight2 
+\par \cf0\highlight0 [    0.000000] clocksource: riscv_clocksource: mask: 0xffffffffffffffff max_cycles: 0x1d854df40, max_idle_ns: 3526361616960 ns\cf1\highlight2 
+\par \cf0\highlight0 [    0.000003] sched_clock: 64 bits at 1000kHz, resolution 1000ns, wraps every 2199023255500ns\cf1\highlight2 
+\par \cf0\highlight0 [    0.000414] Console: colour dummy device 80x25\cf1\highlight2 
+\par \cf0\highlight0 [    0.001985] printk: console [tty0] enabled\cf1\highlight2 
+\par \cf0\highlight0 [    0.002110] Calibrating delay loop (skipped), value calculated using timer frequency.. 2.00 BogoMIPS (lpj=4000)\cf1\highlight2 
+\par \cf0\highlight0 [    0.002177] pid_max: default: 32768 minimum: 301\cf1\highlight2 
+\par \cf0\highlight0 [    0.002681] Mount-cache hash table entries: 4096 (order: 3, 32768 bytes, linear)\cf1\highlight2 
+\par \cf0\highlight0 [    0.002884] Mountpoint-cache hash table entries: 4096 (order: 3, 32768 bytes, linear)\cf1\highlight2 
+\par \cf0\highlight0 [    0.005323] CPU node for /cpus/cpu@0 exist but the possible cpu range is :0-3\cf1\highlight2 
+\par \cf0\highlight0 [    0.007652] cblist_init_generic: Setting adjustable number of callback queues.\cf1\highlight2 
+\par \cf0\highlight0 [    0.007716] cblist_init_generic: Setting shift to 2 and lim to 1.\cf1\highlight2 
+\par \cf0\highlight0 [    0.008027] riscv: ELF compat mode unsupported\cf1\highlight2 
+\par \cf0\highlight0 [    0.008046] ASID allocator disabled (0 bits)\cf1\highlight2 
+\par \cf0\highlight0 [    0.008445] rcu: Hierarchical SRCU implementation.\cf1\highlight2 
+\par \cf0\highlight0 [    0.008482] rcu:     Max phase no-delay instances is 1000.\cf1\highlight2 
+\par \cf0\highlight0 [    0.009154] EFI services will not be available.\cf1\highlight2 
+\par \cf0\highlight0 [    0.010500] smp: Bringing up secondary CPUs ...\cf1\highlight2 
+\par \cf0\highlight0 [    0.016095] smp: Brought up 1 node, 4 CPUs\cf1\highlight2 
+\par \cf0\highlight0 [    0.017389] devtmpfs: initialized\cf1\highlight2 
+\par \cf0\highlight0 [    0.029110] DMA: default coherent area is set\cf1\highlight2 
+\par \cf0\highlight0 [    0.029185] clocksource: jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 7645041785100000 ns\cf1\highlight2 
+\par \cf0\highlight0 [    0.029257] futex hash table entries: 1024 (order: 4, 65536 bytes, linear)\cf1\highlight2 
+\par \cf0\highlight0 [    0.032016] NET: Registered PF_NETLINK/PF_ROUTE protocol family\cf1\highlight2 
+\par \cf0\highlight0 [    0.032486] DMA: preallocated 256 KiB GFP_KERNEL pool for atomic allocations\cf1\highlight2 
+\par \cf0\highlight0 [    0.032608] DMA: preallocated 256 KiB GFP_KERNEL|GFP_DMA32 pool for atomic allocations\cf1\highlight2 
+\par \cf0\highlight0 [    0.033961] CCACHE: DataError @ 0x00000000.081DFFF8\cf1\highlight2 
+\par \cf0\highlight0 [    0.034146] CCACHE: DataFail @ 0x00000000.081DFFE8\cf1\highlight2 
+\par \cf0\highlight0 [    0.034339] CCACHE: 4 banks, 16 ways, sets/bank=512, bytes/block=64\cf1\highlight2 
+\par \cf0\highlight0 [    0.034381] CCACHE: Index of the largest way enabled: 11\cf1\highlight2 
+\par \cf0\highlight0 [    0.063131] SCSI subsystem initialized\cf1\highlight2 
+\par \cf0\highlight0 [    0.064058] usbcore: registered new interface driver usbfs\cf1\highlight2 
+\par \cf0\highlight0 [    0.064163] usbcore: registered new interface driver hub\cf1\highlight2 
+\par \cf0\highlight0 [    0.064264] usbcore: registered new device driver usb\cf1\highlight2 
+\par \cf0\highlight0 [    0.064667] pps_core: LinuxPPS API ver. 1 registered\cf1\highlight2 
+\par \cf0\highlight0 [    0.064705] pps_core: Software ver. 5.3.6 - Copyright 2005-2007 Rodolfo Giometti <giometti@linux.it>\cf1\highlight2 
+\par \cf0\highlight0 [    0.064771] PTP clock support registered\cf1\highlight2 
+\par \cf0\highlight0 [    0.065101] FPGA manager framework\cf1\highlight2 
+\par \cf0\highlight0 [    0.066384] vgaarb: loaded\cf1\highlight2 
+\par \cf0\highlight0 [    0.066687] clocksource: Switched to clocksource riscv_clocksource\cf1\highlight2 
+\par \cf0\highlight0 [    0.083828] NET: Registered PF_INET protocol family\cf1\highlight2 
+\par \cf0\highlight0 [    0.085355] IP idents hash table entries: 32768 (order: 6, 262144 bytes, linear)\cf1\highlight2 
+\par \cf0\highlight0 [    0.094785] tcp_listen_portaddr_hash hash table entries: 1024 (order: 2, 16384 bytes, linear)\cf1\highlight2 
+\par \cf0\highlight0 [    0.094961] Table-perturb hash table entries: 65536 (order: 6, 262144 bytes, linear)\cf1\highlight2 
+\par \cf0\highlight0 [    0.095029] TCP established hash table entries: 16384 (order: 5, 131072 bytes, linear)\cf1\highlight2 
+\par \cf0\highlight0 [    0.095936] TCP bind hash table entries: 16384 (order: 7, 524288 bytes, linear)\cf1\highlight2 
+\par \cf0\highlight0 [    0.099038] TCP: Hash tables configured (established 16384 bind 16384)\cf1\highlight2 
+\par \cf0\highlight0 [    0.099845] UDP hash table entries: 1024 (order: 3, 32768 bytes, linear)\cf1\highlight2 
+\par \cf0\highlight0 [    0.100100] UDP-Lite hash table entries: 1024 (order: 3, 32768 bytes, linear)\cf1\highlight2 
+\par \cf0\highlight0 [    0.100699] NET: Registered PF_UNIX/PF_LOCAL protocol family\cf1\highlight2 
+\par \cf0\highlight0 [    0.100855] PCI: CLS 0 bytes, default 64\cf1\highlight2 
+\par \cf0\highlight0 [    0.103261] workingset: timestamp_bits=62 max_order=19 bucket_order=0\cf1\highlight2 
+\par \cf0\highlight0 [    0.113944] Block layer SCSI generic (bsg) driver version 0.4 loaded (major 249)\cf1\highlight2 
+\par \cf0\highlight0 [    0.114017] io scheduler mq-deadline registered\cf1\highlight2 
+\par \cf0\highlight0 [    0.114050] io scheduler kyber registered\cf1\highlight2 
+\par \cf0\highlight0 [    0.118198] microchip-pcie 3000000000.pcie: host bridge /fabric-pcie-bus@3000000000/pcie@3000000000 ranges:\cf1\highlight2 
+\par \cf0\highlight0 [    0.118329] microchip-pcie 3000000000.pcie:      MEM 0x3009000000..0x3017ffffff -> 0x0009000000\cf1\highlight2 
+\par \cf0\highlight0 [    0.118415] microchip-pcie 3000000000.pcie:       IO 0x3008000000..0x3008ffffff -> 0x0008000000\cf1\highlight2 
+\par \cf0\highlight0 [    0.118486] microchip-pcie 3000000000.pcie:      MEM 0x3018000000..0x3087ffffff -> 0x0018000000\cf1\highlight2 
+\par \cf0\highlight0 [    0.118577] microchip-pcie 3000000000.pcie:   IB MEM 0x0080000000..0x0083ffffff -> 0x0080000000\cf1\highlight2 
+\par \cf0\highlight0 [    0.118719] microchip-pcie 3000000000.pcie:   IB MEM 0x00c4000000..0x00c9ffffff -> 0x0084000000\cf1\highlight2 
+\par \cf0\highlight0 [    0.118813] microchip-pcie 3000000000.pcie:   IB MEM 0x008a000000..0x0091ffffff -> 0x008a000000\cf1\highlight2 
+\par \cf0\highlight0 [    0.118903] microchip-pcie 3000000000.pcie:   IB MEM 0x1412000000..0x1421ffffff -> 0x0092000000\cf1\highlight2 
+\par \cf0\highlight0 [    0.118973] microchip-pcie 3000000000.pcie:   IB MEM 0x1022000000..0x107fffffff -> 0x00a2000000\cf1\highlight2 
+\par \cf0\highlight0 [    0.124589] microchip-pcie 3000000000.pcie: ECAM at [mem 0x3000000000-0x3007ffffff] for [bus 00-7f]\cf1\highlight2 
+\par \cf0\highlight0 [    0.124845] microchip-pcie 3000000000.pcie: PCI host bridge to bus 0000:00\cf1\highlight2 
+\par \cf0\highlight0 [    0.124893] pci_bus 0000:00: root bus resource [bus 00-7f]\cf1\highlight2 
+\par \cf0\highlight0 [    0.124936] pci_bus 0000:00: root bus resource [mem 0x3009000000-0x3017ffffff pref] (bus address [0x09000000-0x17ffffff])\cf1\highlight2 
+\par \cf0\highlight0 [    0.124994] pci_bus 0000:00: root bus resource [io  0x0000-0xffffff] (bus address [0x8000000-0x8ffffff])\cf1\highlight2 
+\par \cf0\highlight0 [    0.125046] pci_bus 0000:00: root bus resource [mem 0x3018000000-0x3087ffffff] (bus address [0x18000000-0x87ffffff])\cf1\highlight2 
+\par \cf0\highlight0 [    0.125157] pci 0000:00:00.0: [11aa:1556] type 01 class 0x000604\cf1\highlight2 
+\par \cf0\highlight0 [    0.125214] pci 0000:00:00.0: reg 0x10: [mem 0x00000000-0x7fffffff 64bit pref]\cf1\highlight2 
+\par \cf0\highlight0 [    0.125357] pci 0000:00:00.0: supports D1 D2\cf1\highlight2 
+\par \cf0\highlight0 [    0.125393] pci 0000:00:00.0: PME# supported from D0 D1 D2 D3hot D3cold\cf1\highlight2 
+\par \cf0\highlight0 [    0.128108] pci 0000:00:00.0: bridge configuration invalid ([bus 00-00]), reconfiguring\cf1\highlight2 
+\par \cf0\highlight0 [    0.177666] pci_bus 0000:01: busn_res: [bus 01-7f] end is updated to 01\cf1\highlight2 
+\par \cf0\highlight0 [    0.177756] pci 0000:00:00.0: BAR 0: no space for [mem size 0x80000000 64bit pref]\cf1\highlight2 
+\par \cf0\highlight0 [    0.177809] pci 0000:00:00.0: BAR 0: failed to assign [mem size 0x80000000 64bit pref]\cf1\highlight2 
+\par \cf0\highlight0 [    0.177860] pci 0000:00:00.0: BAR 8: assigned [mem 0x3018000000-0x30181fffff]\cf1\highlight2 
+\par \cf0\highlight0 [    0.177905] pci 0000:00:00.0: BAR 9: assigned [mem 0x3009000000-0x30091fffff 64bit pref]\cf1\highlight2 
+\par \cf0\highlight0 [    0.177955] pci 0000:00:00.0: BAR 7: assigned [io  0x1000-0x1fff]\cf1\highlight2 
+\par \cf0\highlight0 [    0.177997] pci 0000:00:00.0: PCI bridge to [bus 01]\cf1\highlight2 
+\par \cf0\highlight0 [    0.178033] pci 0000:00:00.0:   bridge window [io  0x1000-0x1fff]\cf1\highlight2 
+\par \cf0\highlight0 [    0.178073] pci 0000:00:00.0:   bridge window [mem 0x3018000000-0x30181fffff]\cf1\highlight2 
+\par \cf0\highlight0 [    0.178114] pci 0000:00:00.0:   bridge window [mem 0x3009000000-0x30091fffff 64bit pref]\cf1\highlight2 
+\par \cf0\highlight0 [    0.280347] Serial: 8250/16550 driver, 4 ports, IRQ sharing disabled\cf1\highlight2 
+\par \cf0\highlight0 [    0.283607] 20100000.serial: ttyS1 at MMIO 0x20100000 (irq = 45, base_baud = 9375000) is a 16550A\cf1\highlight2 
+\par \cf0\highlight0 [    1.325888] printk: console [ttyS1] enabled\cf1\highlight2 
+\par \cf0\highlight0 [    1.331678] 20102000.serial: ttyS2 at MMIO 0x20102000 (irq = 46, base_baud = 9375000) is a 16550A\cf1\highlight2 
+\par \cf0\highlight0 [    1.341890] 20104000.serial: ttyS3 at MMIO 0x20104000 (irq = 47, base_baud = 9375000) is a 16550A\cf1\highlight2 
+\par \cf0\highlight0 [    1.352061] 20106000.serial: ttyS0 at MMIO 0x20106000 (irq = 48, base_baud = 9375000) is a 16550A\cf1\highlight2 
+\par \cf0\highlight0 [    1.376950] loop: module loaded\cf1\highlight2 
+\par \cf0\highlight0 [    1.381539] mpfs_dma_proxy mpfs-dma-proxy: proxy dma 4 channels initialized\cf1\highlight2 
+\par \cf0\highlight0 [    1.539325] u-dma-buf udmabuf-ddr-c0: driver version = 3.2.4\cf1\highlight2 
+\par \cf0\highlight0 [    1.545136] u-dma-buf udmabuf-ddr-c0: major number   = 244\cf1\highlight2 
+\par \cf0\highlight0 [    1.550710] u-dma-buf udmabuf-ddr-c0: minor number   = 0\cf1\highlight2 
+\par \cf0\highlight0 [    1.556075] u-dma-buf udmabuf-ddr-c0: phys address   = 0x0000000088000000\cf1\highlight2 
+\par \cf0\highlight0 [    1.562925] u-dma-buf udmabuf-ddr-c0: buffer size    = 33554432\cf1\highlight2 
+\par \cf0\highlight0 [    1.568925] u-dma-buf udmabuf0: driver installed.\cf1\highlight2 
+\par \cf0\highlight0 [    2.318045] u-dma-buf udmabuf-ddr-nc0: driver version = 3.2.4\cf1\highlight2 
+\par \cf0\highlight0 [    2.323876] u-dma-buf udmabuf-ddr-nc0: major number   = 244\cf1\highlight2 
+\par \cf0\highlight0 [    2.329515] u-dma-buf udmabuf-ddr-nc0: minor number   = 1\cf1\highlight2 
+\par \cf0\highlight0 [    2.334982] u-dma-buf udmabuf-ddr-nc0: phys address   = 0x00000000c8000000\cf1\highlight2 
+\par \cf0\highlight0 [    2.341927] u-dma-buf udmabuf-ddr-nc0: buffer size    = 33554432\cf1\highlight2 
+\par \cf0\highlight0 [    2.348002] u-dma-buf udmabuf1: driver installed.\cf1\highlight2 
+\par \cf0\highlight0 [    2.369815] u-dma-buf udmabuf-ddr-nc-wcb0: driver version = 3.2.4\cf1\highlight2 
+\par \cf0\highlight0 [    2.375984] u-dma-buf udmabuf-ddr-nc-wcb0: major number   = 244\cf1\highlight2 
+\par \cf0\highlight0 [    2.381961] u-dma-buf udmabuf-ddr-nc-wcb0: minor number   = 2\cf1\highlight2 
+\par \cf0\highlight0 [    2.387771] u-dma-buf udmabuf-ddr-nc-wcb0: phys address   = 0x00000000d8000000\cf1\highlight2 
+\par \cf0\highlight0 [    2.395055] u-dma-buf udmabuf-ddr-nc-wcb0: buffer size    = 33554432\cf1\highlight2 
+\par \cf0\highlight0 [    2.401472] u-dma-buf udmabuf2: driver installed.\cf1\highlight2 
+\par \cf0\highlight0 [    2.409876] microchip-corespi 20108000.spi: Registered SPI controller 0\cf1\highlight2 
+\par \cf0\highlight0 [    2.417632] microchip-corespi 20109000.spi: Registered SPI controller 1\cf1\highlight2 
+\par \cf0\highlight0 [    2.461619] macb 20110000.ethernet eth0: Cadence GEM rev 0x0107010c at 0x20110000 irq 52 (00:04:a3:11:40:04)\cf1\highlight2 
+\par \cf0\highlight0 [    2.477156] macb 20112000.ethernet eth1: Cadence GEM rev 0x0107010c at 0x20112000 irq 56 (00:04:a3:11:40:03)\cf1\highlight2 
+\par \cf0\highlight0 [    2.489033] can-uio 2010c000.can: registered device as can@2010c000\cf1\highlight2 
+\par \cf0\highlight0 [    2.496098] mss-dma-uio 60010000.dma-controller: registered device as dma-controller@60010000\cf1\highlight2 
+\par \cf0\highlight0 [    2.507086] musb-hdrc musb-hdrc.1.auto: MUSB HDRC host driver\cf1\highlight2 
+\par \cf0\highlight0 [    2.512936] musb-hdrc musb-hdrc.1.auto: new USB bus registered, assigned bus number 1\cf1\highlight2 
+\par \cf0\highlight0 [    2.522039] hub 1-0:1.0: USB hub found\cf1\highlight2 
+\par \cf0\highlight0 [    2.525938] hub 1-0:1.0: 1 port detected\cf1\highlight2 
+\par \cf0\highlight0 [    2.530532] mpfs-musb 20201000.usb: Registered MPFS MUSB driver\cf1\highlight2 
+\par \cf0\highlight0 [    2.537373] mpfs_rtc 20124000.rtc: prescaler set to: 999999\cf1\highlight2 
+\par \cf0\highlight0 [    2.543430] mpfs_rtc 20124000.rtc: registered as rtc0\cf1\highlight2 
+\par \cf0\highlight0 [    2.548603] mpfs_rtc 20124000.rtc: setting system clock to 1970-01-01T00:00:00 UTC (0)\cf1\highlight2 
+\par \cf0\highlight0 [    2.556757] i2c_dev: i2c /dev entries driver\cf1\highlight2 
+\par \cf0\highlight0 [    2.561900] microchip-corei2c 2010a000.i2c: registered CoreI2C bus driver\cf1\highlight2 
+\par \cf0\highlight0 [    2.569640] microchip-corei2c 2010b000.i2c: registered CoreI2C bus driver\cf1\highlight2 
+\par \cf0\highlight0 [    2.577177] microchip-corei2c 40000200.i2c: registered CoreI2C bus driver\cf1\highlight2 
+\par \cf0\highlight0 [    2.584503] sdhci: Secure Digital Host Controller Interface driver\cf1\highlight2 
+\par \cf0\highlight0 [    2.590752] sdhci: Copyright(c) Pierre Ossman\cf1\highlight2 
+\par \cf0\highlight0 [    2.595202] sdhci-pltfm: SDHCI platform and OF driver helper\cf1\highlight2 
+\par \cf0\highlight0 [    2.601337] usbcore: registered new interface driver usbhid\cf1\highlight2 
+\par \cf0\highlight0 [    2.607048] usbhid: USB HID core driver\cf1\highlight2 
+\par \cf0\highlight0 [    2.611362] mpfs-mailbox 37020000.mailbox: Registered MPFS mailbox controller driver\cf1\highlight2 
+\par \cf0\highlight0 [    2.621079] NET: Registered PF_INET6 protocol family\cf1\highlight2 
+\par \cf0\highlight0 [    2.629226] Segment Routing with IPv6\cf1\highlight2 
+\par \cf0\highlight0 [    2.633119] In-situ OAM (IOAM) with IPv6\cf1\highlight2 
+\par \cf0\highlight0 [    2.633832] mmc0: SDHCI controller on 20008000.mmc [20008000.mmc] using ADMA 64-bit\cf1\highlight2 
+\par \cf0\highlight0 [    2.637228] sit: IPv6, IPv4 and MPLS over IPv4 tunneling driver\cf1\highlight2 
+\par \cf0\highlight0 [    2.651888] NET: Registered PF_PACKET protocol family\cf1\highlight2 
+\par \cf0\highlight0 [    2.685311] mpfs-rng mpfs-rng: Registered MPFS hwrng\cf1\highlight2 
+\par \cf0\highlight0 [    2.706136] mpfs-sys-controller syscontroller: Registered MPFS system controller\cf1\highlight2 
+\par \cf0\highlight0 [    2.706238] random: crng init done\cf1\highlight2 
+\par \cf0\highlight0 [    2.714208] of_cfs_init\cf1\highlight2 
+\par \cf0\highlight0 [    2.719757] of_cfs_init: OK\cf1\highlight2 
+\par \cf0\highlight0 [    2.724237] Waiting for root device /dev/mmcblk0p3...\cf1\highlight2 
+\par \cf0\highlight0 [    2.753652] mmc0: new HS200 MMC card at address 0001\cf1\highlight2 
+\par \cf0\highlight0 [    2.760946] mmcblk0: mmc0:0001 DG4008 7.28 GiB\cf1\highlight2 
+\par \cf0\highlight0 [    2.774040]  mmcblk0: p1 p2 p3\cf1\highlight2 
+\par \cf0\highlight0 [    2.779766] mmcblk0boot0: mmc0:0001 DG4008 4.00 MiB\cf1\highlight2 
+\par \cf0\highlight0 [    2.790120] mmcblk0boot1: mmc0:0001 DG4008 4.00 MiB\cf1\highlight2 
+\par \cf0\highlight0 [    2.799362] mmcblk0rpmb: mmc0:0001 DG4008 4.00 MiB, chardev (240:0)\cf1\highlight2 
+\par \cf0\highlight0 [    2.823789] EXT4-fs (mmcblk0p3): INFO: recovery required on readonly filesystem\cf1\highlight2 
+\par \cf0\highlight0 [    2.831225] EXT4-fs (mmcblk0p3): write access will be enabled during recovery\cf1\highlight2 
+\par \cf0\highlight0 [    2.859612] EXT4-fs (mmcblk0p3): recovery complete\cf1\highlight2 
+\par \cf0\highlight0 [    2.865821] EXT4-fs (mmcblk0p3): mounted filesystem with ordered data mode. Quota mode: disabled.\cf1\highlight2 
+\par \cf0\highlight0 [    2.874862] VFS: Mounted root (ext4 filesystem) readonly on device 179:3.\cf1\highlight2 
+\par \cf0\highlight0 [    2.882388] devtmpfs: mounted\cf1\highlight2 
+\par \cf0\highlight0 [    2.895958] Freeing unused kernel image (initmem) memory: 2144K\cf1\highlight2 
+\par \cf0\highlight0 [    2.902107] Run /sbin/init as init process\cf1\highlight2 
+\par \cf0\highlight0 [    3.071675] systemd[1]: System time before build time, advancing clock.\cf1\highlight2 
+\par \cf0\highlight0 [    3.086388] systemd[1]: Failed to find module 'autofs4'\cf1\highlight2 
+\par \cf0\highlight0 [    3.117936] systemd[1]: systemd 250.5+ running in system mode (+PAM -AUDIT -SELINUX -APPARMOR +IMA -SMACK +SECCOMP -GCRYPT -GNUTLS -OPENSSL +ACL +BLKID -CURL -ELFUTILS -FIDO2 -IDN2 -IDN -IPTC +KMOD -LIBCRYPTSETUP +LIBFDISK -PCRE2 -PWQUALITY -P11KIT -QRENCODE -BZIP2 -LZ4 -XZ -ZLIB +ZSTD -BPF_FRAMEWORK +XKBCOMMON +UTMP +SYSVINIT default-hierarchy=hybrid)\cf1\highlight2 
+\par \cf0\highlight0 [    3.149977] systemd[1]: Detected architecture riscv64.\cf1\highlight2 
+\par 
+\par \cf0\highlight0 Welcome to \b OpenEmbedded nodistro.0\b0 !\cf1\highlight2 
+\par 
+\par \cf0\highlight0 [    3.175839] systemd[1]: Hostname set to <icicle-kit-es>.\cf1\highlight2 
+\par \cf0\highlight0 [    4.028277] systemd[1]: Queued start job for default target Multi-User System.\cf1\highlight2 
+\par \cf0\highlight0 [    4.079591] systemd[1]: Created slice Slice /system/getty.\cf1\highlight2 
+\par \cf0\highlight0 [\cf4   OK  \cf0 ] Created slice \b Slice /system/getty\b0 .\cf1\highlight2 
+\par \cf0\highlight0 [    4.104883] systemd[1]: Created slice Slice /system/modprobe.\cf1\highlight2 
+\par \cf0\highlight0 [\cf4   OK  \cf0 ] Created slice \b Slice /system/modprobe\b0 .\cf1\highlight2 
+\par \cf0\highlight0 [    4.128598] systemd[1]: Created slice Slice /system/serial-getty.\cf1\highlight2 
+\par \cf0\highlight0 [\cf4   OK  \cf0 ] Created slice \b Slice /system/serial-getty\b0 .\cf1\highlight2 
+\par \cf0\highlight0 [    4.151882] systemd[1]: Created slice User and Session Slice.\cf1\highlight2 
+\par \cf0\highlight0 [\cf4   OK  \cf0 ] Created slice \b User and Session Slice\b0 .\cf1\highlight2 
+\par \cf0\highlight0 [    4.175280] systemd[1]: Started Dispatch Password Requests to Console Directory Watch.\cf1\highlight2 
+\par \cf0\highlight0 [\cf4   OK  \cf0 ] Started \b\f1 Dispatch Password \'85ts to Console Directory Watch\b0\f0 .\cf1\highlight2 
+\par \cf0\highlight0 [    4.203226] systemd[1]: Started Forward Password Requests to Wall Directory Watch.\cf1\highlight2 
+\par \cf0\highlight0 [\cf4   OK  \cf0 ] Started \b\f1 Forward Password R\'85uests to Wall Directory Watch\b0\f0 .\cf1\highlight2 
+\par \cf0\highlight0 [    4.227367] systemd[1]: Reached target Path Units.\cf1\highlight2 
+\par \cf0\highlight0 [\cf4   OK  \cf0 ] Reached target \b Path Units\b0 .\cf1\highlight2 
+\par \cf0\highlight0 [    4.246977] systemd[1]: Reached target Remote File Systems.\cf1\highlight2 
+\par \cf0\highlight0 [\cf4   OK  \cf0 ] Reached target \b Remote File Systems\b0 .\cf1\highlight2 
+\par \cf0\highlight0 [    4.266930] systemd[1]: Reached target Slice Units.\cf1\highlight2 
+\par \cf0\highlight0 [\cf4   OK  \cf0 ] Reached target \b Slice Units\b0 .\cf1\highlight2 
+\par \cf0\highlight0 [    4.286968] systemd[1]: Reached target Swaps.\cf1\highlight2 
+\par \cf0\highlight0 [\cf4   OK  \cf0 ] Reached target \b Swaps\b0 .\cf1\highlight2 
+\par \cf0\highlight0 [    4.307724] systemd[1]: Listening on initctl Compatibility Named Pipe.\cf1\highlight2 
+\par \cf0\highlight0 [\cf4   OK  \cf0 ] Listening on \b initctl Compatibility Named Pipe\b0 .\cf1\highlight2 
+\par \cf0\highlight0 [    4.338448] systemd[1]: Journal Audit Socket was skipped because of a failed condition check (ConditionSecurity=audit).\cf1\highlight2 
+\par \cf0\highlight0 [    4.350645] systemd[1]: Listening on Journal Socket (/dev/log).\cf1\highlight2 
+\par \cf0\highlight0 [\cf4   OK  \cf0 ] Listening on \b Journal Socket (/dev/log)\b0 .\cf1\highlight2 
+\par \cf0\highlight0 [    4.375935] systemd[1]: Listening on Journal Socket.\cf1\highlight2 
+\par \cf0\highlight0 [\cf4   OK  \cf0 ] Listening on \b Journal Socket\b0 .\cf1\highlight2 
+\par \cf0\highlight0 [    4.396120] systemd[1]: Listening on Network Service Netlink Socket.\cf1\highlight2 
+\par \cf0\highlight0 [\cf4   OK  \cf0 ] Listening on \b Network Service Netlink Socket\b0 .\cf1\highlight2 
+\par \cf0\highlight0 [    4.419911] systemd[1]: Listening on udev Control Socket.\cf1\highlight2 
+\par \cf0\highlight0 [\cf4   OK  \cf0 ] Listening on \b udev Control Socket\b0 .\cf1\highlight2 
+\par \cf0\highlight0 [    4.443553] systemd[1]: Listening on udev Kernel Socket.\cf1\highlight2 
+\par \cf0\highlight0 [\cf4   OK  \cf0 ] Listening on \b udev Kernel Socket\b0 .\cf1\highlight2 
+\par \cf0\highlight0 [    4.467729] systemd[1]: Listening on User Database Manager Socket.\cf1\highlight2 
+\par \cf0\highlight0 [\cf4   OK  \cf0 ] Listening on \b User Database Manager Socket\b0 .\cf1\highlight2 
+\par \cf0\highlight0 [    4.491699] systemd[1]: Huge Pages File System was skipped because of a failed condition check (ConditionPathExists=/sys/kernel/mm/hugepages).\cf1\highlight2 
+\par \cf0\highlight0 [    4.523629] systemd[1]: Mounting POSIX Message Queue File System...\cf1\highlight2 
+\par \cf0\highlight0          Mounting \b POSIX Message Queue File System\b0 ...\cf1\highlight2 
+\par \cf0\highlight0 [    4.552729] systemd[1]: Mounting Kernel Debug File System...\cf1\highlight2 
+\par \cf0\highlight0          Mounting \b Kernel Debug File System\b0 ...\cf1\highlight2 
+\par \cf0\highlight0 [    4.575716] systemd[1]: Kernel Trace File System was skipped because of a failed condition check (ConditionPathExists=/sys/kernel/tracing).\cf1\highlight2 
+\par \cf0\highlight0 [    4.615584] systemd[1]: Mounting Temporary Directory /tmp...\cf1\highlight2 
+\par \cf0\highlight0          Mounting \b Temporary Directory /tmp\b0 ...\cf1\highlight2 
+\par \cf0\highlight0 [    4.635671] systemd[1]: Create List of Static Device Nodes was skipped because of a failed condition check (ConditionFileNotEmpty=/lib/modules/6.1.33-linux4microchip+fpga-2023.06/modules.devname).\cf1\highlight2 
+\par \cf0\highlight0 [    4.660334] systemd[1]: Starting Load Kernel Module configfs...\cf1\highlight2 
+\par \cf0\highlight0          Starting \b Load Kernel Module configfs\b0 ...\cf1\highlight2 
+\par \cf0\highlight0 [    4.689455] systemd[1]: Starting Load Kernel Module drm...\cf1\highlight2 
+\par \cf0\highlight0          Starting \b Load Kernel Module drm\b0 ...\cf1\highlight2 
+\par \cf0\highlight0 [    4.736076] systemd[1]: Starting Load Kernel Module fuse...\cf1\highlight2 
+\par \cf0\highlight0          Starting \b Load Kernel Module fuse\b0 ...\cf1\highlight2 
+\par \cf0\highlight0 [    4.765387] systemd[1]: Starting File System Check on Root Device...\cf1\highlight2 
+\par \cf0\highlight0          Starting \b File System Check on Root Device\b0 ...\cf1\highlight2 
+\par \cf0\highlight0 [    4.797761] systemd[1]: Starting Journal Service...\cf1\highlight2 
+\par \cf0\highlight0          Starting \b Journal Service\b0 ...\cf1\highlight2 
+\par \cf0\highlight0 [    4.808399] systemd[1]: Load Kernel Modules was skipped because all trigger condition checks failed.\cf1\highlight2 
+\par \cf0\highlight0 [    4.825039] systemd[1]: Starting Generate network units from Kernel command line...\cf1\highlight2 
+\par \cf0\highlight0          Starting \b\f1 Generate network \'85ts from Kernel command line\b0\f0 ...\cf1\highlight2 
+\par \cf0\highlight0 [    4.843977] systemd[1]: Starting Apply Kernel Variables...\cf1\highlight2 
+\par \cf0\highlight0          Starting \b Apply Kernel Variables\b0 ...\cf1\highlight2 
+\par \cf0\highlight0 [    4.859683] systemd[1]: Starting Coldplug All udev Devices...\cf1\highlight2 
+\par \cf0\highlight0          Starting \b Coldplug All udev Devices\b0 ...\cf1\highlight2 
+\par \cf0\highlight0 [    4.886345] systemd[1]: Mounted POSIX Message Queue File System.\cf1\highlight2 
+\par \cf0\highlight0 [\cf4   OK  \cf0 ] Mounted     4.894473] systemd[1]: Mounted Kernel Debug File System.\cf1\highlight2 
+\par \cf0\highlight0 1;39mPOSIX Message Queue File Sy[    4.903287] systemd[1]: Mounted Temporary Directory /tmp.\cf1\highlight2 
+\par \cf0\highlight0 stem.\cf1\highlight2 
+\par \cf0\highlight0 [\cf4   OK  \cf0 ] Mounted \b [    4.912545] systemd[1]: modprobe@configfs.service: Deactivated successfully.\cf1\highlight2\b0 
+\par \cf0\highlight0\b Kernel Debug File System\b0 .\cf1\highlight2 
+\par \cf0\highlight0 [[    4.923045] systemd[1]: Finished Load Kernel Module configfs.\cf1\highlight2 
+\par \cf4\highlight0   OK  \cf0 ] Mounted \b Temporary Di[    4.933122] systemd[1]: modprobe@drm.service: Deactivated successfully.\cf1\highlight2\b0 
+\par \cf0\highlight0\b rectory /tmp\b0 .\cf1\highlight2 
+\par \cf0\highlight0 [\cf4   OK [    4.942265] systemd[1]: Finished Load Kernel Module drm.\cf1\highlight2 
+\par \cf4\highlight0  \cf0 ] Finished \b Load Kernel Module conf[    4.952258] systemd[1]: modprobe@fuse.service: Deactivated successfully.\cf1\highlight2\b0 
+\par \cf0\highlight0\b igfs\b0 .\cf1\highlight2 
+\par \cf0\highlight0 [\cf4   OK  \cf0 ] F[    4.961386] systemd[1]: Finished Load Kernel Module fuse.\cf1\highlight2 
+\par \cf0\highlight0 inished \b Load Kernel Module drm\b0 .\cf1\highlight2 
+\par \cf0\highlight0 [ systemd[1]: Finished Generate network units from Kernel command line.\cf1\highlight2 
+\par \cf0\highlight0 [0;32m  OK  ] Finished \b Load Kernel Module fuse\b0 .\cf1\highlight2 
+\par \cf0\highlight0 [\cf4   OK  \cf0 ] Finished \b Generate network units from Kernel command line\b0 .\cf1\highlight2 
+\par \cf0\highlight0 [    5.017156] systemd[1]: Finished File System Check on Root Device.\cf1\highlight2 
+\par \cf0\highlight0 [\cf4   OK  \cf0 ] Finished \b File System Check on Root Device\b0 .\cf1\highlight2 
+\par \cf0\highlight0 [    5.040894] systemd[1]: Finished Apply Kernel Variables.\cf1\highlight2 
+\par \cf0\highlight0 [\cf4   OK  \cf0 ] Finished \b Apply Kernel Variables\b0 .\cf1\highlight2 
+\par \cf0\highlight0 [    5.103832] systemd[1]: FUSE Control File System was skipped because of a failed condition check (ConditionPathExists=/sys/fs/fuse/connections).\cf1\highlight2 
+\par \cf0\highlight0 [    5.123340] systemd[1]: Mounting Kernel Configuration File System...\cf1\highlight2 
+\par \cf0\highlight0          Mounting \b Kernel Configuration File System\b0 ...\cf1\highlight2 
+\par \cf0\highlight0 [    5.153397] systemd[1]: Starting Remount Root and Kernel File Systems...\cf1\highlight2 
+\par \cf0\highlight0          Starting \b Remount Root and Kernel File Systems\b0 ...\cf1\highlight2 
+\par \cf0\highlight0 [    5.184070] systemd[1]: Started Journal Service.\cf1\highlight2 
+\par \cf0\highlight0 [\cf4   OK  \cf0 ] Started \b Journal Service\b0 .\cf1\highlight2 
+\par \cf0\highlight0 [    5.209410] EXT4-fs (mmcblk0p3): re-mounted. Quota mode: disabled.\cf1\highlight2 
+\par \cf0\highlight0 [\cf4   OK  \cf0 ] Mounted \b Kernel Configuration File System\b0 .\cf1\highlight2 
+\par \cf0\highlight0 [\cf4   OK  \cf0 ] Finished \b Remount Root and Kernel File Systems\b0 .\cf1\highlight2 
+\par \cf0\highlight0          Starting \b Flush Journal to Persistent Storage\b0 ...\cf1\highlight2 
+\par \cf0\highlight0          Starting \b Create Static Device [    5.320340] systemd-journald[118]: Received client request to flush runtime journal.\cf1\highlight2\b0 
+\par \cf0\highlight0\b Nodes in /dev\b0 ...\cf1\highlight2 
+\par \cf0\highlight0 [\cf4   OK  \cf0 ] Finished \b Flush Journal to Persistent Storage\b0 .\cf1\highlight2 
+\par \cf0\highlight0 [\cf4   OK  \cf0 ] Finished \b Create Static Device Nodes in /dev\b0 .\cf1\highlight2 
+\par \cf0\highlight0 [\cf4   OK  \cf0 ] Reached target \b Preparation for Local File Systems\b0 .\cf1\highlight2 
+\par \cf0\highlight0          Starting \b\f1 Rule-based Manage\'85for Device Events and Files\b0\f0 ...\cf1\highlight2 
+\par \cf0\highlight0 [\cf4   OK  \cf0 ] Started \b Rule-based Manager for Device Events and Files\b0 .\cf1\highlight2 
+\par \cf0\highlight0          Mounting \b /var/volatile\b0 ...\cf1\highlight2 
+\par \cf0\highlight0 [\cf4   OK  \cf0 ] Mounted \b /var/volatile\b0 .\cf1\highlight2 
+\par \cf0\highlight0          Starting \b Load/Save Random Seed\b0 ...\cf1\highlight2 
+\par \cf0\highlight0 [\cf4   OK  \cf0 ] Reached target \b Local File Systems\b0 .\cf1\highlight2 
+\par \cf0\highlight0          Starting \b Create Volatile Files and Directories\b0 ...\cf1\highlight2 
+\par \cf0\highlight0 [\cf4   OK  \cf0 ] Finished \b Coldplug All udev Devices\b0 .\cf1\highlight2 
+\par \cf0\highlight0 [\cf4   OK  \cf0 ] Finished \b Load/Save Random Seed\b0 .\cf1\highlight2 
+\par \cf0\highlight0 [    6.186463] pac193x 1-0010: Chip revision: 0x03\cf1\highlight2 
+\par \cf0\highlight0 [    6.218002] pac193x 1-0010: :pac193x_prep_iio_channels: Channel 0 active\cf1\highlight2 
+\par \cf0\highlight0 [    6.225004] pac193x 1-0010: :pac193x_prep_iio_channels: Channel 1 active\cf1\highlight2 
+\par \cf0\highlight0 [    6.231858] pac193x 1-0010: :pac193x_prep_iio_channels: Channel 2 active\cf1\highlight2 
+\par \cf0\highlight0 [    6.238712] pac193x 1-0010: :pac193x_prep_iio_channels: Channel 3 active\cf1\highlight2 
+\par \cf0\highlight0 [    6.245588] pac193x 1-0010: :pac193x_prep_iio_channels: Active chip channels: 25\cf1\highlight2 
+\par \cf0\highlight0 [\cf4   OK  \cf0 ] Finished \b Create Volatile Files and Directories\b0 .\cf1\highlight2 
+\par \cf0\highlight0          Starting \b Network Time Synchronization\b0 ...\cf1\highlight2 
+\par \cf0\highlight0          Starting \b\f1 Wait for udev To \'85plete Device Initialization\b0\f0 ...\cf1\highlight2 
+\par \cf0\highlight0          Starting \b Record System Boot/Shutdown in UTMP\b0 ...\cf1\highlight2 
+\par \cf0\highlight0 [\cf4   OK  \cf0 ] Finished \b Wait for udev To Complete Device Initialization\b0 .\cf1\highlight2 
+\par \cf0\highlight0 [\cf4   OK  \cf0 ] Finished \b Record System Boot/Shutdown in UTMP\b0 .\cf1\highlight2 
+\par \cf0\highlight0 [\cf4   OK  \cf0 ] Started \b Hardware RNG Entropy Gatherer Daemon\b0 .\cf1\highlight2 
+\par \cf0\highlight0 [    9.999062] systemd-journald[118]: Oldest entry in /run/log/journal/baee73071052453e9b8df0ebfda87c84/system.journal is older than the configured file retention duration (1month), suggesting rotation.\cf1\highlight2 
+\par \cf0\highlight0 [   10.017163] systemd-journald[118]: /run/log/journal/baee73071052453e9b8df0ebfda87c84/system.journal: Journal header limits reached or header out-of-date, rotating.\cf1\highlight2 
+\par \cf0\highlight0 [\cf4   OK  \cf0 ] Started \b Network Time Synchronization\b0 .\cf1\highlight2 
+\par \cf0\highlight0 [\cf4   OK  \cf0 ] Reached target \b System Initialization\b0 .\cf1\highlight2 
+\par \cf0\highlight0 [\cf4   OK  \cf0 ] Started \b Daily Cleanup of Temporary Directories\b0 .\cf1\highlight2 
+\par \cf0\highlight0 [\cf4   OK  \cf0 ] Reached target \b System Time Set\b0 .\cf1\highlight2 
+\par \cf0\highlight0 [\cf4   OK  \cf0 ] Reached target \b Timer Units\b0 .\cf1\highlight2 
+\par \cf0\highlight0 [\cf4   OK  \cf0 ] Listening on \b D-Bus System Message Bus Socket\b0 .\cf1\highlight2 
+\par \cf0\highlight0 [\cf4   OK  \cf0 ] Listening on \b dropbear.socket\b0 .\cf1\highlight2 
+\par \cf0\highlight0 [\cf4   OK  \cf0 ] Reached target \b Socket Units\b0 .\cf1\highlight2 
+\par \cf0\highlight0 [\cf4   OK  \cf0 ] Reached target \b Basic System\b0 .\cf1\highlight2 
+\par \cf0\highlight0          Starting \b D-Bus System Message Bus\b0 ...\cf1\highlight2 
+\par \cf0\highlight0          Starting \b IPv6 Packet Filtering Framework\b0 ...\cf1\highlight2 
+\par \cf0\highlight0          Starting \b IPv4 Packet Filtering Framework\b0 ...\cf1\highlight2 
+\par \cf0\highlight0          Starting \b User Login Management\b0 ...\cf1\highlight2 
+\par \cf0\highlight0 [\cf4   OK  \cf0 ] Started \b D-Bus System Message Bus\b0 .\cf1\highlight2 
+\par \cf0\highlight0 [\cf4   OK  \cf0 ] Finished \b IPv6 Packet Filtering Framework\b0 .\cf1\highlight2 
+\par \cf0\highlight0 [\cf4   OK  \cf0 ] Finished \b IPv4 Packet Filtering Framework\b0 .\cf1\highlight2 
+\par \cf0\highlight0 [\cf4   OK  \cf0 ] Reached target \b Preparation for Network\b0 .\cf1\highlight2 
+\par \cf0\highlight0          Starting \b Network Configuration\b0 ...\cf1\highlight2 
+\par \cf0\highlight0 [\cf4   OK  \cf0 ] Started \b User Login Management\b0 .\cf1\highlight2 
+\par \cf0\highlight0 [\cf4   OK  \cf0 ] Started \b Network Configuration\b0 .\cf1\highlight2 
+\par \cf0\highlight0 [   10.917319] macb 20112000.ethernet eth1: PHY [20112000.ethernet-ffffffff:09] driver [Generic PHY] (irq=POLL)\cf1\highlight2 
+\par \cf0\highlight0 [   10.927415] macb 20112000.ethernet eth1: configuring for phy/sgmii link mode\cf1\highlight2 
+\par \cf0\highlight0 [   10.935604] pps pps0: new PPS source ptp0\cf1\highlight2 
+\par \cf0\highlight0 [   10.940112] macb 20112000.ethernet: gem-ptp-timer ptp clock registered.\cf1\highlight2 
+\par \cf0\highlight0 [   10.952761] macb 20110000.ethernet eth0: PHY [20112000.ethernet-ffffffff:08] driver [Generic PHY] (irq=POLL)\cf1\highlight2 
+\par \cf0\highlight0 [   10.962790] macb 20110000.ethernet eth0: configuring for phy/sgmii link mode\cf1\highlight2 
+\par \cf0\highlight0 [   10.970580] pps pps1: new PPS source ptp1\cf1\highlight2 
+\par \cf0\highlight0 [   10.975126] macb 20110000.ethernet: gem-ptp-timer ptp clock registered.\cf1\highlight2 
+\par \cf0\highlight0          Starting \b Network Name Resolution\b0 ...\cf1\highlight2 
+\par \cf0\highlight0 [\cf4   OK  \cf0 ] Started \b Network Name Resolution\b0 .\cf1\highlight2 
+\par \cf0\highlight0 [\cf4   OK  \cf0 ] Reached target \b Network\b0 .\cf1\highlight2 
+\par \cf0\highlight0 [\cf4   OK  \cf0 ] Reached target \b Host and Network Name Lookups\b0 .\cf1\highlight2 
+\par \cf0\highlight0          Starting \b Permit User Sessions\b0 ...\cf1\highlight2 
+\par \cf0\highlight0 [\cf4   OK  \cf0 ] Finished \b Permit User Sessions\b0 .\cf1\highlight2 
+\par \cf0\highlight0 [\cf4   OK  \cf0 ] Started \b Getty on tty1\b0 .\cf1\highlight2 
+\par \cf0\highlight0 [\cf4   OK  \cf0 ] Started \b Serial Getty on ttyS0\b0 .\cf1\highlight2 
+\par \cf0\highlight0 [\cf4   OK  \cf0 ] Started \b Serial Getty on ttyS1\b0 .\cf1\highlight2 
+\par \cf0\highlight0 [\cf4   OK  \cf0 ] Reached target \b Login Prompts\b0 .\cf1\highlight2 
+\par \cf0\highlight0 [\cf4   OK  \cf0 ] Reached target \b Multi-User System\b0 .\cf1\highlight2 
+\par \cf0\highlight0          Starting \b Record Runlevel Change in UTMP\b0 ...\cf1\highlight2 
+\par \cf0\highlight0 [\cf4   OK  \cf0 ] Finished \b Record Runlevel Change in UTMP\b0 .\cf1\highlight2 
+\par 
+\par \cf0\highlight0 OpenEmbedded nodistro.0 icicle-kit-es ttyS1\cf1\highlight2 
+\par 
+\par \cf0\highlight0 icicle-kit-es login: ubuntu\cf1\highlight2 
+\par \cf0\highlight0 Password:\cf1\highlight2 
+\par 
+\par \cf0\highlight0 Login incorrect\cf1\highlight2 
+\par \cf0\highlight0 icicle-kit-es login: root\cf1\highlight2 
+\par \cf0\highlight0 This is version v2023.06 of the Polarfire SoC Yocto BSP.\cf1\highlight2 
+\par 
+\par \cf0\highlight0 Updated images and documentation are available at:\cf1\highlight2 
+\par \cf0\highlight0         https://github.com/polarfire-soc/\cf1\highlight2 
+\par \cf0\highlight0 * FPGA reference design\cf1\highlight2 
+\par \cf0\highlight0         https://github.com/polarfire-soc/icicle-kit-reference-design/releases\cf1\highlight2 
+\par \cf0\highlight0 * Yocto releases\cf1\highlight2 
+\par \cf0\highlight0         https://github.com/polarfire-soc/meta-polarfire-soc-yocto-bsp/releases\cf1\highlight2 
+\par \cf0\highlight0 * Buildroot External\cf1\highlight2 
+\par \cf0\highlight0         https://github.com/linux4microchip/buildroot-external-microchip\cf1\highlight2 
+\par \cf0\highlight0 root@icicle-kit-es:~# ls\cf1\highlight2 
+\par \cf0\highlight0 VectorBlox-SDK-release-v1.4.4.1  camera  ngk  release-v1.4.4.1.zip  samples_V500_1.4.4  samples_V500_1.4.4.zip\cf1\highlight2 
+\par \cf0\highlight0 root@icicle-kit-es:~# cd camera/\cf1\highlight2 
+\par \cf0\highlight0 root@icicle-kit-es:~/camera# ls\cf1\highlight2 
+\par \cf0\highlight0 capture  capture.c  capture.c~  capture_py.py\cf1\highlight2 
+\par \cf0\highlight0 root@icicle-kit-es:~/camera# cat capture.c\cf1\highlight2 
+\par \cf0\highlight0 #include <stdio.h>\cf1\highlight2 
+\par \cf0\highlight0 #include <fcntl.h>\cf1\highlight2 
+\par \cf0\highlight0 #include <unistd.h>\cf1\highlight2 
+\par \cf0\highlight0 #include <sys/ioctl.h>\cf1\highlight2 
+\par \cf0\highlight0 #include <linux/videodev2.h>\cf1\highlight2 
+\par 
+\par \cf0\highlight0 int main() \{\cf1\highlight2 
+\par \cf0\highlight0             int fd = open("/dev/video0", O_RDWR);\cf1\highlight2 
+\par \cf0\highlight0                 if (fd < 0) \{\cf1\highlight2 
+\par \cf0\highlight0                                 perror("Failed to open /dev/video0");\cf1\highlight2 
+\par \cf0\highlight0                                         return 1;\cf1\highlight2 
+\par \cf0\highlight0                                             \}\cf1\highlight2 
+\par 
+\par \cf0\highlight0                     struct v4l2_capability cap;\cf1\highlight2 
+\par \cf0\highlight0                         if (ioctl(fd, VIDIOC_QUERYCAP, &cap) < 0) \{\cf1\highlight2 
+\par \cf0\highlight0                                         perror("Failed to get device capabilities");\cf1\highlight2 
+\par \cf0\highlight0                                                 close(fd);\cf1\highlight2 
+\par \cf0\highlight0                                                         return 1;\cf1\highlight2 
+\par \cf0\highlight0                                                             \}\cf1\highlight2 
+\par 
+\par \cf0\highlight0                             printf("Driver: %s\\n", cap.driver);\cf1\highlight2 
+\par \cf0\highlight0                                 printf("Card: %s\\n", cap.card);\cf1\highlight2 
+\par 
+\par \cf0\highlight0                                     close(fd);\cf1\highlight2 
+\par \cf0\highlight0                                         return 0;\cf1\highlight2 
+\par \cf0\highlight0\}\cf1\highlight2 
+\par \cf0\highlight0 root@icicle-kit-es:~/camera# cd..\cf1\highlight2 
+\par \cf0\highlight0 -sh: cd..: command not found\cf1\highlight2 
+\par \cf0\highlight0 root@icicle-kit-es:~/camera# cd ..\cf1\highlight2 
+\par \cf0\highlight0 root@icicle-kit-es:~# cd..\cf1\highlight2 
+\par \cf0\highlight0 -sh: cd..: command not found\cf1\highlight2 
+\par \cf0\highlight0 root@icicle-kit-es:~# ls\cf1\highlight2 
+\par \cf0\highlight0 VectorBlox-SDK-release-v1.4.4.1  camera  ngk  release-v1.4.4.1.zip  samples_V500_1.4.4  samples_V500_1.4.4.zip\cf1\highlight2 
+\par \cf0\highlight0 root@icicle-kit-es:~# cd ..\cf1\highlight2 
+\par \cf0\highlight0 root@icicle-kit-es:/home# ls\cf1\highlight2 
+\par \cf0\highlight0 root\cf1\highlight2 
+\par \cf0\highlight0 root@icicle-kit-es:/home# cd ..\cf1\highlight2 
+\par \cf0\highlight0 root@icicle-kit-es:/# ls\cf1\highlight2 
+\par \cf0\highlight0 bin  boot  dev  etc  home  lib  lost+found  media  mnt  opt  proc  run  sbin  srv  sys  tmp  usr  var\cf1\highlight2 
+\par \cf0\highlight0 root@icicle-kit-es:/# cd dev/\cf1\highlight2 
+\par \cf0\highlight0 root@icicle-kit-es:/dev# ls\cf1\highlight2 
+\par \cf0\highlight0 block         null   ptybd  ptye2  ptyq7  ptysc  ptyv1  ptyx6  ptyzb   tty30  tty7   ttybe  ttye3  ttyq8  ttysd  ttyv2  ttyx7  ttyzc\cf1\highlight2 
+\par \cf0\highlight0 bus           port   ptybe  ptye3  ptyq8  ptysd  ptyv2  ptyx7  ptyzc   tty31  tty8   ttybf  ttye4  ttyq9  ttyse  ttyv3  ttyx8  ttyzd\cf1\highlight2 
+\par \cf0\highlight0 char          pps0   ptybf  ptye4  ptyq9  ptyse  ptyv3  ptyx8  ptyzd   tty32  tty9   ttyc0  ttye5  ttyqa  ttysf  ttyv4  ttyx9  ttyze\cf1\highlight2 
+\par \cf0\highlight0 console       pps1   ptyc0  ptye5  ptyqa  ptysf  ptyv4  ptyx9  ptyze   tty33  ttyS0  ttyc1  ttye6  ttyqb  ttyt0  ttyv5  ttyxa  ttyzf\cf1\highlight2 
+\par \cf0\highlight0 disk          ptmx   ptyc1  ptye6  ptyqb  ptyt0  ptyv5  ptyxa  ptyzf   tty34  ttyS1  ttyc2  ttye7  ttyqc  ttyt1  ttyv6  ttyxb  u-dma-buf-mgr\cf1\highlight2 
+\par \cf0\highlight0 dma-proxy0    ptp0   ptyc2  ptye7  ptyqc  ptyt1  ptyv6  ptyxb  random  tty35  ttyS2  ttyc3  ttye8  ttyqd  ttyt2  ttyv7  ttyxc  ubi_ctrl\cf1\highlight2 
+\par \cf0\highlight0 dma-proxy1    ptp1   ptyc3  ptye8  ptyqd  ptyt2  ptyv7  ptyxc  rtc     tty36  ttyS3  ttyc4  ttye9  ttyqe  ttyt3  ttyv8  ttyxd  udmabuf-ddr-c0\cf1\highlight2 
+\par \cf0\highlight0 dma-proxy2    pts    ptyc4  ptye9  ptyqe  ptyt3  ptyv8  ptyxd  rtc0    tty37  ttya0  ttyc5  ttyea  ttyqf  ttyt4  ttyv9  ttyxe  udmabuf-ddr-nc-wcb0\cf1\highlight2 
+\par \cf0\highlight0 dma-proxy3    ptya0  ptyc5  ptyea  ptyqf  ptyt4  ptyv9  ptyxe  shm     tty38  ttya1  ttyc6  ttyeb  ttyr0  ttyt5  ttyva  ttyxf  udmabuf-ddr-nc0\cf1\highlight2 
+\par \cf0\highlight0 fd            ptya1  ptyc6  ptyeb  ptyr0  ptyt5  ptyva  ptyxf  stderr  tty39  ttya2  ttyc7  ttyec  ttyr1  ttyt6  ttyvb  ttyy0  uio0\cf1\highlight2 
+\par \cf0\highlight0 full          ptya2  ptyc7  ptyec  ptyr1  ptyt6  ptyvb  ptyy0  stdin   tty4   ttya3  ttyc8  ttyed  ttyr2  ttyt7  ttyvc  ttyy1  uio1\cf1\highlight2 
+\par \cf0\highlight0 gpiochip0     ptya3  ptyc8  ptyed  ptyr2  ptyt7  ptyvc  ptyy1  stdout  tty40  ttya4  ttyc9  ttyee  ttyr3  ttyt8  ttyvd  ttyy2  uio2\cf1\highlight2 
+\par \cf0\highlight0 hwrng         ptya4  ptyc9  ptyee  ptyr3  ptyt8  ptyvd  ptyy2  tty     tty41  ttya5  ttyca  ttyef  ttyr4  ttyt9  ttyve  ttyy3  urandom\cf1\highlight2 
+\par \cf0\highlight0 i2c-0         ptya5  ptyca  ptyef  ptyr4  ptyt9  ptyve  ptyy3  tty0    tty42  ttya6  ttycb  ttyp0  ttyr5  ttyta  ttyvf  ttyy4  vcs\cf1\highlight2 
+\par \cf0\highlight0 i2c-1         ptya6  ptycb  ptyp0  ptyr5  ptyta  ptyvf  ptyy4  tty1    tty43  ttya7  ttycc  ttyp1  ttyr6  ttytb  ttyw0  ttyy5  vcs1\cf1\highlight2 
+\par \cf0\highlight0 i2c-2         ptya7  ptycc  ptyp1  ptyr6  ptytb  ptyw0  ptyy5  tty10   tty44  ttya8  ttycd  ttyp2  ttyr7  ttytc  ttyw1  ttyy6  vcs2\cf1\highlight2 
+\par \cf0\highlight0 initctl       ptya8  ptycd  ptyp2  ptyr7  ptytc  ptyw1  ptyy6  tty11   tty45  ttya9  ttyce  ttyp3  ttyr8  ttytd  ttyw2  ttyy7  vcs3\cf1\highlight2 
+\par \cf0\highlight0 kmsg          ptya9  ptyce  ptyp3  ptyr8  ptytd  ptyw2  ptyy7  tty12   tty46  ttyaa  ttycf  ttyp4  ttyr9  ttyte  ttyw3  ttyy8  vcs4\cf1\highlight2 
+\par \cf0\highlight0 log           ptyaa  ptycf  ptyp4  ptyr9  ptyte  ptyw3  ptyy8  tty13   tty47  ttyab  ttyd0  ttyp5  ttyra  ttytf  ttyw4  ttyy9  vcs5\cf1\highlight2 
+\par \cf0\highlight0 loop-control  ptyab  ptyd0  ptyp5  ptyra  ptytf  ptyw4  ptyy9  tty14   tty48  ttyac  ttyd1  ttyp6  ttyrb  ttyu0  ttyw5  ttyya  vcs6\cf1\highlight2 
+\par \cf0\highlight0 loop0         ptyac  ptyd1  ptyp6  ptyrb  ptyu0  ptyw5  ptyya  tty15   tty49  ttyad  ttyd2  ttyp7  ttyrc  ttyu1  ttyw6  ttyyb  vcsa\cf1\highlight2 
+\par \cf0\highlight0 loop1         ptyad  ptyd2  ptyp7  ptyrc  ptyu1  ptyw6  ptyyb  tty16   tty5   ttyae  ttyd3  ttyp8  ttyrd  ttyu2  ttyw7  ttyyc  vcsa1\cf1\highlight2 
+\par \cf0\highlight0 loop2         ptyae  ptyd3  ptyp8  ptyrd  ptyu2  ptyw7  ptyyc  tty17   tty50  ttyaf  ttyd4  ttyp9  ttyre  ttyu3  ttyw8  ttyyd  vcsa2\cf1\highlight2 
+\par \cf0\highlight0 loop3         ptyaf  ptyd4  ptyp9  ptyre  ptyu3  ptyw8  ptyyd  tty18   tty51  ttyb0  ttyd5  ttypa  ttyrf  ttyu4  ttyw9  ttyye  vcsa3\cf1\highlight2 
+\par \cf0\highlight0 loop4         ptyb0  ptyd5  ptypa  ptyrf  ptyu4  ptyw9  ptyye  tty19   tty52  ttyb1  ttyd6  ttypb  ttys0  ttyu5  ttywa  ttyyf  vcsa4\cf1\highlight2 
+\par \cf0\highlight0 loop5         ptyb1  ptyd6  ptypb  ptys0  ptyu5  ptywa  ptyyf  tty2    tty53  ttyb2  ttyd7  ttypc  ttys1  ttyu6  ttywb  ttyz0  vcsa5\cf1\highlight2 
+\par \cf0\highlight0 loop6         ptyb2  ptyd7  ptypc  ptys1  ptyu6  ptywb  ptyz0  tty20   tty54  ttyb3  ttyd8  ttypd  ttys2  ttyu7  ttywc  ttyz1  vcsa6\cf1\highlight2 
+\par \cf0\highlight0 loop7         ptyb3  ptyd8  ptypd  ptys2  ptyu7  ptywc  ptyz1  tty21   tty55  ttyb4  ttyd9  ttype  ttys3  ttyu8  ttywd  ttyz2  vcsu\cf1\highlight2 
+\par \cf0\highlight0 mem           ptyb4  ptyd9  ptype  ptys3  ptyu8  ptywd  ptyz2  tty22   tty56  ttyb5  ttyda  ttypf  ttys4  ttyu9  ttywe  ttyz3  vcsu1\cf1\highlight2 
+\par \cf0\highlight0 mmcblk0       ptyb5  ptyda  ptypf  ptys4  ptyu9  ptywe  ptyz3  tty23   tty57  ttyb6  ttydb  ttyq0  ttys5  ttyua  ttywf  ttyz4  vcsu2\cf1\highlight2 
+\par \cf0\highlight0 mmcblk0boot0  ptyb6  ptydb  ptyq0  ptys5  ptyua  ptywf  ptyz4  tty24   tty58  ttyb7  ttydc  ttyq1  ttys6  ttyub  ttyx0  ttyz5  vcsu3\cf1\highlight2 
+\par \cf0\highlight0 mmcblk0boot1  ptyb7  ptydc  ptyq1  ptys6  ptyub  ptyx0  ptyz5  tty25   tty59  ttyb8  ttydd  ttyq2  ttys7  ttyuc  ttyx1  ttyz6  vcsu4\cf1\highlight2 
+\par \cf0\highlight0 mmcblk0p1     ptyb8  ptydd  ptyq2  ptys7  ptyuc  ptyx1  ptyz6  tty26   tty6   ttyb9  ttyde  ttyq3  ttys8  ttyud  ttyx2  ttyz7  vcsu5\cf1\highlight2 
+\par \cf0\highlight0 mmcblk0p2     ptyb9  ptyde  ptyq3  ptys8  ptyud  ptyx2  ptyz7  tty27   tty60  ttyba  ttydf  ttyq4  ttys9  ttyue  ttyx3  ttyz8  vcsu6\cf1\highlight2 
+\par \cf0\highlight0 mmcblk0p3     ptyba  ptydf  ptyq4  ptys9  ptyue  ptyx3  ptyz8  tty28   tty61  ttybb  ttye0  ttyq5  ttysa  ttyuf  ttyx4  ttyz9  vga_arbiter\cf1\highlight2 
+\par \cf0\highlight0 mmcblk0rpmb   ptybb  ptye0  ptyq5  ptysa  ptyuf  ptyx4  ptyz9  tty29   tty62  ttybc  ttye1  ttyq6  ttysb  ttyv0  ttyx5  ttyza  zero\cf1\highlight2 
+\par \cf0\highlight0 mqueue        ptybc  ptye1  ptyq6  ptysb  ptyv0  ptyx5  ptyza  tty3    tty63  ttybd  ttye2  ttyq7  ttysc  ttyv1  ttyx6  ttyzb\cf1\highlight2 
+\par \cf0\highlight0 root@icicle-kit-es:/dev# cd uio2\cf1\highlight2 
+\par \cf0\highlight0 -sh: cd: uio2: Not a directory\cf1\highlight2 
+\par \cf0\highlight0 root@icicle-kit-es:/dev# cat uio2\cf1\highlight2 
+\par \cf0\highlight0 cat: uio2: Invalid argument\cf1\highlight2 
+\par \cf0\highlight0 root@icicle-kit-es:/dev# [  131.844870] musb-hdrc musb-hdrc.1.auto: VBUS_ERROR in b_idle (90, <VBusValid), retry #0, port1 00000100\cf1\highlight2 
+\par \cf0\highlight0 dtc -I fs -O dts /sys/firmware/devicetree/base > /home/root/live.dts\cf1\highlight2 
+\par \cf0\highlight0 <stdout>: Warning (clocks_property): /soc/clkcfg@20002000:clocks: cell 0 is not a phandle reference\cf1\highlight2 
+\par \cf0\highlight0 <stdout>: Warning (clocks_property): /soc/serial@20104000:clocks: cell 0 is not a phandle reference\cf1\highlight2 
+\par \cf0\highlight0 <stdout>: Warning (clocks_property): /soc/i2c@2010a000:clocks: cell 0 is not a phandle reference\cf1\highlight2 
+\par \cf0\highlight0 <stdout>: Warning (clocks_property): /soc/can@2010d000:clocks: cell 0 is not a phandle reference\cf1\highlight2 
+\par \cf0\highlight0 <stdout>: Warning (clocks_property): /soc/gpio@20122000:clocks: cell 0 is not a phandle reference\cf1\highlight2 
+\par \cf0\highlight0 <stdout>: Warning (clocks_property): /soc/ethernet@20110000:clocks: cell 0 is not a phandle reference\cf1\highlight2 
+\par \cf0\highlight0 <stdout>: Warning (clocks_property): /soc/ethernet@20110000:clocks: cell 2 is not a phandle reference\cf1\highlight2 
+\par \cf0\highlight0 <stdout>: Warning (clocks_property): /soc/serial@20106000:clocks: cell 0 is not a phandle reference\cf1\highlight2 
+\par \cf0\highlight0 <stdout>: Warning (clocks_property): /soc/serial@20100000:clocks: cell 0 is not a phandle reference\cf1\highlight2 
+\par \cf0\highlight0 <stdout>: Warning (clocks_property): /soc/spi@20109000:clocks: cell 0 is not a phandle reference\cf1\highlight2 
+\par \cf0\highlight0 <stdout>: Warning (clocks_property): /soc/usb@20201000:clocks: cell 0 is not a phandle reference\cf1\highlight2 
+\par \cf0\highlight0 <stdout>: Warning (clocks_property): /soc/clock-controller@38100000:clocks: cell 0 is not a phandle reference\cf1\highlight2 
+\par \cf0\highlight0 <stdout>: Warning (clocks_property): /soc/clock-controller@38100000:clocks: cell 1 is not a phandle reference\cf1\highlight2 
+\par \cf0\highlight0 <stdout>: Warning (clocks_property): /soc/clock-controller@38100000:clocks: cell 2 is not a phandle reference\cf1\highlight2 
+\par \cf0\highlight0 <stdout>: Warning (clocks_property): /soc/clock-controller@38100000:clocks: cell 3 is not a phandle reference\cf1\highlight2 
+\par \cf0\highlight0 <stdout>: Warning (clocks_property): /soc/clock-controller@38100000:clocks: cell 4 is not a phandle reference\cf1\highlight2 
+\par \cf0\highlight0 <stdout>: Warning (clocks_property): /soc/clock-controller@38100000:clocks: cell 5 is not a phandle reference\cf1\highlight2 
+\par \cf0\highlight0 <stdout>: Warning (clocks_property): /soc/rtc@20124000:clocks: cell 0 is not a phandle reference\cf1\highlight2 
+\par \cf0\highlight0 <stdout>: Warning (clocks_property): /soc/rtc@20124000:clocks: cell 2 is not a phandle reference\cf1\highlight2 
+\par \cf0\highlight0 <stdout>: Warning (clocks_property): /soc/serial@20000000:clocks: cell 0 is not a phandle reference\cf1\highlight2 
+\par \cf0\highlight0 <stdout>: Warning (clocks_property): /soc/can@2010c000:clocks: cell 0 is not a phandle reference\cf1\highlight2 
+\par \cf0\highlight0 <stdout>: Warning (clocks_property): /soc/gpio@20121000:clocks: cell 0 is not a phandle reference\cf1\highlight2 
+\par \cf0\highlight0 <stdout>: Warning (clocks_property): /soc/ethernet@20112000:clocks: cell 0 is not a phandle reference\cf1\highlight2 
+\par \cf0\highlight0 <stdout>: Warning (clocks_property): /soc/ethernet@20112000:clocks: cell 2 is not a phandle reference\cf1\highlight2 
+\par \cf0\highlight0 <stdout>: Warning (clocks_property): /soc/mmc@20008000:clocks: cell 0 is not a phandle reference\cf1\highlight2 
+\par \cf0\highlight0 <stdout>: Warning (clocks_property): /soc/serial@20102000:clocks: cell 0 is not a phandle reference\cf1\highlight2 
+\par \cf0\highlight0 <stdout>: Warning (clocks_property): /soc/spi@20108000:clocks: cell 0 is not a phandle reference\cf1\highlight2 
+\par \cf0\highlight0 <stdout>: Warning (clocks_property): /soc/i2c@2010b000:clocks: cell 0 is not a phandle reference\cf1\highlight2 
+\par \cf0\highlight0 <stdout>: Warning (clocks_property): /soc/spi@37020100:clocks: cell 0 is not a phandle reference\cf1\highlight2 
+\par \cf0\highlight0 <stdout>: Warning (clocks_property): /soc/spi@21000000:clocks: cell 0 is not a phandle reference\cf1\highlight2 
+\par \cf0\highlight0 <stdout>: Warning (clocks_property): /soc/gpio@20120000:clocks: cell 0 is not a phandle reference\cf1\highlight2 
+\par \cf0\highlight0 <stdout>: Warning (clocks_property): /fabric-pcie-bus@3000000000/pcie@3000000000:clocks: cell 0 is not a phandle reference\cf1\highlight2 
+\par \cf0\highlight0 <stdout>: Warning (clocks_property): /fabric-pcie-bus@3000000000/pcie@3000000000:clocks: cell 2 is not a phandle reference\cf1\highlight2 
+\par \cf0\highlight0 <stdout>: Warning (clocks_property): /fabric-bus@40000000/pwm@40000000:clocks: cell 0 is not a phandle reference\cf1\highlight2 
+\par \cf0\highlight0 <stdout>: Warning (clocks_property): /fabric-bus@40000000/i2c@40000200:clocks: cell 0 is not a phandle reference\cf1\highlight2 
+\par \cf0\highlight0 <stdout>: Warning (clocks_property): /cpus/cpu@1:clocks: cell 0 is not a phandle reference\cf1\highlight2 
+\par \cf0\highlight0 <stdout>: Warning (clocks_property): /cpus/cpu@4:clocks: cell 0 is not a phandle reference\cf1\highlight2 
+\par \cf0\highlight0 <stdout>: Warning (clocks_property): /cpus/cpu@2:clocks: cell 0 is not a phandle reference\cf1\highlight2 
+\par \cf0\highlight0 <stdout>: Warning (clocks_property): /cpus/cpu@0:clocks: cell 0 is not a phandle reference\cf1\highlight2 
+\par \cf0\highlight0 <stdout>: Warning (clocks_property): /cpus/cpu@3:clocks: cell 0 is not a phandle reference\cf1\highlight2 
+\par \cf0\highlight0 <stdout>: Warning (dmas_property): /mpfs-dma-proxy:dmas: cell 0 is not a phandle reference\cf1\highlight2 
+\par \cf0\highlight0 <stdout>: Warning (dmas_property): /mpfs-dma-proxy:dmas: cell 2 is not a phandle reference\cf1\highlight2 
+\par \cf0\highlight0 <stdout>: Warning (dmas_property): /mpfs-dma-proxy:dmas: cell 4 is not a phandle reference\cf1\highlight2 
+\par \cf0\highlight0 <stdout>: Warning (dmas_property): /mpfs-dma-proxy:dmas: cell 6 is not a phandle reference\cf1\highlight2 
+\par \cf0\highlight0 <stdout>: Warning (interrupts_extended_property): /soc/clint@2000000:interrupts-extended: cell 0 is not a phandle reference\cf1\highlight2 
+\par \cf0\highlight0 <stdout>: Warning (interrupts_extended_property): /soc/clint@2000000:interrupts-extended: cell 2 is not a phandle reference\cf1\highlight2 
+\par \cf0\highlight0 <stdout>: Warning (interrupts_extended_property): /soc/clint@2000000:interrupts-extended: cell 4 is not a phandle reference\cf1\highlight2 
+\par \cf0\highlight0 <stdout>: Warning (interrupts_extended_property): /soc/clint@2000000:interrupts-extended: cell 6 is not a phandle reference\cf1\highlight2 
+\par \cf0\highlight0 <stdout>: Warning (interrupts_extended_property): /soc/clint@2000000:interrupts-extended: cell 8 is not a phandle reference\cf1\highlight2 
+\par \cf0\highlight0 <stdout>: Warning (interrupts_extended_property): /soc/clint@2000000:interrupts-extended: cell 10 is not a phandle reference\cf1\highlight2 
+\par \cf0\highlight0 <stdout>: Warning (interrupts_extended_property): /soc/clint@2000000:interrupts-extended: cell 12 is not a phandle reference\cf1\highlight2 
+\par \cf0\highlight0 <stdout>: Warning (interrupts_extended_property): /soc/clint@2000000:interrupts-extended: cell 14 is not a phandle reference\cf1\highlight2 
+\par \cf0\highlight0 <stdout>: Warning (interrupts_extended_property): /soc/clint@2000000:interrupts-extended: cell 16 is not a phandle reference\cf1\highlight2 
+\par \cf0\highlight0 <stdout>: Warning (interrupts_extended_property): /soc/clint@2000000:interrupts-extended: cell 18 is not a phandle reference\cf1\highlight2 
+\par \cf0\highlight0 <stdout>: Warning (interrupts_extended_property): /soc/interrupt-controller@c000000:interrupts-extended: cell 0 is not a phandle reference\cf1\highlight2 
+\par \cf0\highlight0 <stdout>: Warning (interrupts_extended_property): /soc/interrupt-controller@c000000:interrupts-extended: cell 2 is not a phandle reference\cf1\highlight2 
+\par \cf0\highlight0 <stdout>: Warning (interrupts_extended_property): /soc/interrupt-controller@c000000:interrupts-extended: cell 4 is not a phandle reference\cf1\highlight2 
+\par \cf0\highlight0 <stdout>: Warning (interrupts_extended_property): /soc/interrupt-controller@c000000:interrupts-extended: cell 6 is not a phandle reference\cf1\highlight2 
+\par \cf0\highlight0 <stdout>: Warning (interrupts_extended_property): /soc/interrupt-controller@c000000:interrupts-extended: cell 8 is not a phandle reference\cf1\highlight2 
+\par \cf0\highlight0 <stdout>: Warning (interrupts_extended_property): /soc/interrupt-controller@c000000:interrupts-extended: cell 10 is not a phandle reference\cf1\highlight2 
+\par \cf0\highlight0 <stdout>: Warning (interrupts_extended_property): /soc/interrupt-controller@c000000:interrupts-extended: cell 12 is not a phandle reference\cf1\highlight2 
+\par \cf0\highlight0 <stdout>: Warning (interrupts_extended_property): /soc/interrupt-controller@c000000:interrupts-extended: cell 14 is not a phandle reference\cf1\highlight2 
+\par \cf0\highlight0 <stdout>: Warning (interrupts_extended_property): /soc/interrupt-controller@c000000:interrupts-extended: cell 16 is not a phandle reference\cf1\highlight2 
+\par \cf0\highlight0 <stdout>: Warning (mboxes_property): /syscontroller:mboxes: cell 0 is not a phandle reference\cf1\highlight2 
+\par \cf0\highlight0 <stdout>: Warning (msi_parent_property): /fabric-pcie-bus@3000000000/pcie@3000000000:msi-parent: cell 0 is not a phandle reference\cf1\highlight2 
+\par \cf0\highlight0 <stdout>: Warning (resets_property): /soc/ethernet@20110000:resets: cell 0 is not a phandle reference\cf1\highlight2 
+\par \cf0\highlight0 <stdout>: Warning (resets_property): /soc/ethernet@20112000:resets: cell 0 is not a phandle reference\cf1\highlight2 
+\par \cf0\highlight0 <stdout>: Warning (interrupt_provider): /soc/gpio@20122000: Missing #address-cells in interrupt provider\cf1\highlight2 
+\par \cf0\highlight0 <stdout>: Warning (interrupt_provider): /soc/gpio@20121000: Missing #address-cells in interrupt provider\cf1\highlight2 
+\par \cf0\highlight0 <stdout>: Warning (interrupt_provider): /soc/gpio@20120000: Missing #address-cells in interrupt provider\cf1\highlight2 
+\par \cf0\highlight0 <stdout>: Warning (interrupt_provider): /cpus/cpu@1/interrupt-controller: Missing #address-cells in interrupt provider\cf1\highlight2 
+\par \cf0\highlight0 <stdout>: Warning (interrupt_provider): /cpus/cpu@4/interrupt-controller: Missing #address-cells in interrupt provider\cf1\highlight2 
+\par \cf0\highlight0 <stdout>: Warning (interrupt_provider): /cpus/cpu@2/interrupt-controller: Missing #address-cells in interrupt provider\cf1\highlight2 
+\par \cf0\highlight0 <stdout>: Warning (interrupt_provider): /cpus/cpu@0/interrupt-controller: Missing #address-cells in interrupt provider\cf1\highlight2 
+\par \cf0\highlight0 <stdout>: Warning (interrupt_provider): /cpus/cpu@3/interrupt-controller: Missing #address-cells in interrupt provider\cf1\highlight2 
+\par \cf0\highlight0 root@icicle-kit-es:/dev# cd ..\cf1\highlight2 
+\par \cf0\highlight0 root@icicle-kit-es:/# cd home/\cf1\highlight2 
+\par \cf0\highlight0 root@icicle-kit-es:/home# ls\cf1\highlight2 
+\par \cf0\highlight0 root\cf1\highlight2 
+\par \cf0\highlight0 root@icicle-kit-es:/home# cd root/\cf1\highlight2 
+\par \cf0\highlight0 root@icicle-kit-es:~# ls\cf1\highlight2 
+\par \cf0\highlight0 VectorBlox-SDK-release-v1.4.4.1  camera  live.dts  ngk  release-v1.4.4.1.zip  samples_V500_1.4.4  samples_V500_1.4.4.zip\cf1\highlight2 
+\par \cf0\highlight0 root@icicle-kit-es:~# cat live.dts\cf1\highlight2 
+\par \cf0\highlight0 /dts-v1/;\cf1\highlight2 
+\par 
+\par \cf0\highlight0 / \{\cf1\highlight2 
+\par \cf0\highlight0         #address-cells = <0x02>;\cf1\highlight2 
+\par \cf0\highlight0         model = "Microchip PolarFire-SoC Icicle Kit";\cf1\highlight2 
+\par \cf0\highlight0         #size-cells = <0x02>;\cf1\highlight2 
+\par \cf0\highlight0         compatible = "microchip,mpfs-icicle-reference-rtlv2210\\0microchip,mpfs-icicle-kit\\0microchip,mpfs";\cf1\highlight2 
+\par 
+\par \cf0\highlight0         mssrefclk \{\cf1\highlight2 
+\par \cf0\highlight0                 #clock-cells = <0x00>;\cf1\highlight2 
+\par \cf0\highlight0                 clock-frequency = <0x7735940>;\cf1\highlight2 
+\par \cf0\highlight0                 compatible = "fixed-clock";\cf1\highlight2 
+\par \cf0\highlight0                 phandle = <0x0f>;\cf1\highlight2 
+\par \cf0\highlight0         \};\cf1\highlight2 
+\par 
+\par \cf0\highlight0         memory@c4000000 \{\cf1\highlight2 
+\par \cf0\highlight0                 device_type = "memory";\cf1\highlight2 
+\par \cf0\highlight0                 reg = <0x00 0xc4000000 0x00 0x6000000>;\cf1\highlight2 
+\par \cf0\highlight0                 phandle = <0x43>;\cf1\highlight2 
+\par \cf0\highlight0         \};\cf1\highlight2 
+\par 
+\par \cf0\highlight0         mailbox \{\cf1\highlight2 
+\par \cf0\highlight0                 interrupts = <0xb4>;\cf1\highlight2 
+\par \cf0\highlight0                 #mbox-cells = <0x01>;\cf1\highlight2 
+\par \cf0\highlight0                 microchip,miv-ihc-remote-context-id = <0x06>;\cf1\highlight2 
+\par \cf0\highlight0                 interrupt-parent = <0x09>;\cf1\highlight2 
+\par \cf0\highlight0                 compatible = "microchip,miv-ihc";\cf1\highlight2 
+\par \cf0\highlight0                 status = "disabled";\cf1\highlight2 
+\par \cf0\highlight0                 phandle = <0x3f>;\cf1\highlight2 
+\par \cf0\highlight0         \};\cf1\highlight2 
+\par 
+\par \cf0\highlight0         soc \{\cf1\highlight2 
+\par \cf0\highlight0                 dma-ranges = <0x14 0x00 0x00 0x80000000 0x00 0x4000000 0x14 0x4000000 0x00 0xc4000000 0x00 0x6000000 0x14 0xa000000 0x00 0x8a000000 0x00 0x8000000 0x14 0x12000000 0x14 0x12000000 0x00 0x10000000 0x14 0x22000000 0x10 0x22000000 0x00 0x5e000000>;\cf1\highlight2 
+\par \cf0\highlight0                 #address-cells = <0x02>;\cf1\highlight2 
+\par \cf0\highlight0                 #size-cells = <0x02>;\cf1\highlight2 
+\par \cf0\highlight0                 compatible = "simple-bus";\cf1\highlight2 
+\par \cf0\highlight0                 ranges;\cf1\highlight2 
+\par 
+\par \cf0\highlight0                 clkcfg@20002000 \{\cf1\highlight2 
+\par \cf0\highlight0                         #reset-cells = <0x01>;\cf1\highlight2 
+\par \cf0\highlight0                         clocks = <0x0f>;\cf1\highlight2 
+\par \cf0\highlight0                         #clock-cells = <0x01>;\cf1\highlight2 
+\par \cf0\highlight0                         compatible = "microchip,mpfs-clkcfg";\cf1\highlight2 
+\par \cf0\highlight0                         reg = <0x00 0x20002000 0x00 0x1000 0x00 0x3e001000 0x00 0x1000>;\cf1\highlight2 
+\par \cf0\highlight0                         phandle = <0x01>;\cf1\highlight2 
+\par \cf0\highlight0                 \};\cf1\highlight2 
+\par 
+\par \cf0\highlight0                 mailbox@37020000 \{\cf1\highlight2 
+\par \cf0\highlight0                         interrupts = <0x60>;\cf1\highlight2 
+\par \cf0\highlight0                         #mbox-cells = <0x01>;\cf1\highlight2 
+\par \cf0\highlight0                         interrupt-parent = <0x09>;\cf1\highlight2 
+\par \cf0\highlight0                         compatible = "microchip,mpfs-mailbox";\cf1\highlight2 
+\par \cf0\highlight0                         status = "okay";\cf1\highlight2 
+\par \cf0\highlight0                         reg = <0x00 0x37020000 0x00 0x58 0x00 0x2000318c 0x00 0x40 0x00 0x37020800 0x00 0x100>;\cf1\highlight2 
+\par \cf0\highlight0                         phandle = <0x08>;\cf1\highlight2 
+\par \cf0\highlight0                 \};\cf1\highlight2 
+\par 
+\par \cf0\highlight0                 serial@20104000 \{\cf1\highlight2 
+\par \cf0\highlight0                         reg-io-width = <0x04>;\cf1\highlight2 
+\par \cf0\highlight0                         interrupts = <0x5d>;\cf1\highlight2 
+\par \cf0\highlight0                         clocks = <0x01 0x0b>;\cf1\highlight2 
+\par \cf0\highlight0                         interrupt-parent = <0x09>;\cf1\highlight2 
+\par \cf0\highlight0                         current-speed = <0x1c200>;\cf1\highlight2 
+\par \cf0\highlight0                         compatible = "ns16550a";\cf1\highlight2 
+\par \cf0\highlight0                         status = "okay";\cf1\highlight2 
+\par \cf0\highlight0                         reg = <0x00 0x20104000 0x00 0x400>;\cf1\highlight2 
+\par \cf0\highlight0                         phandle = <0x23>;\cf1\highlight2 
+\par \cf0\highlight0                         reg-shift = <0x02>;\cf1\highlight2 
+\par \cf0\highlight0                 \};\cf1\highlight2 
+\par 
+\par \cf0\highlight0                 clock-controller@38400000 \{\cf1\highlight2 
+\par \cf0\highlight0                         #clock-cells = <0x01>;\cf1\highlight2 
+\par \cf0\highlight0                         compatible = "microchip,mpfs-ccc";\cf1\highlight2 
+\par \cf0\highlight0                         status = "disabled";\cf1\highlight2 
+\par \cf0\highlight0                         reg = <0x00 0x38400000 0x00 0x1000 0x00 0x38800000 0x00 0x1000 0x00 0x39400000 0x00 0x1000 0x00 0x39800000 0x00 0x1000>;\cf1\highlight2 
+\par \cf0\highlight0                         phandle = <0x1f>;\cf1\highlight2 
+\par \cf0\highlight0                 \};\cf1\highlight2 
+\par 
+\par \cf0\highlight0                 clint@2000000 \{\cf1\highlight2 
+\par \cf0\highlight0                         interrupts-extended = <0x0a 0xffffffff 0x0a 0xffffffff 0x0b 0x03 0x0b 0x07 0x0c 0x03 0x0c 0x07 0x0d 0x03 0x0d 0x07 0x0e 0x03 0x0e 0x07>;\cf1\highlight2 
+\par \cf0\highlight0                         compatible = "sifive,fu540-c000-clint\\0sifive,clint0";\cf1\highlight2 
+\par \cf0\highlight0                         reg = <0x00 0x2000000 0x00 0xc000>;\cf1\highlight2 
+\par \cf0\highlight0                         phandle = <0x1c>;\cf1\highlight2 
+\par \cf0\highlight0                 \};\cf1\highlight2 
+\par 
+\par \cf0\highlight0                 i2c@2010a000 \{\cf1\highlight2 
+\par \cf0\highlight0                         #address-cells = <0x01>;\cf1\highlight2 
+\par \cf0\highlight0                         interrupts = <0x3a>;\cf1\highlight2 
+\par \cf0\highlight0                         clocks = <0x01 0x0f>;\cf1\highlight2 
+\par \cf0\highlight0                         #size-cells = <0x00>;\cf1\highlight2 
+\par \cf0\highlight0                         interrupt-parent = <0x09>;\cf1\highlight2 
+\par \cf0\highlight0                         clock-frequency = <0x186a0>;\cf1\highlight2 
+\par \cf0\highlight0                         compatible = "microchip,mpfs-i2c\\0microchip,corei2c-rtl-v7";\cf1\highlight2 
+\par \cf0\highlight0                         status = "okay";\cf1\highlight2 
+\par \cf0\highlight0                         reg = <0x00 0x2010a000 0x00 0x1000>;\cf1\highlight2 
+\par \cf0\highlight0                         phandle = <0x29>;\cf1\highlight2 
+\par \cf0\highlight0                 \};\cf1\highlight2 
+\par 
+\par \cf0\highlight0                 can@2010d000 \{\cf1\highlight2 
+\par \cf0\highlight0                         interrupts = <0x39>;\cf1\highlight2 
+\par \cf0\highlight0                         clocks = <0x01 0x12>;\cf1\highlight2 
+\par \cf0\highlight0                         interrupt-parent = <0x09>;\cf1\highlight2 
+\par \cf0\highlight0                         compatible = "microchip,mpfs-can";\cf1\highlight2 
+\par \cf0\highlight0                         status = "disabled";\cf1\highlight2 
+\par \cf0\highlight0                         reg = <0x00 0x2010d000 0x00 0x1000>;\cf1\highlight2 
+\par \cf0\highlight0                         phandle = <0x31>;\cf1\highlight2 
+\par \cf0\highlight0                 \};\cf1\highlight2 
+\par 
+\par \cf0\highlight0                 gpio@20122000 \{\cf1\highlight2 
+\par \cf0\highlight0                         gpio-controller;\cf1\highlight2 
+\par \cf0\highlight0                         interrupts = <0x35 0x35 0x35 0x35 0x35 0x35 0x35 0x35 0x35 0x35 0x35 0x35 0x35 0x35 0x35 0x35 0x35 0x35 0x35 0x35 0x35 0x35 0x35 0x35 0x35 0x35 0x35 0x35 0x35 0x35 0x35 0x35>;\cf1\highlight2 
+\par \cf0\highlight0                         clocks = <0x01 0x19>;\cf1\highlight2 
+\par \cf0\highlight0                         interrupt-parent = <0x09>;\cf1\highlight2 
+\par \cf0\highlight0                         compatible = "microchip,mpfs-gpio";\cf1\highlight2 
+\par \cf0\highlight0                         #interrupt-cells = <0x02>;\cf1\highlight2 
+\par \cf0\highlight0                         status = "okay";\cf1\highlight2 
+\par \cf0\highlight0                         reg = <0x00 0x20122000 0x00 0x1000>;\cf1\highlight2 
+\par \cf0\highlight0                         phandle = <0x36>;\cf1\highlight2 
+\par \cf0\highlight0                         #gpio-cells = <0x02>;\cf1\highlight2 
+\par \cf0\highlight0                         interrupt-controller;\cf1\highlight2 
+\par \cf0\highlight0                 \};\cf1\highlight2 
+\par 
+\par \cf0\highlight0                 ethernet@20110000 \{\cf1\highlight2 
+\par \cf0\highlight0                         #address-cells = <0x01>;\cf1\highlight2 
+\par \cf0\highlight0                         phy-mode = "sgmii";\cf1\highlight2 
+\par \cf0\highlight0                         dma-noncoherent;\cf1\highlight2 
+\par \cf0\highlight0                         clock-names = "pclk\\0hclk";\cf1\highlight2 
+\par \cf0\highlight0                         local-mac-address = [00 00 00 00 00 00];\cf1\highlight2 
+\par \cf0\highlight0                         resets = <0x01 0x04>;\cf1\highlight2 
+\par \cf0\highlight0                         interrupts = <0x40 0x41 0x42 0x43 0x44 0x45>;\cf1\highlight2 
+\par \cf0\highlight0                         clocks = <0x01 0x04 0x01 0x02>;\cf1\highlight2 
+\par \cf0\highlight0                         mac-address = [00 04 a3 11 40 04];\cf1\highlight2 
+\par \cf0\highlight0                         #size-cells = <0x00>;\cf1\highlight2 
+\par \cf0\highlight0                         interrupt-parent = <0x09>;\cf1\highlight2 
+\par \cf0\highlight0                         compatible = "microchip,mpfs-macb\\0cdns,macb";\cf1\highlight2 
+\par \cf0\highlight0                         status = "okay";\cf1\highlight2 
+\par \cf0\highlight0                         reg = <0x00 0x20110000 0x00 0x2000>;\cf1\highlight2 
+\par \cf0\highlight0                         phandle = <0x32>;\cf1\highlight2 
+\par \cf0\highlight0                         phy-handle = <0x11>;\cf1\highlight2 
+\par \cf0\highlight0                 \};\cf1\highlight2 
+\par 
+\par \cf0\highlight0                 serial@20106000 \{\cf1\highlight2 
+\par \cf0\highlight0                         reg-io-width = <0x04>;\cf1\highlight2 
+\par \cf0\highlight0                         interrupts = <0x5e>;\cf1\highlight2 
+\par \cf0\highlight0                         clocks = <0x01 0x0c>;\cf1\highlight2 
+\par \cf0\highlight0                         interrupt-parent = <0x09>;\cf1\highlight2 
+\par \cf0\highlight0                         current-speed = <0x1c200>;\cf1\highlight2 
+\par \cf0\highlight0                         compatible = "ns16550a";\cf1\highlight2 
+\par \cf0\highlight0                         status = "okay";\cf1\highlight2 
+\par \cf0\highlight0                         reg = <0x00 0x20106000 0x00 0x400>;\cf1\highlight2 
+\par \cf0\highlight0                         phandle = <0x24>;\cf1\highlight2 
+\par \cf0\highlight0                         reg-shift = <0x02>;\cf1\highlight2 
+\par \cf0\highlight0                 \};\cf1\highlight2 
+\par 
+\par \cf0\highlight0                 serial@20100000 \{\cf1\highlight2 
+\par \cf0\highlight0                         reg-io-width = <0x04>;\cf1\highlight2 
+\par \cf0\highlight0                         interrupts = <0x5b>;\cf1\highlight2 
+\par \cf0\highlight0                         clocks = <0x01 0x09>;\cf1\highlight2 
+\par \cf0\highlight0                         interrupt-parent = <0x09>;\cf1\highlight2 
+\par \cf0\highlight0                         current-speed = <0x1c200>;\cf1\highlight2 
+\par \cf0\highlight0                         compatible = "ns16550a";\cf1\highlight2 
+\par \cf0\highlight0                         status = "okay";\cf1\highlight2 
+\par \cf0\highlight0                         reg = <0x00 0x20100000 0x00 0x400>;\cf1\highlight2 
+\par \cf0\highlight0                         phandle = <0x21>;\cf1\highlight2 
+\par \cf0\highlight0                         reg-shift = <0x02>;\cf1\highlight2 
+\par \cf0\highlight0                 \};\cf1\highlight2 
+\par 
+\par \cf0\highlight0                 spi@20109000 \{\cf1\highlight2 
+\par \cf0\highlight0                         #address-cells = <0x01>;\cf1\highlight2 
+\par \cf0\highlight0                         interrupts = <0x37>;\cf1\highlight2 
+\par \cf0\highlight0                         clocks = <0x01 0x0e>;\cf1\highlight2 
+\par \cf0\highlight0                         #size-cells = <0x00>;\cf1\highlight2 
+\par \cf0\highlight0                         interrupt-parent = <0x09>;\cf1\highlight2 
+\par \cf0\highlight0                         compatible = "microchip,mpfs-spi";\cf1\highlight2 
+\par \cf0\highlight0                         status = "okay";\cf1\highlight2 
+\par \cf0\highlight0                         reg = <0x00 0x20109000 0x00 0x1000>;\cf1\highlight2 
+\par \cf0\highlight0                         phandle = <0x27>;\cf1\highlight2 
+\par \cf0\highlight0                 \};\cf1\highlight2 
+\par 
+\par \cf0\highlight0                 dma-controller@3000000 \{\cf1\highlight2 
+\par \cf0\highlight0                         interrupts = <0x05 0x06 0x07 0x08 0x09 0x0a 0x0b 0x0c>;\cf1\highlight2 
+\par \cf0\highlight0                         interrupt-parent = <0x09>;\cf1\highlight2 
+\par \cf0\highlight0                         compatible = "microchip,mpfs-pdma\\0sifive,fu540-c000-pdma";\cf1\highlight2 
+\par \cf0\highlight0                         reg = <0x00 0x3000000 0x00 0x8000>;\cf1\highlight2 
+\par \cf0\highlight0                         phandle = <0x15>;\cf1\highlight2 
+\par \cf0\highlight0                         #dma-cells = <0x01>;\cf1\highlight2 
+\par \cf0\highlight0                 \};\cf1\highlight2 
+\par 
+\par \cf0\highlight0                 usb@20201000 \{\cf1\highlight2 
+\par \cf0\highlight0                         dma-noncoherent;\cf1\highlight2 
+\par \cf0\highlight0                         interrupts = <0x56 0x57>;\cf1\highlight2 
+\par \cf0\highlight0                         clocks = <0x01 0x13>;\cf1\highlight2 
+\par \cf0\highlight0                         interrupt-parent = <0x09>;\cf1\highlight2 
+\par \cf0\highlight0                         compatible = "microchip,mpfs-musb";\cf1\highlight2 
+\par \cf0\highlight0                         status = "okay";\cf1\highlight2 
+\par \cf0\highlight0                         interrupt-names = "dma\\0mc";\cf1\highlight2 
+\par \cf0\highlight0                         reg = <0x00 0x20201000 0x00 0x1000>;\cf1\highlight2 
+\par \cf0\highlight0                         phandle = <0x38>;\cf1\highlight2 
+\par \cf0\highlight0                         dr_mode = "otg";\cf1\highlight2 
+\par \cf0\highlight0                 \};\cf1\highlight2 
+\par 
+\par \cf0\highlight0                 clock-controller@38100000 \{\cf1\highlight2 
+\par \cf0\highlight0                         clock-names = "pll0_ref0\\0pll0_ref1\\0pll1_ref0\\0pll1_ref1\\0dll0_ref\\0dll1_ref";\cf1\highlight2 
+\par \cf0\highlight0                         clocks = <0x10 0x10 0x10 0x10 0x10 0x10>;\cf1\highlight2 
+\par \cf0\highlight0                         #clock-cells = <0x01>;\cf1\highlight2 
+\par \cf0\highlight0                         compatible = "microchip,mpfs-ccc";\cf1\highlight2 
+\par \cf0\highlight0                         status = "okay";\cf1\highlight2 
+\par \cf0\highlight0                         reg = <0x00 0x38100000 0x00 0x1000 0x00 0x38200000 0x00 0x1000 0x00 0x39100000 0x00 0x1000 0x00 0x39200000 0x00 0x1000>;\cf1\highlight2 
+\par \cf0\highlight0                         phandle = <0x14>;\cf1\highlight2 
+\par \cf0\highlight0                 \};\cf1\highlight2 
+\par 
+\par \cf0\highlight0                 interrupt-controller@c000000 \{\cf1\highlight2 
+\par \cf0\highlight0                         #address-cells = <0x00>;\cf1\highlight2 
+\par \cf0\highlight0                         interrupts-extended = <0x0a 0xffffffff 0x0b 0xffffffff 0x0b 0x09 0x0c 0xffffffff 0x0c 0x09 0x0d 0xffffffff 0x0d 0x09 0x0e 0xffffffff 0x0e 0x09>;\cf1\highlight2 
+\par \cf0\highlight0                         compatible = "sifive,fu540-c000-plic\\0sifive,plic-1.0.0";\cf1\highlight2 
+\par \cf0\highlight0                         #interrupt-cells = <0x01>;\cf1\highlight2 
+\par \cf0\highlight0                         reg = <0x00 0xc000000 0x00 0x4000000>;\cf1\highlight2 
+\par \cf0\highlight0                         phandle = <0x09>;\cf1\highlight2 
+\par \cf0\highlight0                         riscv,ndev = <0xba>;\cf1\highlight2 
+\par \cf0\highlight0                         interrupt-controller;\cf1\highlight2 
+\par \cf0\highlight0                 \};\cf1\highlight2 
+\par 
+\par \cf0\highlight0                 rtc@20124000 \{\cf1\highlight2 
+\par \cf0\highlight0                         clock-names = "rtc\\0rtcref";\cf1\highlight2 
+\par \cf0\highlight0                         interrupts = <0x50 0x51>;\cf1\highlight2 
+\par \cf0\highlight0                         clocks = <0x01 0x15 0x01 0x21>;\cf1\highlight2 
+\par \cf0\highlight0                         interrupt-parent = <0x09>;\cf1\highlight2 
+\par \cf0\highlight0                         compatible = "microchip,mpfs-rtc";\cf1\highlight2 
+\par \cf0\highlight0                         status = "okay";\cf1\highlight2 
+\par \cf0\highlight0                         reg = <0x00 0x20124000 0x00 0x1000>;\cf1\highlight2 
+\par \cf0\highlight0                         phandle = <0x37>;\cf1\highlight2 
+\par \cf0\highlight0                 \};\cf1\highlight2 
+\par 
+\par \cf0\highlight0                 serial@20000000 \{\cf1\highlight2 
+\par \cf0\highlight0                         reg-io-width = <0x04>;\cf1\highlight2 
+\par \cf0\highlight0                         interrupts = <0x5a>;\cf1\highlight2 
+\par \cf0\highlight0                         clocks = <0x01 0x08>;\cf1\highlight2 
+\par \cf0\highlight0                         interrupt-parent = <0x09>;\cf1\highlight2 
+\par \cf0\highlight0                         current-speed = <0x1c200>;\cf1\highlight2 
+\par \cf0\highlight0                         compatible = "ns16550a";\cf1\highlight2 
+\par \cf0\highlight0                         status = "disabled";\cf1\highlight2 
+\par \cf0\highlight0                         reg = <0x00 0x20000000 0x00 0x400>;\cf1\highlight2 
+\par \cf0\highlight0                         phandle = <0x20>;\cf1\highlight2 
+\par \cf0\highlight0                         reg-shift = <0x02>;\cf1\highlight2 
+\par \cf0\highlight0                 \};\cf1\highlight2 
+\par 
+\par \cf0\highlight0                 can@2010c000 \{\cf1\highlight2 
+\par \cf0\highlight0                         interrupts = <0x38>;\cf1\highlight2 
+\par \cf0\highlight0                         clocks = <0x01 0x11>;\cf1\highlight2 
+\par \cf0\highlight0                         interrupt-parent = <0x09>;\cf1\highlight2 
+\par \cf0\highlight0                         compatible = "microchip,mpfs-can";\cf1\highlight2 
+\par \cf0\highlight0                         status = "okay";\cf1\highlight2 
+\par \cf0\highlight0                         reg = <0x00 0x2010c000 0x00 0x1000>;\cf1\highlight2 
+\par \cf0\highlight0                         phandle = <0x30>;\cf1\highlight2 
+\par \cf0\highlight0                 \};\cf1\highlight2 
+\par 
+\par \cf0\highlight0                 gpio@20121000 \{\cf1\highlight2 
+\par \cf0\highlight0                         gpio-controller;\cf1\highlight2 
+\par \cf0\highlight0                         clocks = <0x01 0x18>;\cf1\highlight2 
+\par \cf0\highlight0                         interrupt-parent = <0x09>;\cf1\highlight2 
+\par \cf0\highlight0                         compatible = "microchip,mpfs-gpio";\cf1\highlight2 
+\par \cf0\highlight0                         #interrupt-cells = <0x02>;\cf1\highlight2 
+\par \cf0\highlight0                         status = "disabled";\cf1\highlight2 
+\par \cf0\highlight0                         reg = <0x00 0x20121000 0x00 0x1000>;\cf1\highlight2 
+\par \cf0\highlight0                         phandle = <0x35>;\cf1\highlight2 
+\par \cf0\highlight0                         #gpio-cells = <0x02>;\cf1\highlight2 
+\par \cf0\highlight0                         interrupt-controller;\cf1\highlight2 
+\par \cf0\highlight0                 \};\cf1\highlight2 
+\par 
+\par \cf0\highlight0                 ethernet@20112000 \{\cf1\highlight2 
+\par \cf0\highlight0                         #address-cells = <0x01>;\cf1\highlight2 
+\par \cf0\highlight0                         phy-mode = "sgmii";\cf1\highlight2 
+\par \cf0\highlight0                         dma-noncoherent;\cf1\highlight2 
+\par \cf0\highlight0                         clock-names = "pclk\\0hclk";\cf1\highlight2 
+\par \cf0\highlight0                         local-mac-address = [00 04 a3 11 40 03];\cf1\highlight2 
+\par \cf0\highlight0                         resets = <0x01 0x05>;\cf1\highlight2 
+\par \cf0\highlight0                         interrupts = <0x46 0x47 0x48 0x49 0x4a 0x4b>;\cf1\highlight2 
+\par \cf0\highlight0                         clocks = <0x01 0x05 0x01 0x02>;\cf1\highlight2 
+\par \cf0\highlight0                         mac-address = [00 04 a3 11 40 03];\cf1\highlight2 
+\par \cf0\highlight0                         #size-cells = <0x00>;\cf1\highlight2 
+\par \cf0\highlight0                         interrupt-parent = <0x09>;\cf1\highlight2 
+\par \cf0\highlight0                         compatible = "microchip,mpfs-macb\\0cdns,macb";\cf1\highlight2 
+\par \cf0\highlight0                         status = "okay";\cf1\highlight2 
+\par \cf0\highlight0                         reg = <0x00 0x20112000 0x00 0x2000>;\cf1\highlight2 
+\par \cf0\highlight0                         phandle = <0x33>;\cf1\highlight2 
+\par \cf0\highlight0                         phy-handle = <0x12>;\cf1\highlight2 
+\par 
+\par \cf0\highlight0                         ethernet-phy@8 \{\cf1\highlight2 
+\par \cf0\highlight0                                 reg = <0x08>;\cf1\highlight2 
+\par \cf0\highlight0                                 phandle = <0x11>;\cf1\highlight2 
+\par \cf0\highlight0                         \};\cf1\highlight2 
+\par 
+\par \cf0\highlight0                         ethernet-phy@9 \{\cf1\highlight2 
+\par \cf0\highlight0                                 reg = <0x09>;\cf1\highlight2 
+\par \cf0\highlight0                                 phandle = <0x12>;\cf1\highlight2 
+\par \cf0\highlight0                         \};\cf1\highlight2 
+\par \cf0\highlight0                 \};\cf1\highlight2 
+\par 
+\par \cf0\highlight0                 mmc@20008000 \{\cf1\highlight2 
+\par \cf0\highlight0                         dma-noncoherent;\cf1\highlight2 
+\par \cf0\highlight0                         cap-sd-highspeed;\cf1\highlight2 
+\par \cf0\highlight0                         sd-uhs-sdr25;\cf1\highlight2 
+\par \cf0\highlight0                         mmc-hs200-1_8v;\cf1\highlight2 
+\par \cf0\highlight0                         bus-width = <0x04>;\cf1\highlight2 
+\par \cf0\highlight0                         interrupts = <0x58>;\cf1\highlight2 
+\par \cf0\highlight0                         clocks = <0x01 0x06>;\cf1\highlight2 
+\par \cf0\highlight0                         interrupt-parent = <0x09>;\cf1\highlight2 
+\par \cf0\highlight0                         mmc-ddr-1_8v;\cf1\highlight2 
+\par \cf0\highlight0                         compatible = "microchip,mpfs-sd4hc\\0cdns,sd4hc";\cf1\highlight2 
+\par \cf0\highlight0                         status = "okay";\cf1\highlight2 
+\par \cf0\highlight0                         disable-wp;\cf1\highlight2 
+\par \cf0\highlight0                         reg = <0x00 0x20008000 0x00 0x1000>;\cf1\highlight2 
+\par \cf0\highlight0                         phandle = <0x25>;\cf1\highlight2 
+\par \cf0\highlight0                         sd-uhs-sdr104;\cf1\highlight2 
+\par \cf0\highlight0                         max-frequency = <0xbebc200>;\cf1\highlight2 
+\par \cf0\highlight0                         cap-mmc-highspeed;\cf1\highlight2 
+\par \cf0\highlight0                         sd-uhs-sdr50;\cf1\highlight2 
+\par \cf0\highlight0                         sd-uhs-sdr12;\cf1\highlight2 
+\par \cf0\highlight0                 \};\cf1\highlight2 
+\par 
+\par \cf0\highlight0                 clock-controller@38040000 \{\cf1\highlight2 
+\par \cf0\highlight0                         #clock-cells = <0x01>;\cf1\highlight2 
+\par \cf0\highlight0                         compatible = "microchip,mpfs-ccc";\cf1\highlight2 
+\par \cf0\highlight0                         status = "disabled";\cf1\highlight2 
+\par \cf0\highlight0                         reg = <0x00 0x38040000 0x00 0x1000 0x00 0x38080000 0x00 0x1000 0x00 0x39040000 0x00 0x1000 0x00 0x39080000 0x00 0x1000>;\cf1\highlight2 
+\par \cf0\highlight0                         phandle = <0x1e>;\cf1\highlight2 
+\par \cf0\highlight0                 \};\cf1\highlight2 
+\par 
+\par \cf0\highlight0                 cache-controller@2010000 \{\cf1\highlight2 
+\par \cf0\highlight0                         cache-size = <0x200000>;\cf1\highlight2 
+\par \cf0\highlight0                         cache-level = <0x02>;\cf1\highlight2 
+\par \cf0\highlight0                         cache-sets = <0x400>;\cf1\highlight2 
+\par \cf0\highlight0                         interrupts = <0x01 0x03 0x04 0x02>;\cf1\highlight2 
+\par \cf0\highlight0                         cache-unified;\cf1\highlight2 
+\par \cf0\highlight0                         interrupt-parent = <0x09>;\cf1\highlight2 
+\par \cf0\highlight0                         compatible = "microchip,mpfs-ccache\\0sifive,fu540-c000-ccache\\0cache";\cf1\highlight2 
+\par \cf0\highlight0                         reg = <0x00 0x2010000 0x00 0x1000>;\cf1\highlight2 
+\par \cf0\highlight0                         phandle = <0x02>;\cf1\highlight2 
+\par \cf0\highlight0                         cache-block-size = <0x40>;\cf1\highlight2 
+\par \cf0\highlight0                 \};\cf1\highlight2 
+\par 
+\par \cf0\highlight0                 serial@20102000 \{\cf1\highlight2 
+\par \cf0\highlight0                         reg-io-width = <0x04>;\cf1\highlight2 
+\par \cf0\highlight0                         interrupts = <0x5c>;\cf1\highlight2 
+\par \cf0\highlight0                         clocks = <0x01 0x0a>;\cf1\highlight2 
+\par \cf0\highlight0                         interrupt-parent = <0x09>;\cf1\highlight2 
+\par \cf0\highlight0                         current-speed = <0x1c200>;\cf1\highlight2 
+\par \cf0\highlight0                         compatible = "ns16550a";\cf1\highlight2 
+\par \cf0\highlight0                         status = "okay";\cf1\highlight2 
+\par \cf0\highlight0                         reg = <0x00 0x20102000 0x00 0x400>;\cf1\highlight2 
+\par \cf0\highlight0                         phandle = <0x22>;\cf1\highlight2 
+\par \cf0\highlight0                         reg-shift = <0x02>;\cf1\highlight2 
+\par \cf0\highlight0                 \};\cf1\highlight2 
+\par 
+\par \cf0\highlight0                 spi@20108000 \{\cf1\highlight2 
+\par \cf0\highlight0                         #address-cells = <0x01>;\cf1\highlight2 
+\par \cf0\highlight0                         interrupts = <0x36>;\cf1\highlight2 
+\par \cf0\highlight0                         clocks = <0x01 0x0d>;\cf1\highlight2 
+\par \cf0\highlight0                         #size-cells = <0x00>;\cf1\highlight2 
+\par \cf0\highlight0                         interrupt-parent = <0x09>;\cf1\highlight2 
+\par \cf0\highlight0                         compatible = "microchip,mpfs-spi";\cf1\highlight2 
+\par \cf0\highlight0                         status = "okay";\cf1\highlight2 
+\par \cf0\highlight0                         reg = <0x00 0x20108000 0x00 0x1000>;\cf1\highlight2 
+\par \cf0\highlight0                         phandle = <0x26>;\cf1\highlight2 
+\par \cf0\highlight0                 \};\cf1\highlight2 
+\par 
+\par \cf0\highlight0                 i2c@2010b000 \{\cf1\highlight2 
+\par \cf0\highlight0                         #address-cells = <0x01>;\cf1\highlight2 
+\par \cf0\highlight0                         interrupts = <0x3d>;\cf1\highlight2 
+\par \cf0\highlight0                         clocks = <0x01 0x10>;\cf1\highlight2 
+\par \cf0\highlight0                         #size-cells = <0x00>;\cf1\highlight2 
+\par \cf0\highlight0                         interrupt-parent = <0x09>;\cf1\highlight2 
+\par \cf0\highlight0                         clock-frequency = <0x186a0>;\cf1\highlight2 
+\par \cf0\highlight0                         compatible = "microchip,mpfs-i2c\\0microchip,corei2c-rtl-v7";\cf1\highlight2 
+\par \cf0\highlight0                         status = "okay";\cf1\highlight2 
+\par \cf0\highlight0                         reg = <0x00 0x2010b000 0x00 0x1000>;\cf1\highlight2 
+\par \cf0\highlight0                         phandle = <0x2a>;\cf1\highlight2 
+\par 
+\par \cf0\highlight0                         adc@10 \{\cf1\highlight2 
+\par \cf0\highlight0                                 compatible = "microchip,pac1934";\cf1\highlight2 
+\par \cf0\highlight0                                 status = "okay";\cf1\highlight2 
+\par \cf0\highlight0                                 reg = <0x10>;\cf1\highlight2 
+\par \cf0\highlight0                                 phandle = <0x2b>;\cf1\highlight2 
+\par \cf0\highlight0                                 microchip,samp-rate = <0x40>;\cf1\highlight2 
+\par 
+\par \cf0\highlight0                                 channel3 \{\cf1\highlight2 
+\par \cf0\highlight0                                         microchip,channel-enabled;\cf1\highlight2 
+\par \cf0\highlight0                                         microchip,uohms-shunt-res = <0x2710>;\cf1\highlight2 
+\par \cf0\highlight0                                         phandle = <0x2f>;\cf1\highlight2 
+\par \cf0\highlight0                                         rail-name = "VDDA_REG";\cf1\highlight2 
+\par \cf0\highlight0                                 \};\cf1\highlight2 
+\par 
+\par \cf0\highlight0                                 channel1 \{\cf1\highlight2 
+\par \cf0\highlight0                                         microchip,channel-enabled;\cf1\highlight2 
+\par \cf0\highlight0                                         microchip,uohms-shunt-res = <0x2710>;\cf1\highlight2 
+\par \cf0\highlight0                                         phandle = <0x2d>;\cf1\highlight2 
+\par \cf0\highlight0                                         rail-name = "VDDA25";\cf1\highlight2 
+\par \cf0\highlight0                                 \};\cf1\highlight2 
+\par 
+\par \cf0\highlight0                                 channel2 \{\cf1\highlight2 
+\par \cf0\highlight0                                         microchip,channel-enabled;\cf1\highlight2 
+\par \cf0\highlight0                                         microchip,uohms-shunt-res = <0x2710>;\cf1\highlight2 
+\par \cf0\highlight0                                         phandle = <0x2e>;\cf1\highlight2 
+\par \cf0\highlight0                                         rail-name = "VDD25";\cf1\highlight2 
+\par \cf0\highlight0                                 \};\cf1\highlight2 
+\par 
+\par \cf0\highlight0                                 channel0 \{\cf1\highlight2 
+\par \cf0\highlight0                                         microchip,channel-enabled;\cf1\highlight2 
+\par \cf0\highlight0                                         microchip,uohms-shunt-res = <0x2710>;\cf1\highlight2 
+\par \cf0\highlight0                                         phandle = <0x2c>;\cf1\highlight2 
+\par \cf0\highlight0                                         rail-name = "VDDREG";\cf1\highlight2 
+\par \cf0\highlight0                                 \};\cf1\highlight2 
+\par \cf0\highlight0                         \};\cf1\highlight2 
+\par \cf0\highlight0                 \};\cf1\highlight2 
+\par 
+\par \cf0\highlight0                 spi@37020100 \{\cf1\highlight2 
+\par \cf0\highlight0                         #address-cells = <0x01>;\cf1\highlight2 
+\par \cf0\highlight0                         interrupts = <0x6e>;\cf1\highlight2 
+\par \cf0\highlight0                         clocks = <0x13>;\cf1\highlight2 
+\par \cf0\highlight0                         #size-cells = <0x00>;\cf1\highlight2 
+\par \cf0\highlight0                         interrupt-parent = <0x09>;\cf1\highlight2 
+\par \cf0\highlight0                         compatible = "microchip,mpfs-qspi\\0microchip,coreqspi-rtl-v2";\cf1\highlight2 
+\par \cf0\highlight0                         status = "disabled";\cf1\highlight2 
+\par \cf0\highlight0                         reg = <0x00 0x37020100 0x00 0x100>;\cf1\highlight2 
+\par \cf0\highlight0                         phandle = <0x39>;\cf1\highlight2 
+\par 
+\par \cf0\highlight0                         flash@0 \{\cf1\highlight2 
+\par \cf0\highlight0                                 #address-cells = <0x01>;\cf1\highlight2 
+\par \cf0\highlight0                                 #size-cells = <0x01>;\cf1\highlight2 
+\par \cf0\highlight0                                 spi-max-frequency = <0x1312d00>;\cf1\highlight2 
+\par \cf0\highlight0                                 spi-rx-bus-width = <0x01>;\cf1\highlight2 
+\par \cf0\highlight0                                 compatible = "jedec,spi-nor";\cf1\highlight2 
+\par \cf0\highlight0                                 reg = <0x00>;\cf1\highlight2 
+\par \cf0\highlight0                                 phandle = <0x3a>;\cf1\highlight2 
+\par \cf0\highlight0                         \};\cf1\highlight2 
+\par \cf0\highlight0                 \};\cf1\highlight2 
+\par 
+\par \cf0\highlight0                 clock-controller@38010000 \{\cf1\highlight2 
+\par \cf0\highlight0                         #clock-cells = <0x01>;\cf1\highlight2 
+\par \cf0\highlight0                         compatible = "microchip,mpfs-ccc";\cf1\highlight2 
+\par \cf0\highlight0                         status = "disabled";\cf1\highlight2 
+\par \cf0\highlight0                         reg = <0x00 0x38010000 0x00 0x1000 0x00 0x38020000 0x00 0x1000 0x00 0x39010000 0x00 0x1000 0x00 0x39020000 0x00 0x1000>;\cf1\highlight2 
+\par \cf0\highlight0                         phandle = <0x1d>;\cf1\highlight2 
+\par \cf0\highlight0                 \};\cf1\highlight2 
+\par 
+\par \cf0\highlight0                 spi@21000000 \{\cf1\highlight2 
+\par \cf0\highlight0                         #address-cells = <0x01>;\cf1\highlight2 
+\par \cf0\highlight0                         interrupts = <0x55>;\cf1\highlight2 
+\par \cf0\highlight0                         clocks = <0x01 0x16>;\cf1\highlight2 
+\par \cf0\highlight0                         #size-cells = <0x00>;\cf1\highlight2 
+\par \cf0\highlight0                         interrupt-parent = <0x09>;\cf1\highlight2 
+\par \cf0\highlight0                         compatible = "microchip,mpfs-qspi\\0microchip,coreqspi-rtl-v2";\cf1\highlight2 
+\par \cf0\highlight0                         status = "okay";\cf1\highlight2 
+\par \cf0\highlight0                         reg = <0x00 0x21000000 0x00 0x1000>;\cf1\highlight2 
+\par \cf0\highlight0                         phandle = <0x28>;\cf1\highlight2 
+\par \cf0\highlight0                 \};\cf1\highlight2 
+\par 
+\par \cf0\highlight0                 gpio@20120000 \{\cf1\highlight2 
+\par \cf0\highlight0                         gpio-controller;\cf1\highlight2 
+\par \cf0\highlight0                         clocks = <0x01 0x17>;\cf1\highlight2 
+\par \cf0\highlight0                         interrupt-parent = <0x09>;\cf1\highlight2 
+\par \cf0\highlight0                         compatible = "microchip,mpfs-gpio";\cf1\highlight2 
+\par \cf0\highlight0                         #interrupt-cells = <0x02>;\cf1\highlight2 
+\par \cf0\highlight0                         status = "disabled";\cf1\highlight2 
+\par \cf0\highlight0                         reg = <0x00 0x20120000 0x00 0x1000>;\cf1\highlight2 
+\par \cf0\highlight0                         phandle = <0x34>;\cf1\highlight2 
+\par \cf0\highlight0                         #gpio-cells = <0x02>;\cf1\highlight2 
+\par \cf0\highlight0                         interrupt-controller;\cf1\highlight2 
+\par \cf0\highlight0                 \};\cf1\highlight2 
+\par \cf0\highlight0         \};\cf1\highlight2 
+\par 
+\par \cf0\highlight0         memory@1022000000 \{\cf1\highlight2 
+\par \cf0\highlight0                 device_type = "memory";\cf1\highlight2 
+\par \cf0\highlight0                 reg = <0x10 0x22000000 0x00 0x5e000000>;\cf1\highlight2 
+\par \cf0\highlight0                 phandle = <0x44>;\cf1\highlight2 
+\par \cf0\highlight0         \};\cf1\highlight2 
+\par 
+\par \cf0\highlight0         udmabuf1 \{\cf1\highlight2 
+\par \cf0\highlight0                 device-name = "udmabuf-ddr-nc0";\cf1\highlight2 
+\par \cf0\highlight0                 minor-number = <0x01>;\cf1\highlight2 
+\par \cf0\highlight0                 sync-mode = <0x03>;\cf1\highlight2 
+\par \cf0\highlight0                 memory-region = <0x19>;\cf1\highlight2 
+\par \cf0\highlight0                 compatible = "ikwzm,u-dma-buf";\cf1\highlight2 
+\par \cf0\highlight0                 size = <0x00 0x2000000>;\cf1\highlight2 
+\par \cf0\highlight0         \};\cf1\highlight2 
+\par 
+\par \cf0\highlight0         memory@80000000 \{\cf1\highlight2 
+\par \cf0\highlight0                 device_type = "memory";\cf1\highlight2 
+\par \cf0\highlight0                 reg = <0x00 0x80000000 0x00 0x4000000>;\cf1\highlight2 
+\par \cf0\highlight0                 phandle = <0x41>;\cf1\highlight2 
+\par \cf0\highlight0         \};\cf1\highlight2 
+\par 
+\par \cf0\highlight0         fabric-pcie-bus@3000000000 \{\cf1\highlight2 
+\par \cf0\highlight0                 dma-ranges = <0x00 0x00 0x00 0x80000000 0x00 0x4000000 0x00 0x4000000 0x00 0xc4000000 0x00 0x6000000 0x00 0xa000000 0x00 0x8a000000 0x00 0x8000000 0x00 0x12000000 0x14 0x12000000 0x00 0x10000000 0x00 0x22000000 0x10 0x22000000 0x00 0x5e000000>;\cf1\highlight2 
+\par \cf0\highlight0                 #address-cells = <0x02>;\cf1\highlight2 
+\par \cf0\highlight0                 #size-cells = <0x02>;\cf1\highlight2 
+\par \cf0\highlight0                 compatible = "simple-bus";\cf1\highlight2 
+\par \cf0\highlight0                 ranges = <0x00 0x40000000 0x00 0x40000000 0x00 0x20000000 0x30 0x00 0x30 0x00 0x10 0x00>;\cf1\highlight2 
+\par 
+\par \cf0\highlight0                 pcie@3000000000 \{\cf1\highlight2 
+\par \cf0\highlight0                         dma-ranges = <0x3000000 0x00 0x80000000 0x00 0x00 0x00 0x4000000 0x3000000 0x00 0x84000000 0x00 0x4000000 0x00 0x6000000 0x3000000 0x00 0x8a000000 0x00 0xa000000 0x00 0x8000000 0x3000000 0x00 0x92000000 0x00 0x12000000 0x00 0x10000000 0x3000000 0x00 0xa2000000 0x00 0x22000000 0x00 0x5e000000>;\cf1\highlight2 
+\par \cf0\highlight0                         #address-cells = <0x03>;\cf1\highlight2 
+\par \cf0\highlight0                         dma-noncoherent;\cf1\highlight2 
+\par \cf0\highlight0                         bus-range = <0x00 0x7f>;\cf1\highlight2 
+\par \cf0\highlight0                         clock-names = "fic1\\0fic3";\cf1\highlight2 
+\par \cf0\highlight0                         reg-names = "cfg\\0apb";\cf1\highlight2 
+\par \cf0\highlight0                         interrupts = <0x77>;\cf1\highlight2 
+\par \cf0\highlight0                         clocks = <0x14 0x05 0x14 0x07>;\cf1\highlight2 
+\par \cf0\highlight0                         interrupt-map = <0x00 0x00 0x00 0x01 0x16 0x00 0x00 0x00 0x00 0x02 0x16 0x01 0x00 0x00 0x00 0x03 0x16 0x02 0x00 0x00 0x00 0x04 0x16 0x03>;\cf1\highlight2 
+\par \cf0\highlight0                         #size-cells = <0x02>;\cf1\highlight2 
+\par \cf0\highlight0                         interrupt-parent = <0x09>;\cf1\highlight2 
+\par \cf0\highlight0                         msi-controller;\cf1\highlight2 
+\par \cf0\highlight0                         device_type = "pci";\cf1\highlight2 
+\par \cf0\highlight0                         interrupt-map-mask = <0x00 0x00 0x00 0x07>;\cf1\highlight2 
+\par \cf0\highlight0                         compatible = "microchip,pcie-host-1.0";\cf1\highlight2 
+\par \cf0\highlight0                         ranges = <0x43000000 0x00 0x9000000 0x30 0x9000000 0x00 0xf000000 0x1000000 0x00 0x8000000 0x30 0x8000000 0x00 0x1000000 0x3000000 0x00 0x18000000 0x30 0x18000000 0x00 0x70000000>;\cf1\highlight2 
+\par \cf0\highlight0                         #interrupt-cells = <0x01>;\cf1\highlight2 
+\par \cf0\highlight0                         status = "okay";\cf1\highlight2 
+\par \cf0\highlight0                         reg = <0x30 0x00 0x00 0x8000000 0x00 0x43000000 0x00 0x10000>;\cf1\highlight2 
+\par \cf0\highlight0                         phandle = <0x17>;\cf1\highlight2 
+\par \cf0\highlight0                         msi-parent = <0x17>;\cf1\highlight2 
+\par 
+\par \cf0\highlight0                         interrupt-controller \{\cf1\highlight2 
+\par \cf0\highlight0                                 #address-cells = <0x00>;\cf1\highlight2 
+\par \cf0\highlight0                                 #interrupt-cells = <0x01>;\cf1\highlight2 
+\par \cf0\highlight0                                 phandle = <0x16>;\cf1\highlight2 
+\par \cf0\highlight0                                 interrupt-controller;\cf1\highlight2 
+\par \cf0\highlight0                         \};\cf1\highlight2 
+\par \cf0\highlight0                 \};\cf1\highlight2 
+\par \cf0\highlight0         \};\cf1\highlight2 
+\par 
+\par \cf0\highlight0         mssclkclk \{\cf1\highlight2 
+\par \cf0\highlight0                 #clock-cells = <0x00>;\cf1\highlight2 
+\par \cf0\highlight0                 clock-frequency = <0x4c4b400>;\cf1\highlight2 
+\par \cf0\highlight0                 compatible = "fixed-clock";\cf1\highlight2 
+\par \cf0\highlight0                 phandle = <0x13>;\cf1\highlight2 
+\par \cf0\highlight0         \};\cf1\highlight2 
+\par 
+\par \cf0\highlight0         memory@1412000000 \{\cf1\highlight2 
+\par \cf0\highlight0                 device_type = "memory";\cf1\highlight2 
+\par \cf0\highlight0                 reg = <0x14 0x12000000 0x00 0x10000000>;\cf1\highlight2 
+\par \cf0\highlight0                 phandle = <0x45>;\cf1\highlight2 
+\par \cf0\highlight0         \};\cf1\highlight2 
+\par 
+\par \cf0\highlight0         aliases \{\cf1\highlight2 
+\par \cf0\highlight0                 ethernet0 = "/soc/ethernet@20112000";\cf1\highlight2 
+\par \cf0\highlight0                 serial3 = "/soc/serial@20104000";\cf1\highlight2 
+\par \cf0\highlight0                 serial1 = "/soc/serial@20100000";\cf1\highlight2 
+\par \cf0\highlight0                 serial4 = "/soc/serial@20106000";\cf1\highlight2 
+\par \cf0\highlight0                 serial2 = "/soc/serial@20102000";\cf1\highlight2 
+\par \cf0\highlight0                 serial0 = "/soc/serial@20000000";\cf1\highlight2 
+\par \cf0\highlight0         \};\cf1\highlight2 
+\par 
+\par \cf0\highlight0         fabric-bus@40000000 \{\cf1\highlight2 
+\par \cf0\highlight0                 #address-cells = <0x02>;\cf1\highlight2 
+\par \cf0\highlight0                 #size-cells = <0x02>;\cf1\highlight2 
+\par \cf0\highlight0                 compatible = "simple-bus";\cf1\highlight2 
+\par \cf0\highlight0                 ranges = <0x00 0x40000000 0x00 0x40000000 0x00 0x20000000 0x00 0x60000000 0x00 0x60000000 0x00 0x20000000 0x00 0xe0000000 0x00 0xe0000000 0x00 0x20000000 0x20 0x00 0x20 0x00 0x10 0x00 0x30 0x00 0x30 0x00 0x10 0x00>;\cf1\highlight2 
+\par 
+\par \cf0\highlight0                 pwm@40000000 \{\cf1\highlight2 
+\par \cf0\highlight0                         clocks = <0x14 0x07>;\cf1\highlight2 
+\par \cf0\highlight0                         #pwm-cells = <0x03>;\cf1\highlight2 
+\par \cf0\highlight0                         compatible = "microchip,corepwm-rtl-v4";\cf1\highlight2 
+\par \cf0\highlight0                         microchip,sync-update-mask = <0x00>;\cf1\highlight2 
+\par \cf0\highlight0                         status = "okay";\cf1\highlight2 
+\par \cf0\highlight0                         reg = <0x00 0x40000000 0x00 0xf0>;\cf1\highlight2 
+\par \cf0\highlight0                         phandle = <0x3b>;\cf1\highlight2 
+\par \cf0\highlight0                 \};\cf1\highlight2 
+\par 
+\par \cf0\highlight0                 i2c@40000200 \{\cf1\highlight2 
+\par \cf0\highlight0                         #address-cells = <0x01>;\cf1\highlight2 
+\par \cf0\highlight0                         interrupts = <0x7a>;\cf1\highlight2 
+\par \cf0\highlight0                         clocks = <0x14 0x07>;\cf1\highlight2 
+\par \cf0\highlight0                         #size-cells = <0x00>;\cf1\highlight2 
+\par \cf0\highlight0                         interrupt-parent = <0x09>;\cf1\highlight2 
+\par \cf0\highlight0                         clock-frequency = <0x186a0>;\cf1\highlight2 
+\par \cf0\highlight0                         compatible = "microchip,corei2c-rtl-v7";\cf1\highlight2 
+\par \cf0\highlight0                         status = "okay";\cf1\highlight2 
+\par \cf0\highlight0                         reg = <0x00 0x40000200 0x00 0x100>;\cf1\highlight2 
+\par \cf0\highlight0                         phandle = <0x3c>;\cf1\highlight2 
+\par \cf0\highlight0                 \};\cf1\highlight2 
+\par 
+\par \cf0\highlight0                 uio@60000000 \{\cf1\highlight2 
+\par \cf0\highlight0                         compatible = "generic-uio";\cf1\highlight2 
+\par \cf0\highlight0                         status = "okay";\cf1\highlight2 
+\par \cf0\highlight0                         reg = <0x00 0x60000000 0x00 0x1000>;\cf1\highlight2 
+\par \cf0\highlight0                         phandle = <0x3e>;\cf1\highlight2 
+\par \cf0\highlight0                         linux,uio-name = "fpga_lsram";\cf1\highlight2 
+\par \cf0\highlight0                 \};\cf1\highlight2 
+\par 
+\par \cf0\highlight0                 dma-controller@60010000 \{\cf1\highlight2 
+\par \cf0\highlight0                         interrupts = <0x78>;\cf1\highlight2 
+\par \cf0\highlight0                         interrupt-parent = <0x09>;\cf1\highlight2 
+\par \cf0\highlight0                         compatible = "microchip,mpfs-fpga-dma";\cf1\highlight2 
+\par \cf0\highlight0                         status = "okay";\cf1\highlight2 
+\par \cf0\highlight0                         reg = <0x00 0x60010000 0x00 0x1000>;\cf1\highlight2 
+\par \cf0\highlight0                         phandle = <0x3d>;\cf1\highlight2 
+\par \cf0\highlight0                         #dma-cells = <0x01>;\cf1\highlight2 
+\par \cf0\highlight0                 \};\cf1\highlight2 
+\par \cf0\highlight0         \};\cf1\highlight2 
+\par 
+\par \cf0\highlight0         chosen \{\cf1\highlight2 
+\par \cf0\highlight0                 boot-hartid = <0x01>;\cf1\highlight2 
+\par \cf0\highlight0                 stdout-path = "serial1:115200n8";\cf1\highlight2 
+\par \cf0\highlight0         \};\cf1\highlight2 
+\par 
+\par \cf0\highlight0         udmabuf2 \{\cf1\highlight2 
+\par \cf0\highlight0                 device-name = "udmabuf-ddr-nc-wcb0";\cf1\highlight2 
+\par \cf0\highlight0                 minor-number = <0x02>;\cf1\highlight2 
+\par \cf0\highlight0                 sync-mode = <0x03>;\cf1\highlight2 
+\par \cf0\highlight0                 memory-region = <0x1a>;\cf1\highlight2 
+\par \cf0\highlight0                 compatible = "ikwzm,u-dma-buf";\cf1\highlight2 
+\par \cf0\highlight0                 size = <0x00 0x2000000>;\cf1\highlight2 
+\par \cf0\highlight0         \};\cf1\highlight2 
+\par 
+\par \cf0\highlight0         cccrefclk \{\cf1\highlight2 
+\par \cf0\highlight0                 #clock-cells = <0x00>;\cf1\highlight2 
+\par \cf0\highlight0                 clock-frequency = <0x2faf080>;\cf1\highlight2 
+\par \cf0\highlight0                 compatible = "fixed-clock";\cf1\highlight2 
+\par \cf0\highlight0                 phandle = <0x10>;\cf1\highlight2 
+\par \cf0\highlight0         \};\cf1\highlight2 
+\par 
+\par \cf0\highlight0         cpus \{\cf1\highlight2 
+\par \cf0\highlight0                 #address-cells = <0x01>;\cf1\highlight2 
+\par \cf0\highlight0                 #size-cells = <0x00>;\cf1\highlight2 
+\par \cf0\highlight0                 timebase-frequency = <0xf4240>;\cf1\highlight2 
+\par 
+\par \cf0\highlight0                 cpu@1 \{\cf1\highlight2 
+\par \cf0\highlight0                         i-tlb-sets = <0x01>;\cf1\highlight2 
+\par \cf0\highlight0                         clocks = <0x01 0x00>;\cf1\highlight2 
+\par \cf0\highlight0                         d-cache-block-size = <0x40>;\cf1\highlight2 
+\par \cf0\highlight0                         device_type = "cpu";\cf1\highlight2 
+\par \cf0\highlight0                         compatible = "sifive,u54-mc\\0sifive,rocket0\\0riscv";\cf1\highlight2 
+\par \cf0\highlight0                         mmu-type = "riscv,sv39";\cf1\highlight2 
+\par \cf0\highlight0                         status = "okay";\cf1\highlight2 
+\par \cf0\highlight0                         d-cache-size = <0x8000>;\cf1\highlight2 
+\par \cf0\highlight0                         next-level-cache = <0x02>;\cf1\highlight2 
+\par \cf0\highlight0                         i-cache-size = <0x8000>;\cf1\highlight2 
+\par \cf0\highlight0                         reg = <0x01>;\cf1\highlight2 
+\par \cf0\highlight0                         phandle = <0x04>;\cf1\highlight2 
+\par \cf0\highlight0                         d-cache-sets = <0x40>;\cf1\highlight2 
+\par \cf0\highlight0                         i-cache-block-size = <0x40>;\cf1\highlight2 
+\par \cf0\highlight0                         i-cache-sets = <0x40>;\cf1\highlight2 
+\par \cf0\highlight0                         d-tlb-size = <0x20>;\cf1\highlight2 
+\par \cf0\highlight0                         riscv,isa = "rv64imafdc";\cf1\highlight2 
+\par \cf0\highlight0                         tlb-split;\cf1\highlight2 
+\par \cf0\highlight0                         i-tlb-size = <0x20>;\cf1\highlight2 
+\par \cf0\highlight0                         d-tlb-sets = <0x01>;\cf1\highlight2 
+\par 
+\par \cf0\highlight0                         interrupt-controller \{\cf1\highlight2 
+\par \cf0\highlight0                                 compatible = "riscv,cpu-intc";\cf1\highlight2 
+\par \cf0\highlight0                                 #interrupt-cells = <0x01>;\cf1\highlight2 
+\par \cf0\highlight0                                 phandle = <0x0b>;\cf1\highlight2 
+\par \cf0\highlight0                                 interrupt-controller;\cf1\highlight2 
+\par \cf0\highlight0                         \};\cf1\highlight2 
+\par \cf0\highlight0                 \};\cf1\highlight2 
+\par 
+\par \cf0\highlight0                 cpu@4 \{\cf1\highlight2 
+\par \cf0\highlight0                         i-tlb-sets = <0x01>;\cf1\highlight2 
+\par \cf0\highlight0                         clocks = <0x01 0x00>;\cf1\highlight2 
+\par \cf0\highlight0                         d-cache-block-size = <0x40>;\cf1\highlight2 
+\par \cf0\highlight0                         device_type = "cpu";\cf1\highlight2 
+\par \cf0\highlight0                         compatible = "sifive,u54-mc\\0sifive,rocket0\\0riscv";\cf1\highlight2 
+\par \cf0\highlight0                         mmu-type = "riscv,sv39";\cf1\highlight2 
+\par \cf0\highlight0                         status = "okay";\cf1\highlight2 
+\par \cf0\highlight0                         d-cache-size = <0x8000>;\cf1\highlight2 
+\par \cf0\highlight0                         next-level-cache = <0x02>;\cf1\highlight2 
+\par \cf0\highlight0                         i-cache-size = <0x8000>;\cf1\highlight2 
+\par \cf0\highlight0                         reg = <0x04>;\cf1\highlight2 
+\par \cf0\highlight0                         phandle = <0x07>;\cf1\highlight2 
+\par \cf0\highlight0                         d-cache-sets = <0x40>;\cf1\highlight2 
+\par \cf0\highlight0                         i-cache-block-size = <0x40>;\cf1\highlight2 
+\par \cf0\highlight0                         i-cache-sets = <0x40>;\cf1\highlight2 
+\par \cf0\highlight0                         d-tlb-size = <0x20>;\cf1\highlight2 
+\par \cf0\highlight0                         riscv,isa = "rv64imafdc";\cf1\highlight2 
+\par \cf0\highlight0                         tlb-split;\cf1\highlight2 
+\par \cf0\highlight0                         i-tlb-size = <0x20>;\cf1\highlight2 
+\par \cf0\highlight0                         d-tlb-sets = <0x01>;\cf1\highlight2 
+\par 
+\par \cf0\highlight0                         interrupt-controller \{\cf1\highlight2 
+\par \cf0\highlight0                                 compatible = "riscv,cpu-intc";\cf1\highlight2 
+\par \cf0\highlight0                                 #interrupt-cells = <0x01>;\cf1\highlight2 
+\par \cf0\highlight0                                 phandle = <0x0e>;\cf1\highlight2 
+\par \cf0\highlight0                                 interrupt-controller;\cf1\highlight2 
+\par \cf0\highlight0                         \};\cf1\highlight2 
+\par \cf0\highlight0                 \};\cf1\highlight2 
+\par 
+\par \cf0\highlight0                 cpu-map \{\cf1\highlight2 
+\par 
+\par \cf0\highlight0                         cluster0 \{\cf1\highlight2 
+\par 
+\par \cf0\highlight0                                 core3 \{\cf1\highlight2 
+\par \cf0\highlight0                                         cpu = <0x06>;\cf1\highlight2 
+\par \cf0\highlight0                                 \};\cf1\highlight2 
+\par 
+\par \cf0\highlight0                                 core1 \{\cf1\highlight2 
+\par \cf0\highlight0                                         cpu = <0x04>;\cf1\highlight2 
+\par \cf0\highlight0                                 \};\cf1\highlight2 
+\par 
+\par \cf0\highlight0                                 core4 \{\cf1\highlight2 
+\par \cf0\highlight0                                         cpu = <0x07>;\cf1\highlight2 
+\par \cf0\highlight0                                 \};\cf1\highlight2 
+\par 
+\par \cf0\highlight0                                 core2 \{\cf1\highlight2 
+\par \cf0\highlight0                                         cpu = <0x05>;\cf1\highlight2 
+\par \cf0\highlight0                                 \};\cf1\highlight2 
+\par 
+\par \cf0\highlight0                                 core0 \{\cf1\highlight2 
+\par \cf0\highlight0                                         cpu = <0x03>;\cf1\highlight2 
+\par \cf0\highlight0                                 \};\cf1\highlight2 
+\par \cf0\highlight0                         \};\cf1\highlight2 
+\par \cf0\highlight0                 \};\cf1\highlight2 
+\par 
+\par \cf0\highlight0                 cpu@2 \{\cf1\highlight2 
+\par \cf0\highlight0                         i-tlb-sets = <0x01>;\cf1\highlight2 
+\par \cf0\highlight0                         clocks = <0x01 0x00>;\cf1\highlight2 
+\par \cf0\highlight0                         d-cache-block-size = <0x40>;\cf1\highlight2 
+\par \cf0\highlight0                         device_type = "cpu";\cf1\highlight2 
+\par \cf0\highlight0                         compatible = "sifive,u54-mc\\0sifive,rocket0\\0riscv";\cf1\highlight2 
+\par \cf0\highlight0                         mmu-type = "riscv,sv39";\cf1\highlight2 
+\par \cf0\highlight0                         status = "okay";\cf1\highlight2 
+\par \cf0\highlight0                         d-cache-size = <0x8000>;\cf1\highlight2 
+\par \cf0\highlight0                         next-level-cache = <0x02>;\cf1\highlight2 
+\par \cf0\highlight0                         i-cache-size = <0x8000>;\cf1\highlight2 
+\par \cf0\highlight0                         reg = <0x02>;\cf1\highlight2 
+\par \cf0\highlight0                         phandle = <0x05>;\cf1\highlight2 
+\par \cf0\highlight0                         d-cache-sets = <0x40>;\cf1\highlight2 
+\par \cf0\highlight0                         i-cache-block-size = <0x40>;\cf1\highlight2 
+\par \cf0\highlight0                         i-cache-sets = <0x40>;\cf1\highlight2 
+\par \cf0\highlight0                         d-tlb-size = <0x20>;\cf1\highlight2 
+\par \cf0\highlight0                         riscv,isa = "rv64imafdc";\cf1\highlight2 
+\par \cf0\highlight0                         tlb-split;\cf1\highlight2 
+\par \cf0\highlight0                         i-tlb-size = <0x20>;\cf1\highlight2 
+\par \cf0\highlight0                         d-tlb-sets = <0x01>;\cf1\highlight2 
+\par 
+\par \cf0\highlight0                         interrupt-controller \{\cf1\highlight2 
+\par \cf0\highlight0                                 compatible = "riscv,cpu-intc";\cf1\highlight2 
+\par \cf0\highlight0                                 #interrupt-cells = <0x01>;\cf1\highlight2 
+\par \cf0\highlight0                                 phandle = <0x0c>;\cf1\highlight2 
+\par \cf0\highlight0                                 interrupt-controller;\cf1\highlight2 
+\par \cf0\highlight0                         \};\cf1\highlight2 
+\par \cf0\highlight0                 \};\cf1\highlight2 
+\par 
+\par \cf0\highlight0                 cpu@0 \{\cf1\highlight2 
+\par \cf0\highlight0                         clocks = <0x01 0x00>;\cf1\highlight2 
+\par \cf0\highlight0                         device_type = "cpu";\cf1\highlight2 
+\par \cf0\highlight0                         compatible = "sifive,e51\\0sifive,rocket0\\0riscv";\cf1\highlight2 
+\par \cf0\highlight0                         status = "disabled";\cf1\highlight2 
+\par \cf0\highlight0                         i-cache-size = <0x4000>;\cf1\highlight2 
+\par \cf0\highlight0                         reg = <0x00>;\cf1\highlight2 
+\par \cf0\highlight0                         phandle = <0x03>;\cf1\highlight2 
+\par \cf0\highlight0                         i-cache-block-size = <0x40>;\cf1\highlight2 
+\par \cf0\highlight0                         i-cache-sets = <0x80>;\cf1\highlight2 
+\par \cf0\highlight0                         riscv,isa = "rv64imac";\cf1\highlight2 
+\par 
+\par \cf0\highlight0                         interrupt-controller \{\cf1\highlight2 
+\par \cf0\highlight0                                 compatible = "riscv,cpu-intc";\cf1\highlight2 
+\par \cf0\highlight0                                 #interrupt-cells = <0x01>;\cf1\highlight2 
+\par \cf0\highlight0                                 phandle = <0x0a>;\cf1\highlight2 
+\par \cf0\highlight0                                 interrupt-controller;\cf1\highlight2 
+\par \cf0\highlight0                         \};\cf1\highlight2 
+\par \cf0\highlight0                 \};\cf1\highlight2 
+\par 
+\par \cf0\highlight0                 cpu@3 \{\cf1\highlight2 
+\par \cf0\highlight0                         i-tlb-sets = <0x01>;\cf1\highlight2 
+\par \cf0\highlight0                         clocks = <0x01 0x00>;\cf1\highlight2 
+\par \cf0\highlight0                         d-cache-block-size = <0x40>;\cf1\highlight2 
+\par \cf0\highlight0                         device_type = "cpu";\cf1\highlight2 
+\par \cf0\highlight0                         compatible = "sifive,u54-mc\\0sifive,rocket0\\0riscv";\cf1\highlight2 
+\par \cf0\highlight0                         mmu-type = "riscv,sv39";\cf1\highlight2 
+\par \cf0\highlight0                         status = "okay";\cf1\highlight2 
+\par \cf0\highlight0                         d-cache-size = <0x8000>;\cf1\highlight2 
+\par \cf0\highlight0                         next-level-cache = <0x02>;\cf1\highlight2 
+\par \cf0\highlight0                         i-cache-size = <0x8000>;\cf1\highlight2 
+\par \cf0\highlight0                         reg = <0x03>;\cf1\highlight2 
+\par \cf0\highlight0                         phandle = <0x06>;\cf1\highlight2 
+\par \cf0\highlight0                         d-cache-sets = <0x40>;\cf1\highlight2 
+\par \cf0\highlight0                         i-cache-block-size = <0x40>;\cf1\highlight2 
+\par \cf0\highlight0                         i-cache-sets = <0x40>;\cf1\highlight2 
+\par \cf0\highlight0                         d-tlb-size = <0x20>;\cf1\highlight2 
+\par \cf0\highlight0                         riscv,isa = "rv64imafdc";\cf1\highlight2 
+\par \cf0\highlight0                         tlb-split;\cf1\highlight2 
+\par \cf0\highlight0                         i-tlb-size = <0x20>;\cf1\highlight2 
+\par \cf0\highlight0                         d-tlb-sets = <0x01>;\cf1\highlight2 
+\par 
+\par \cf0\highlight0                         interrupt-controller \{\cf1\highlight2 
+\par \cf0\highlight0                                 compatible = "riscv,cpu-intc";\cf1\highlight2 
+\par \cf0\highlight0                                 #interrupt-cells = <0x01>;\cf1\highlight2 
+\par \cf0\highlight0                                 phandle = <0x0d>;\cf1\highlight2 
+\par \cf0\highlight0                                 interrupt-controller;\cf1\highlight2 
+\par \cf0\highlight0                         \};\cf1\highlight2 
+\par \cf0\highlight0                 \};\cf1\highlight2 
+\par \cf0\highlight0         \};\cf1\highlight2 
+\par 
+\par \cf0\highlight0         __symbols__ \{\cf1\highlight2 
+\par \cf0\highlight0                 ccc_se = "/soc/clock-controller@38010000";\cf1\highlight2 
+\par \cf0\highlight0                 clkcfg = "/soc/clkcfg@20002000";\cf1\highlight2 
+\par \cf0\highlight0                 core_pwm0 = "/fabric-bus@40000000/pwm@40000000";\cf1\highlight2 
+\par \cf0\highlight0                 clint = "/soc/clint@2000000";\cf1\highlight2 
+\par \cf0\highlight0                 gpio0 = "/soc/gpio@20120000";\cf1\highlight2 
+\par \cf0\highlight0                 dma_non_cached_low = "/reserved-memory/non-cached-low-buffer";\cf1\highlight2 
+\par \cf0\highlight0                 fabricbuf0ddrc = "/reserved-memory/buffer@88000000";\cf1\highlight2 
+\par \cf0\highlight0                 scbclk = "/mssclkclk";\cf1\highlight2 
+\par \cf0\highlight0                 i2c1 = "/soc/i2c@2010b000";\cf1\highlight2 
+\par \cf0\highlight0                 fpgadma = "/fabric-bus@40000000/dma-controller@60010000";\cf1\highlight2 
+\par \cf0\highlight0                 ddr_cached_low = "/memory@8a000000";\cf1\highlight2 
+\par \cf0\highlight0                 cpu1_intc = "/cpus/cpu@1/interrupt-controller";\cf1\highlight2 
+\par \cf0\highlight0                 fabricbuf2ddrncwcb = "/reserved-memory/buffer@d8000000";\cf1\highlight2 
+\par \cf0\highlight0                 cctrllr = "/soc/cache-controller@2010000";\cf1\highlight2 
+\par \cf0\highlight0                 qspi = "/soc/spi@21000000";\cf1\highlight2 
+\par \cf0\highlight0                 spi0 = "/soc/spi@20108000";\cf1\highlight2 
+\par \cf0\highlight0                 mmuart4 = "/soc/serial@20106000";\cf1\highlight2 
+\par \cf0\highlight0                 mpfs_dma_proxy = "/mpfs-dma-proxy";\cf1\highlight2 
+\par \cf0\highlight0                 ch2 = "/soc/i2c@2010b000/adc@10/channel2";\cf1\highlight2 
+\par \cf0\highlight0                 phy1 = "/soc/ethernet@20112000/ethernet-phy@9";\cf1\highlight2 
+\par \cf0\highlight0                 ccc_nw = "/soc/clock-controller@38100000";\cf1\highlight2 
+\par \cf0\highlight0                 kernel = "/memory@80000000";\cf1\highlight2 
+\par \cf0\highlight0                 pdma = "/soc/dma-controller@3000000";\cf1\highlight2 
+\par \cf0\highlight0                 cpu0_intc = "/cpus/cpu@0/interrupt-controller";\cf1\highlight2 
+\par \cf0\highlight0                 mmuart2 = "/soc/serial@20102000";\cf1\highlight2 
+\par \cf0\highlight0                 cpu3 = "/cpus/cpu@3";\cf1\highlight2 
+\par \cf0\highlight0                 ch0 = "/soc/i2c@2010b000/adc@10/channel0";\cf1\highlight2 
+\par \cf0\highlight0                 mmuart0 = "/soc/serial@20000000";\cf1\highlight2 
+\par \cf0\highlight0                 mac0 = "/soc/ethernet@20110000";\cf1\highlight2 
+\par \cf0\highlight0                 refclk = "/mssrefclk";\cf1\highlight2 
+\par \cf0\highlight0                 ddr_non_cached_high = "/memory@1412000000";\cf1\highlight2 
+\par \cf0\highlight0                 cpu1 = "/cpus/cpu@1";\cf1\highlight2 
+\par \cf0\highlight0                 ddr_non_cached_low = "/memory@c4000000";\cf1\highlight2 
+\par \cf0\highlight0                 dma_non_cached_high = "/reserved-memory/non-cached-high-buffer";\cf1\highlight2 
+\par \cf0\highlight0                 mmc = "/soc/mmc@20008000";\cf1\highlight2 
+\par \cf0\highlight0                 sys_ctrl_flash = "/soc/spi@37020100/flash@0";\cf1\highlight2 
+\par \cf0\highlight0                 can0 = "/soc/can@2010c000";\cf1\highlight2 
+\par \cf0\highlight0                 pcie = "/fabric-pcie-bus@3000000000/pcie@3000000000";\cf1\highlight2 
+\par \cf0\highlight0                 gpio1 = "/soc/gpio@20121000";\cf1\highlight2 
+\par \cf0\highlight0                 i2c2 = "/fabric-bus@40000000/i2c@40000200";\cf1\highlight2 
+\par \cf0\highlight0                 ccc_sw = "/soc/clock-controller@38400000";\cf1\highlight2 
+\par \cf0\highlight0                 fabricbuf1ddrnc = "/reserved-memory/buffer@c8000000";\cf1\highlight2 
+\par \cf0\highlight0                 spi1 = "/soc/spi@20109000";\cf1\highlight2 
+\par \cf0\highlight0                 usb = "/soc/usb@20201000";\cf1\highlight2 
+\par \cf0\highlight0                 i2c0 = "/soc/i2c@2010a000";\cf1\highlight2 
+\par \cf0\highlight0                 cpu4_intc = "/cpus/cpu@4/interrupt-controller";\cf1\highlight2 
+\par \cf0\highlight0                 ch3 = "/soc/i2c@2010b000/adc@10/channel3";\cf1\highlight2 
+\par \cf0\highlight0                 ccc_ne = "/soc/clock-controller@38040000";\cf1\highlight2 
+\par \cf0\highlight0                 mmuart3 = "/soc/serial@20104000";\cf1\highlight2 
+\par \cf0\highlight0                 cpu4 = "/cpus/cpu@4";\cf1\highlight2 
+\par \cf0\highlight0                 ihc = "/mailbox";\cf1\highlight2 
+\par \cf0\highlight0                 ch1 = "/soc/i2c@2010b000/adc@10/channel1";\cf1\highlight2 
+\par \cf0\highlight0                 phy0 = "/soc/ethernet@20112000/ethernet-phy@8";\cf1\highlight2 
+\par \cf0\highlight0                 cpu3_intc = "/cpus/cpu@3/interrupt-controller";\cf1\highlight2 
+\par \cf0\highlight0                 mmuart1 = "/soc/serial@20100000";\cf1\highlight2 
+\par \cf0\highlight0                 mac1 = "/soc/ethernet@20112000";\cf1\highlight2 
+\par \cf0\highlight0                 refclk_ccc = "/cccrefclk";\cf1\highlight2 
+\par \cf0\highlight0                 plic = "/soc/interrupt-controller@c000000";\cf1\highlight2 
+\par \cf0\highlight0                 hss = "/reserved-memory/hss-buffer@103fc00000";\cf1\highlight2 
+\par \cf0\highlight0                 pac193x = "/soc/i2c@2010b000/adc@10";\cf1\highlight2 
+\par \cf0\highlight0                 cpu2 = "/cpus/cpu@2";\cf1\highlight2 
+\par \cf0\highlight0                 syscontroller_qspi = "/soc/spi@37020100";\cf1\highlight2 
+\par \cf0\highlight0                 fpgalsram = "/fabric-bus@40000000/uio@60000000";\cf1\highlight2 
+\par \cf0\highlight0                 syscontroller = "/syscontroller";\cf1\highlight2 
+\par \cf0\highlight0                 mbox = "/soc/mailbox@37020000";\cf1\highlight2 
+\par \cf0\highlight0                 ddr_cached_high = "/memory@1022000000";\cf1\highlight2 
+\par \cf0\highlight0                 can1 = "/soc/can@2010d000";\cf1\highlight2 
+\par \cf0\highlight0                 pcie_intc = "/fabric-pcie-bus@3000000000/pcie@3000000000/interrupt-controller";\cf1\highlight2 
+\par \cf0\highlight0                 rtc = "/soc/rtc@20124000";\cf1\highlight2 
+\par \cf0\highlight0                 gpio2 = "/soc/gpio@20122000";\cf1\highlight2 
+\par \cf0\highlight0                 cpu2_intc = "/cpus/cpu@2/interrupt-controller";\cf1\highlight2 
+\par \cf0\highlight0                 cpu0 = "/cpus/cpu@0";\cf1\highlight2 
+\par \cf0\highlight0         \};\cf1\highlight2 
+\par 
+\par \cf0\highlight0         syscontroller \{\cf1\highlight2 
+\par \cf0\highlight0                 compatible = "microchip,mpfs-sys-controller";\cf1\highlight2 
+\par \cf0\highlight0                 status = "okay";\cf1\highlight2 
+\par \cf0\highlight0                 phandle = <0x1b>;\cf1\highlight2 
+\par \cf0\highlight0                 mboxes = <0x08 0x00>;\cf1\highlight2 
+\par \cf0\highlight0         \};\cf1\highlight2 
+\par 
+\par \cf0\highlight0         reserved-memory \{\cf1\highlight2 
+\par \cf0\highlight0                 #address-cells = <0x02>;\cf1\highlight2 
+\par \cf0\highlight0                 #size-cells = <0x02>;\cf1\highlight2 
+\par \cf0\highlight0                 ranges;\cf1\highlight2 
+\par 
+\par \cf0\highlight0                 mmode_resv0@a000000 \{\cf1\highlight2 
+\par \cf0\highlight0                         reg = <0x00 0xa000000 0x00 0x40000>;\cf1\highlight2 
+\par \cf0\highlight0                         phandle = <0x4a>;\cf1\highlight2 
+\par \cf0\highlight0                         no-map;\cf1\highlight2 
+\par \cf0\highlight0                 \};\cf1\highlight2 
+\par 
+\par \cf0\highlight0                 hss-buffer@103fc00000 \{\cf1\highlight2 
+\par \cf0\highlight0                         compatible = "shared-dma-pool";\cf1\highlight2 
+\par \cf0\highlight0                         reg = <0x10 0x3fc00000 0x00 0x400000>;\cf1\highlight2 
+\par \cf0\highlight0                         phandle = <0x46>;\cf1\highlight2 
+\par \cf0\highlight0                         no-map;\cf1\highlight2 
+\par \cf0\highlight0                 \};\cf1\highlight2 
+\par 
+\par \cf0\highlight0                 non-cached-low-buffer \{\cf1\highlight2 
+\par \cf0\highlight0                         linux,dma-default;\cf1\highlight2 
+\par \cf0\highlight0                         alloc-ranges = <0x00 0xc4000000 0x00 0x4000000>;\cf1\highlight2 
+\par \cf0\highlight0                         compatible = "shared-dma-pool";\cf1\highlight2 
+\par \cf0\highlight0                         size = <0x00 0x4000000>;\cf1\highlight2 
+\par \cf0\highlight0                         phandle = <0x47>;\cf1\highlight2 
+\par \cf0\highlight0                         no-map;\cf1\highlight2 
+\par \cf0\highlight0                 \};\cf1\highlight2 
+\par 
+\par \cf0\highlight0                 region@bfc00000 \{\cf1\highlight2 
+\par \cf0\highlight0                         reg = <0x00 0xbfc00000 0x00 0x400000>;\cf1\highlight2 
+\par \cf0\highlight0                         phandle = <0x49>;\cf1\highlight2 
+\par \cf0\highlight0                         no-map;\cf1\highlight2 
+\par \cf0\highlight0                 \};\cf1\highlight2 
+\par 
+\par \cf0\highlight0                 buffer@c8000000 \{\cf1\highlight2 
+\par \cf0\highlight0                         compatible = "shared-dma-pool";\cf1\highlight2 
+\par \cf0\highlight0                         reg = <0x00 0xc8000000 0x00 0x2000000>;\cf1\highlight2 
+\par \cf0\highlight0                         phandle = <0x19>;\cf1\highlight2 
+\par \cf0\highlight0                         no-map;\cf1\highlight2 
+\par \cf0\highlight0                 \};\cf1\highlight2 
+\par 
+\par \cf0\highlight0                 buffer@d8000000 \{\cf1\highlight2 
+\par \cf0\highlight0                         compatible = "shared-dma-pool";\cf1\highlight2 
+\par \cf0\highlight0                         reg = <0x00 0xd8000000 0x00 0x2000000>;\cf1\highlight2 
+\par \cf0\highlight0                         phandle = <0x1a>;\cf1\highlight2 
+\par \cf0\highlight0                         no-map;\cf1\highlight2 
+\par \cf0\highlight0                 \};\cf1\highlight2 
+\par 
+\par \cf0\highlight0                 non-cached-high-buffer \{\cf1\highlight2 
+\par \cf0\highlight0                         linux,dma-default;\cf1\highlight2 
+\par \cf0\highlight0                         alloc-ranges = <0x14 0x12000000 0x00 0x10000000>;\cf1\highlight2 
+\par \cf0\highlight0                         compatible = "shared-dma-pool";\cf1\highlight2 
+\par \cf0\highlight0                         size = <0x00 0x10000000>;\cf1\highlight2 
+\par \cf0\highlight0                         phandle = <0x48>;\cf1\highlight2 
+\par \cf0\highlight0                         no-map;\cf1\highlight2 
+\par \cf0\highlight0                 \};\cf1\highlight2 
+\par 
+\par \cf0\highlight0                 buffer@88000000 \{\cf1\highlight2 
+\par \cf0\highlight0                         compatible = "shared-dma-pool";\cf1\highlight2 
+\par \cf0\highlight0                         reg = <0x00 0x88000000 0x00 0x2000000>;\cf1\highlight2 
+\par \cf0\highlight0                         phandle = <0x18>;\cf1\highlight2 
+\par \cf0\highlight0                         no-map;\cf1\highlight2 
+\par \cf0\highlight0                 \};\cf1\highlight2 
+\par \cf0\highlight0         \};\cf1\highlight2 
+\par 
+\par \cf0\highlight0         memory@8a000000 \{\cf1\highlight2 
+\par \cf0\highlight0                 device_type = "memory";\cf1\highlight2 
+\par \cf0\highlight0                 reg = <0x00 0x8a000000 0x00 0x8000000>;\cf1\highlight2 
+\par \cf0\highlight0                 phandle = <0x42>;\cf1\highlight2 
+\par \cf0\highlight0         \};\cf1\highlight2 
+\par 
+\par \cf0\highlight0         mpfs-dma-proxy \{\cf1\highlight2 
+\par \cf0\highlight0                 dma-names = "dma-proxy0\\0dma-proxy1\\0dma-proxy2\\0dma-proxy3";\cf1\highlight2 
+\par \cf0\highlight0                 compatible = "microchip,mpfs-dma-proxy";\cf1\highlight2 
+\par \cf0\highlight0                 phandle = <0x40>;\cf1\highlight2 
+\par \cf0\highlight0                 dmas = <0x15 0x00 0x15 0x01 0x15 0x02 0x15 0x03>;\cf1\highlight2 
+\par \cf0\highlight0         \};\cf1\highlight2 
+\par 
+\par \cf0\highlight0         udmabuf0 \{\cf1\highlight2 
+\par \cf0\highlight0                 device-name = "udmabuf-ddr-c0";\cf1\highlight2 
+\par \cf0\highlight0                 minor-number = <0x00>;\cf1\highlight2 
+\par \cf0\highlight0                 sync-mode = <0x03>;\cf1\highlight2 
+\par \cf0\highlight0                 memory-region = <0x18>;\cf1\highlight2 
+\par \cf0\highlight0                 compatible = "ikwzm,u-dma-buf";\cf1\highlight2 
+\par \cf0\highlight0                 size = <0x00 0x2000000>;\cf1\highlight2 
+\par \cf0\highlight0         \};\cf1\highlight2 
+\par \cf0\highlight0\};\cf1\highlight2 
+\par \cf0\highlight0 root@icicle-kit-es:~# ^C\cf1\highlight2 
+\par \cf0\highlight0 root@icicle-kit-es:~# ls\cf1\highlight2 
+\par \cf0\highlight0 VectorBlox-SDK-release-v1.4.4.1  camera  live.dts  ngk  release-v1.4.4.1.zip  samples_V500_1.4.4  samples_V500_1.4.4.zip\cf1\highlight2 
+\par \cf0\highlight0 root@icicle-kit-es:~# cd VectorBlox-SDK-release-v1.4.4.1/\cf1\highlight2 
+\par \cf0\highlight0 root@icicle-kit-es:~/VectorBlox-SDK-release-v1.4.4.1# ls\cf1\highlight2 
+\par \cf0\highlight0 README.md  app_notes  docs  drivers  example  fw  install_dependencies.sh  install_venv.sh  lib  python  requirements.txt  setup_vars.sh  tutorials\cf1\highlight2 
+\par \cf0\highlight0 root@icicle-kit-es:~/VectorBlox-SDK-release-v1.4.4.1# cd ..\cf1\highlight2 
+\par \cf0\highlight0 root@icicle-kit-es:~# cd ngk/\cf1\highlight2 
+\par \cf0\highlight0 root@icicle-kit-es:~/ngk# ls\cf1\highlight2 
+\par \cf0\highlight0 VectorBlox-SDK-master  master.zip\cf1\highlight2 
+\par \cf0\highlight0 root@icicle-kit-es:~/ngk# cd VectorBlox-SDK-master/\cf1\highlight2 
+\par \cf0\highlight0 root@icicle-kit-es:~/ngk/VectorBlox-SDK-master# ls\cf1\highlight2 
+\par \cf0\highlight0 README.md  app_notes  docs  drivers  example  fw  install_dependencies.sh  install_venv.sh  lib  python  requirements.txt  setup_vars.sh  tutorials\cf1\highlight2 
+\par \cf0\highlight0 root@icicle-kit-es:~/ngk/VectorBlox-SDK-master# cd ..\cf1\highlight2 
+\par \cf0\highlight0 root@icicle-kit-es:~/ngk# cd ..\cf1\highlight2 
+\par \cf0\highlight0 root@icicle-kit-es:~# ls\cf1\highlight2 
+\par \cf0\highlight0 VectorBlox-SDK-release-v1.4.4.1  camera  live.dts  ngk  release-v1.4.4.1.zip  samples_V500_1.4.4  samples_V500_1.4.4.zip\cf1\highlight2 
+\par \cf0\highlight0 root@icicle-kit-es:~# cd ..\cf1\highlight2 
+\par \cf0\highlight0 root@icicle-kit-es:/home# ls /dev/uio3\cf1\highlight2 
+\par \cf0\highlight0 ls: cannot access '/dev/uio3': No such file or directory\cf1\highlight2 
+\par \cf0\highlight0 root@icicle-kit-es:/home# ls /dev/uio2\cf1\highlight2 
+\par \cf0\highlight0 /dev/uio2\cf1\highlight2 
+\par \cf0\highlight0 root@icicle-kit-es:/home# cat /dev/uio\cf1\highlight2 
+\par \cf0\highlight0 cat: /dev/uio: No such file or directory\cf1\highlight2 
+\par \cf0\highlight0 root@icicle-kit-es:/home# cat /dev/uio2\cf1\highlight2 
+\par \cf0\highlight0 cat: /dev/uio2: Invalid argument\cf1\highlight2 
+\par \cf0\highlight0 root@icicle-kit-es:/home#\cf1\highlight2 
+\par \cf5\highlight0 Error reading from serial device\cf1\highlight2 
+\par 
+\par \cf6\highlight0\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\cf1\highlight2 
+\par 
+\par \cf5\highlight0 Session stopped\cf1\highlight2 
+\par \cf0\highlight0     - Press \cf7 <Return>\cf0  to exit tab\cf1\highlight2 
+\par \cf0\highlight0     - Press \cf7 R\cf0  to restart session\cf1\highlight2 
+\par \cf0\highlight0     - Press \cf7 S\cf0  to save terminal output to file\cf1\highlight2 
+\par 
+\par \cf6\highlight0\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\u9472?\cf1\highlight2 
+\par 
+\par \cf5\highlight0 Session stopped\cf1\highlight2 
+\par \cf0\highlight0     - Press \cf7 <Return>\cf0  to exit tab\cf1\highlight2 
+\par \cf0\highlight0     - Press \cf7 R\cf0  to restart session\cf1\highlight2 
+\par \cf0\highlight0     - Press \cf7 S\cf0  to save terminal output to file\cf1\highlight2 
+\par \pard\cf0\highlight0\f2\fs16 
+\par }
