@@ -1,0 +1,10 @@
+prefix=/home/joelphilip/Documents/VLSID26/VectorBlox-SDK/example/soc-c/jpeg-9e/riscv-install
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: libjpeg
+Description: Reads and writes JPEG files
+Version: 9.5.0
+Libs: -L${libdir} -ljpeg
+Cflags: -I${includedir}
