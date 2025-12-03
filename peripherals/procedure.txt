@@ -1,0 +1,37 @@
+1) ULtrasonic Sensor
+
+(i)
+(ii)
+(iii)
+(iv) 
+(v)
+
+
+2) HMI Display
+
+
+(i)
+(ii)
+(iii)
+(iv) 
+(v)
+
+
+3) Servo/DC Motor Via L298N Motor Driver
+
+
+(i)
+(ii)
+(iii)
+(iv) 
+(v)
+
+
+4) Buzzer Module 
+
+
+(i)
+(ii)
+(iii)
+(iv) 
+(v)
