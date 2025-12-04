@@ -16,7 +16,7 @@
 // ==========================================
 #define PWM_CHANNEL 0
 #define PWM_PERIOD_NS 20000000    // 20ms = 50Hz
-#define PWM_DUTY_NS 1500000       // 1.5ms pulse width (adjust for your motor)
+#define PWM_DUTY_NS 1500000       // 1.5ms pulse width
 #define DISTANCE_THRESHOLD 8.0    // cm
 #define MODEL_PATH "./model.vnnx" // Path to your compiled model
 #define IMAGE_PATH "./capture.jpg"
@@ -34,6 +34,16 @@
 // ==========================================
 static volatile int running = 1;
 static int defect_gpio_fd = -1;
+
+// ==========================================
+// HMI HELPER FUNCTIONS
+// ==========================================
+// Helper to send "variable.val=number" to Nextion
+void hmi_set_var(const char *var_name, int value) {
+    char cmd_buffer[32];
+    snprintf(cmd_buffer, sizeof(cmd_buffer), "%s.val=%d", var_name, value);
+    uart_send_hmi(cmd_buffer);
+}
 
 // ==========================================
 // SIGNAL HANDLER
@@ -147,6 +157,9 @@ int initialize_system(void) {
 void cleanup_system(void) {
     printf("\n=== System Cleanup ===\n");
     
+    // [HMI UPDATE] Set to Offline
+    hmi_set_var("blinkMode", 0); 
+
     // Stop PWM if running
     pwm_disable(PWM_CHANNEL);
     
@@ -172,6 +185,12 @@ void cleanup_system(void) {
 // ==========================================
 void run_inspection_cycle(int servo_fd) {
     printf("\n--- Starting Inspection Cycle ---\n");
+
+    // [HMI UPDATE] State 0: Scanning / Idle
+    // Reset Pass/Fail (pf=0) and Product ID (prdID=0)
+    hmi_set_var("state", 0);
+    hmi_set_var("pf", 0);
+    hmi_set_var("prdID", 0); 
     
     // 1. Start PWM (conveyor motor)
     printf("Starting PWM (Conveyor)...\n");
@@ -191,6 +210,10 @@ void run_inspection_cycle(int servo_fd) {
         if (distance > 0 && distance < DISTANCE_THRESHOLD) {
             printf("Object detected at %.2f cm!\n", distance);
             object_detected = 1;
+            
+            // [HMI UPDATE] State 1: Object Detected (Yellow)
+            hmi_set_var("state", 1);
+            
         } else if (distance > 0) {
             printf("Distance: %.2f cm\r", distance);
             fflush(stdout);
@@ -205,6 +228,9 @@ void run_inspection_cycle(int servo_fd) {
     printf("\nStopping PWM...\n");
     pwm_disable(PWM_CHANNEL);
     usleep(500000); // Wait 500ms for mechanical settling
+
+    // [HMI UPDATE] State 2: Processing (Blue)
+    hmi_set_var("state", 2);
     
     // 4. Capture image
     printf("Capturing image...\n");
@@ -225,6 +251,9 @@ void run_inspection_cycle(int servo_fd) {
     
     printf("✓ Classification result: Class %d\n", class_id);
     
+    // [HMI UPDATE] Update Product ID based on class
+    hmi_set_var("prdID", class_id);
+
     // 6. Pause before restarting (allow mechanical settling)
     printf("\nPausing for 2 seconds before restarting conveyor...\n");
     sleep(2);
@@ -232,6 +261,11 @@ void run_inspection_cycle(int servo_fd) {
     // 7. Handle defect (Class 1) - Restart PWM and activate servo simultaneously
     if (class_id == 1) {
         printf("\n*** DEFECTIVE ITEM DETECTED ***\n");
+
+        // [HMI UPDATE] State 4: RESULT DAMAGED (Red)
+        // Set pf=2 (FAIL indicator)
+        hmi_set_var("state", 4);
+        hmi_set_var("pf", 2);
         
         // Set defect pin HIGH for 1 second
         set_defect_pin_high();
@@ -255,6 +289,11 @@ void run_inspection_cycle(int servo_fd) {
         
     } else {
         printf("Item passed inspection (Class %d)\n", class_id);
+
+        // [HMI UPDATE] State 3: RESULT FINE (Green)
+        // Set pf=1 (PASS indicator)
+        hmi_set_var("state", 3);
+        hmi_set_var("pf", 1);
         
         // If item passed, just restart PWM
         printf("\nRestarting PWM (conveyor)...\n");
@@ -269,6 +308,10 @@ void run_inspection_cycle(int servo_fd) {
     printf("\nReady for next item in 1 second...\n");
     sleep(1);
     
+    // [HMI UPDATE] State 5: RESETTING (Gray)
+    // This resets the bar to 0 immediately so it doesn't animate backwards on next scan
+    hmi_set_var("state", 5);
+
     printf("--- Inspection Cycle Complete ---\n\n");
 }
 
@@ -278,8 +321,8 @@ void run_inspection_cycle(int servo_fd) {
 int main(int argc, char **argv) {
     printf("\n");
     printf("╔════════════════════════════════════════╗\n");
-    printf("║  Automated Inspection System v1.0      ║\n");
-    printf("║  PolarFire SoC Icicle Kit              ║\n");
+    printf("║   Automated Inspection System v1.0     ║\n");
+    printf("║   PolarFire SoC Icicle Kit             ║\n");
     printf("╚════════════════════════════════════════╝\n");
     printf("\n");
     
@@ -303,6 +346,11 @@ int main(int argc, char **argv) {
     }
     printf("✓ Servo initialized\n\n");
     
+    // [HMI UPDATE] System is now Online (blinkMode=1)
+    // This turns t2 to "Online" and makes the status light blink Green
+    hmi_set_var("blinkMode", 1);
+    hmi_set_var("state", 0); // Ensure Idle state on boot
+
     // Main control loop
     printf("=== System Active ===\n");
     printf("Waiting for UART command to start...\n");
