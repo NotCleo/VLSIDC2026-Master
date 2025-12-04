@@ -28,7 +28,7 @@
 #define GPIO_PATH "/sys/class/gpio/"
 
 // Servo angle for defect rejection
-#define SERVO_REJECT_ANGLE 30
+#define SERVO_REJECT_ANGLE 25
 
 // ==========================================
 // GLOBAL STATE
