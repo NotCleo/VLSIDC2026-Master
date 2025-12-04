@@ -4,6 +4,7 @@
 #include <signal.h>
 #include <fcntl.h>
 #include <string.h>
+#include <time.h>         // Added for random number generation
 #include "uart.h"
 #include "pwm.h"
 #include "ultrasonic.h"
@@ -42,7 +43,8 @@ static int defect_gpio_fd = -1;
 void hmi_set_var(const char *var_name, int value) {
     char cmd_buffer[32];
     snprintf(cmd_buffer, sizeof(cmd_buffer), "%s.val=%d", var_name, value);
-    uart_send_hmi(cmd_buffer);
+    // [UPDATED] Using the new HMI specific function from uart.h
+    uart_hmi_send(cmd_buffer);
 }
 
 // ==========================================
@@ -116,12 +118,12 @@ static void set_defect_pin_low(void) {
 int initialize_system(void) {
     printf("=== System Initialization ===\n");
     
-    // 1. Initialize UART
+    // 1. Initialize Dual UART (HMI + BT)
     if (uart_init() != 0) {
         fprintf(stderr, "ERROR: UART initialization failed\n");
         return -1;
     }
-    printf("✓ UART initialized\n");
+    printf("✓ UART (HMI & Bluetooth) initialized\n");
     
     // 2. Initialize Ultrasonic Sensor
     if (sensor_init() != 0) {
@@ -157,13 +159,13 @@ int initialize_system(void) {
 void cleanup_system(void) {
     printf("\n=== System Cleanup ===\n");
     
-    // [HMI UPDATE] Set to Offline
+    // Set HMI to Offline
     hmi_set_var("blinkMode", 0); 
 
     // Stop PWM if running
     pwm_disable(PWM_CHANNEL);
     
-    // Close UART
+    // Close UART ports
     uart_close();
     
     // Cleanup sensors
@@ -185,9 +187,9 @@ void cleanup_system(void) {
 // ==========================================
 void run_inspection_cycle(int servo_fd) {
     printf("\n--- Starting Inspection Cycle ---\n");
+    char bt_buffer[64]; // Buffer for Bluetooth messages
 
-    // [HMI UPDATE] State 0: Scanning / Idle
-    // Reset Pass/Fail (pf=0) and Product ID (prdID=0)
+    // State 0: Scanning / Idle
     hmi_set_var("state", 0);
     hmi_set_var("pf", 0);
     hmi_set_var("prdID", 0); 
@@ -211,7 +213,7 @@ void run_inspection_cycle(int servo_fd) {
             printf("Object detected at %.2f cm!\n", distance);
             object_detected = 1;
             
-            // [HMI UPDATE] State 1: Object Detected (Yellow)
+            // State 1: Object Detected (Yellow)
             hmi_set_var("state", 1);
             
         } else if (distance > 0) {
@@ -229,7 +231,7 @@ void run_inspection_cycle(int servo_fd) {
     pwm_disable(PWM_CHANNEL);
     usleep(500000); // Wait 500ms for mechanical settling
 
-    // [HMI UPDATE] State 2: Processing (Blue)
+    // State 2: Processing (Blue)
     hmi_set_var("state", 2);
     
     // 4. Capture image
@@ -240,6 +242,15 @@ void run_inspection_cycle(int servo_fd) {
     }
     printf("✓ Image saved to %s\n", IMAGE_PATH);
     
+    // -----------------------------------------------------
+    // [NEW REQ 1] Generate 5-digit Random ID & Send via BT
+    // -----------------------------------------------------
+    int unique_id = (rand() % 90000) + 10000; // Generates 10000 to 99999
+    
+    snprintf(bt_buffer, sizeof(bt_buffer), "ID:%d\n", unique_id);
+    uart_bt_send(bt_buffer);
+    printf(">> Bluetooth Sent: %s", bt_buffer);
+
     // 5. Run classifier
     printf("Running classifier...\n");
     int class_id = classifier_predict(IMAGE_PATH);
@@ -251,38 +262,40 @@ void run_inspection_cycle(int servo_fd) {
     
     printf("✓ Classification result: Class %d\n", class_id);
     
-    // [HMI UPDATE] Update Product ID based on class
+    // -----------------------------------------------------
+    // [NEW REQ 2] Transmit inference result via BT
+    // -----------------------------------------------------
+    snprintf(bt_buffer, sizeof(bt_buffer), "RESULT:CLASS_%d\n", class_id);
+    uart_bt_send(bt_buffer);
+    printf(">> Bluetooth Sent: %s", bt_buffer);
+    
+    // Update HMI Product ID
     hmi_set_var("prdID", class_id);
 
     // 6. Pause before restarting (allow mechanical settling)
     printf("\nPausing for 2 seconds before restarting conveyor...\n");
     sleep(2);
     
-    // 7. Handle defect (Class 1) - Restart PWM and activate servo simultaneously
+    // 7. Handle defect (Class 1)
     if (class_id == 1) {
         printf("\n*** DEFECTIVE ITEM DETECTED ***\n");
 
-        // [HMI UPDATE] State 4: RESULT DAMAGED (Red)
-        // Set pf=2 (FAIL indicator)
+        // State 4: RESULT DAMAGED (Red)
         hmi_set_var("state", 4);
         hmi_set_var("pf", 2);
         
-        // Set defect pin HIGH for 1 second
+        // GPIO Trigger
         set_defect_pin_high();
         sleep(1);
         set_defect_pin_low();
         
-        // SIMULTANEOUSLY: Restart PWM and activate servo
+        // Restart PWM & Servo
         printf("Restarting PWM and activating servo for rejection...\n");
-        
-        // Restart PWM first
         if (pwm_setup(PWM_CHANNEL, PWM_PERIOD_NS, PWM_DUTY_NS) != 0) {
             fprintf(stderr, "ERROR: Failed to restart PWM\n");
             return;
         }
-        printf("✓ PWM restarted (conveyor moving)\n");
         
-        // Immediately activate servo (happens while conveyor is running)
         printf("Activating servo for rejection...\n");
         servo_perform_cycle(servo_fd, SERVO_REJECT_ANGLE);
         printf("✓ Servo cycle completed\n");
@@ -290,12 +303,10 @@ void run_inspection_cycle(int servo_fd) {
     } else {
         printf("Item passed inspection (Class %d)\n", class_id);
 
-        // [HMI UPDATE] State 3: RESULT FINE (Green)
-        // Set pf=1 (PASS indicator)
+        // State 3: RESULT FINE (Green)
         hmi_set_var("state", 3);
         hmi_set_var("pf", 1);
         
-        // If item passed, just restart PWM
         printf("\nRestarting PWM (conveyor)...\n");
         if (pwm_setup(PWM_CHANNEL, PWM_PERIOD_NS, PWM_DUTY_NS) != 0) {
             fprintf(stderr, "ERROR: Failed to restart PWM\n");
@@ -308,8 +319,7 @@ void run_inspection_cycle(int servo_fd) {
     printf("\nReady for next item in 1 second...\n");
     sleep(1);
     
-    // [HMI UPDATE] State 5: RESETTING (Gray)
-    // This resets the bar to 0 immediately so it doesn't animate backwards on next scan
+    // State 5: RESETTING (Gray)
     hmi_set_var("state", 5);
 
     printf("--- Inspection Cycle Complete ---\n\n");
@@ -321,11 +331,14 @@ void run_inspection_cycle(int servo_fd) {
 int main(int argc, char **argv) {
     printf("\n");
     printf("╔════════════════════════════════════════╗\n");
-    printf("║   Automated Inspection System v1.0     ║\n");
+    printf("║   Automated Inspection System v1.1     ║\n");
     printf("║   PolarFire SoC Icicle Kit             ║\n");
     printf("╚════════════════════════════════════════╝\n");
     printf("\n");
     
+    // Seed the random number generator
+    srand(time(NULL));
+
     // Setup signal handlers
     signal(SIGINT, signal_handler);
     signal(SIGTERM, signal_handler);
@@ -336,7 +349,7 @@ int main(int argc, char **argv) {
         return 1;
     }
     
-    // Initialize servo (do this once)
+    // Initialize servo
     printf("Initializing servo...\n");
     int servo_fd = servo_init();
     if (servo_fd == -1) {
@@ -346,52 +359,39 @@ int main(int argc, char **argv) {
     }
     printf("✓ Servo initialized\n\n");
     
-    // [HMI UPDATE] System is now Online (blinkMode=1)
-    // This turns t2 to "Online" and makes the status light blink Green
+    // HMI Online
     hmi_set_var("blinkMode", 1);
-    hmi_set_var("state", 0); // Ensure Idle state on boot
+    hmi_set_var("state", 0);
 
     // Main control loop
     printf("=== System Active ===\n");
-    printf("Waiting for UART command to start...\n");
-    printf("Commands:\n");
-    printf("  - Send any character (except 'B') to start inspection cycle\n");
-    printf("  - Send 'B' to shutdown system\n");
-    printf("  - Press Ctrl+C for emergency stop\n\n");
+    printf("Waiting for HMI command to start...\n");
     
     int system_armed = 0;
     
     while (running) {
-        // Check for UART input
-        char received = uart_check_input();
+        // [UPDATED] Check for HMI input specifically
+        char received = uart_hmi_check_input();
         
         if (received != 0) {
-            // Check for shutdown command
             if (received == 'B' || received == 'b') {
                 printf("\n>>> Received shutdown command: '%c' <<<\n", received);
-                printf("Initiating graceful shutdown...\n");
-                running = 0;  // This will exit the loop
+                running = 0;
                 break;
             }
             
-            // Any other character starts inspection
             if (!system_armed) {
                 printf("\n>>> Received command: '%c' <<<\n", received);
-                printf("System ARMED - Starting inspection cycle\n");
                 system_armed = 1;
             }
             
-            // Run inspection cycle
             run_inspection_cycle(servo_fd);
             
-            // After cycle completes, wait for next command
             system_armed = 0;
-            printf("\nWaiting for next UART command...\n");
-            printf("  - Send any character to continue\n");
-            printf("  - Send 'B' to shutdown\n");
+            printf("\nWaiting for next HMI command...\n");
         }
         
-        usleep(50000); // 50ms polling for UART
+        usleep(50000); // 50ms polling
     }
     
     // Cleanup
