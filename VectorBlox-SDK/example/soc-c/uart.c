@@ -8,8 +8,8 @@
 #include <termios.h>
 
 // --- Configuration ---
-#define HMI_PORT "/dev/ttyS0"
-#define BT_PORT  "/dev/ttyS3"
+#define HMI_PORT "/dev/ttyS3"
+#define BT_PORT  "/dev/ttyS0"
 #define BAUD_RATE B9600
 
 // Internal State - Two file descriptors now
