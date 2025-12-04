@@ -19,8 +19,8 @@
 #define PWM_PERIOD_NS 20000000    // 20ms = 50Hz
 #define PWM_DUTY_NS 1500000       // 1.5ms pulse width
 #define DISTANCE_THRESHOLD 8.0    // cm
-#define MODEL_PATH "./model.vnnx" // Path to your compiled model
-#define IMAGE_PATH "./capture.jpg"
+#define MODEL_PATH "my_model.vnnx" // Path to your compiled model
+#define IMAGE_PATH "capture.jpg"
 
 // GPIO Configuration for Pin 22 (Line 13)
 #define GPIO_BASE 512

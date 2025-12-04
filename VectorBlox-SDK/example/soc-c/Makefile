@@ -2,7 +2,7 @@
 # Updated to match your system's compiler: riscv64-linux-gnu-gcc
 CC = riscv64-linux-gnu-gcc
 CXX = riscv64-linux-gnu-g++
-TARGET = component-test
+TARGET = full-cycle
 
 # *** JPEG LIBRARY PATH (Updated to your specific location) ***
 JPEG_PATH = /home/joelphilip/Documents/VLSID26/VectorBlox-SDK/example/soc-c/jpeg-9e/riscv-install
