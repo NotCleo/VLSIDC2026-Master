@@ -19,8 +19,8 @@
 #define PWM_PERIOD_NS 20000000    // 20ms = 50Hz
 #define PWM_DUTY_NS 1500000       // 1.5ms pulse width
 #define DISTANCE_THRESHOLD 8.0    // cm
-#define MODEL_PATH "./model.vnnx" // Path to your compiled model
-#define IMAGE_PATH "./capture.jpg"
+#define MODEL_PATH "my_model.vnnx" // Path to your compiled model
+#define IMAGE_PATH "capture.jpg"
 
 // GPIO Configuration for Pin 22 (Line 13)
 #define GPIO_BASE 512
@@ -132,7 +132,6 @@ int initialize_system(void) {
     printf("✓ Ultrasonic sensor initialized\n");
     
     // 3. Initialize Camera (REMOVED - Will Init per cycle)
-    // if (camera_init() != 0) { ... }
     
     // 4. Initialize Classifier
     if (classifier_init(MODEL_PATH) != 0) {
@@ -210,7 +209,7 @@ void run_inspection_cycle(int servo_fd) {
             // State 1: Object Detected (Yellow)
             hmi_set_var("state", 1);
             
-            // [UPDATED] Stop motor IMMEDIATELY
+            // Stop motor IMMEDIATELY upon detection
             printf("Stopping motor immediately...\n");
             pwm_disable(PWM_CHANNEL);
             
@@ -227,8 +226,6 @@ void run_inspection_cycle(int servo_fd) {
     if (!running) return;
     
     // 3. Mechanical Settling
-    // Motor is already stopped above, but we wait 500ms to ensure 
-    // vibrations cease before image capture.
     usleep(500000); 
 
     // State 2: Processing (Blue)
@@ -249,7 +246,7 @@ void run_inspection_cycle(int servo_fd) {
     }
     printf("✓ Image saved to %s\n", IMAGE_PATH);
     
-    // [REQ 1] Generate 5-digit Random ID & Send via BT
+    // Generate 5-digit Random ID & Send via BT
     int unique_id = (rand() % 90000) + 10000;
     snprintf(bt_buffer, sizeof(bt_buffer), "ID:%d\n", unique_id);
     uart_bt_send(bt_buffer);
@@ -265,23 +262,30 @@ void run_inspection_cycle(int servo_fd) {
         return;
     }
     
-    printf("✓ Classification result: Class %d\n", class_id);
-    
-    // [REQ 2] Transmit inference result via BT
-    snprintf(bt_buffer, sizeof(bt_buffer), "RESULT:CLASS_%d\n", class_id);
-    uart_bt_send(bt_buffer);
-    printf(">> Bluetooth Sent: %s", bt_buffer);
-    
     // Update HMI Product ID
     hmi_set_var("prdID", class_id);
+    
+    // Display Logic via Bluetooth/Console
+    char result_text[32];
+    if (class_id == 1) {
+        strcpy(result_text, "DEFECTIVE");
+        printf("✓ Result: DEFECTIVE (Class 1)\n");
+    } else {
+        strcpy(result_text, "NON DEFECTIVE");
+        printf("✓ Result: NON DEFECTIVE (Class %d)\n", class_id);
+    }
 
-    // [UPDATED] Delay 1 second before restarting motors
-    printf("Waiting 1 second before restarting motors...\n");
+    snprintf(bt_buffer, sizeof(bt_buffer), "RESULT:%s\n", result_text);
+    uart_bt_send(bt_buffer);
+    printf(">> Bluetooth Sent: %s", bt_buffer);
+
+    // Delay 1 second before taking action
+    printf("Waiting 1 second before proceeding...\n");
     sleep(1);
 
-    // 7. Handle defect (Class 1)
+    // 7. Handle Result and Restart Motors accordingly
     if (class_id == 1) {
-        printf("\n*** DEFECTIVE ITEM DETECTED ***\n");
+        printf("\n*** DEFECTIVE ITEM ACTION ***\n");
 
         // State 4: RESULT DAMAGED (Red)
         hmi_set_var("state", 4);
@@ -292,24 +296,25 @@ void run_inspection_cycle(int servo_fd) {
         sleep(1);
         set_defect_pin_low();
         
-        // Restart PWM & Servo
+        // RESTART PWM HERE (Dependent on defect detection)
         printf("Restarting PWM and activating servo for rejection...\n");
         if (pwm_setup(PWM_CHANNEL, PWM_PERIOD_NS, PWM_DUTY_NS) != 0) {
             fprintf(stderr, "ERROR: Failed to restart PWM\n");
-            // Do not return immediately, ensure cleanup
         }
         
+        // Activate Servo simultaneously with motor restart
         printf("Activating servo for rejection...\n");
         servo_perform_cycle(servo_fd, SERVO_REJECT_ANGLE);
         printf("✓ Servo cycle completed\n");
         
     } else {
-        printf("Item passed inspection (Class %d)\n", class_id);
+        printf("Item passed inspection.\n");
 
         // State 3: RESULT FINE (Green)
         hmi_set_var("state", 3);
         hmi_set_var("pf", 1);
         
+        // RESTART PWM HERE (Dependent on NON-defect)
         printf("\nRestarting PWM (conveyor)...\n");
         if (pwm_setup(PWM_CHANNEL, PWM_PERIOD_NS, PWM_DUTY_NS) != 0) {
             fprintf(stderr, "ERROR: Failed to restart PWM\n");
@@ -336,7 +341,7 @@ void run_inspection_cycle(int servo_fd) {
 int main(int argc, char **argv) {
     printf("\n");
     printf("╔════════════════════════════════════════╗\n");
-    printf("║   Automated Inspection System v1.3     ║\n");
+    printf("║   Automated Inspection System v1.5     ║\n");
     printf("║   PolarFire SoC Icicle Kit             ║\n");
     printf("╚════════════════════════════════════════╝\n");
     printf("\n");
