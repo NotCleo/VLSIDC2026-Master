@@ -19,8 +19,8 @@
 #define PWM_PERIOD_NS 20000000    // 20ms = 50Hz
 #define PWM_DUTY_NS 1500000       // 1.5ms pulse width
 #define DISTANCE_THRESHOLD 8.0    // cm
-#define MODEL_PATH "./model.vnnx" // Path to your compiled model
-#define IMAGE_PATH "./capture.jpg"
+#define MODEL_PATH "my_model.vnnx" // Path to your compiled model
+#define IMAGE_PATH "capture.jpg"
 
 // GPIO Configuration for Pin 22 (Line 13)
 #define GPIO_BASE 512
@@ -44,6 +44,20 @@ void hmi_set_var(const char *var_name, int value) {
     char cmd_buffer[32];
     snprintf(cmd_buffer, sizeof(cmd_buffer), "%s.val=%d", var_name, value);
     uart_hmi_send(cmd_buffer);
+}
+
+// ==========================================
+// SYSTEM HELPER FUNCTIONS
+// ==========================================
+// Force kill any process holding /dev/video0
+void force_kill_camera(void) {
+    // Uses 'fuser' command to find and kill process accessing /dev/video0
+    // -k: kill
+    // -9: SIGKILL (Force kill)
+    // > /dev/null: Silence output
+    system("fuser -k -9 /dev/video0 > /dev/null 2>&1");
+    // Wait a tiny fraction to ensure OS cleans up
+    usleep(10000); 
 }
 
 // ==========================================
@@ -131,8 +145,9 @@ int initialize_system(void) {
     }
     printf("✓ Ultrasonic sensor initialized\n");
     
-    // 3. Initialize Camera (REMOVED from here, done in loop per cycle)
-    // if (camera_init() != 0) { ... }
+    // 3. Ensure Camera is Free (Force Kill any stuck process)
+    force_kill_camera();
+    printf("✓ Camera resources cleared\n");
     
     // 4. Initialize Classifier
     if (classifier_init(MODEL_PATH) != 0) {
@@ -166,6 +181,10 @@ void cleanup_system(void) {
     // Cleanup sensors
     sensor_cleanup();
     // camera_cleanup(); // Removed here, handled in loop
+    
+    // Final force kill to ensure no dangling process
+    force_kill_camera();
+    
     classifier_cleanup();
     
     // Close defect GPIO
@@ -265,6 +284,7 @@ void run_automatic_mode(int servo_fd) {
             fprintf(stderr, "ERROR: Image capture failed\n");
             // If capture fails, we try to cleanup and loop again
             camera_cleanup();
+            force_kill_camera(); // Ensure process is killed even on failure
             continue;
         }
         printf("✓ Image saved to %s\n", IMAGE_PATH);
@@ -283,6 +303,7 @@ void run_automatic_mode(int servo_fd) {
             fprintf(stderr, "ERROR: Classification failed\n");
             // Cleanup camera and continue
             camera_cleanup();
+            force_kill_camera();
             continue;
         } 
         
@@ -350,6 +371,9 @@ void run_automatic_mode(int servo_fd) {
         // Terminate Camera Process (Done PER CYCLE to release resource)
         printf("Cleaning up camera resource...\n");
         camera_cleanup();
+        
+        // FORCE KILL to ensure kernel releases /dev/video0
+        force_kill_camera();
 
         // Brief delay before next cycle
         printf("\nReady for next item scan in 1 second...\n");
@@ -368,7 +392,7 @@ void run_automatic_mode(int servo_fd) {
 int main(int argc, char **argv) {
     printf("\n");
     printf("╔════════════════════════════════════════╗\n");
-    printf("║   Automated Inspection System v2.1     ║\n");
+    printf("║   Automated Inspection System v2.2     ║\n");
     printf("║   PolarFire SoC Icicle Kit             ║\n");
     printf("╚════════════════════════════════════════╝\n");
     printf("\n");
