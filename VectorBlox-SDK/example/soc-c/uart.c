@@ -7,7 +7,7 @@
 #include <errno.h>
 #include <termios.h>
 
-// --- Configuration ---
+//Configuration 
 #define HMI_PORT "/dev/ttyS3"
 #define BT_PORT  "/dev/ttyS0"
 #define BAUD_RATE B9600
@@ -19,7 +19,7 @@ static int bt_fd = -1;
 // Define the Nextion/HMI Terminator (3 bytes of 0xFF)
 static const unsigned char HMI_TERMINATOR[3] = {0xFF, 0xFF, 0xFF};
 
-// --- Internal Helper: Configure the Port ---
+// Internal Helper: Configure the Port
 // This helper is generic and can configure any file descriptor
 static int configure_serial_port(int fd) {
     struct termios tty;
@@ -89,7 +89,6 @@ int uart_init(void) {
     bt_fd = open(BT_PORT, O_RDWR | O_NOCTTY | O_SYNC);
     if (bt_fd < 0) {
         fprintf(stderr, "UART: Failed to open Bluetooth port (%s)\n", BT_PORT);
-        // We chose to continue even if BT fails, or return -1? 
         // Returning -1 ensures strict hardware checking.
         close(hmi_fd); 
         hmi_fd = -1;

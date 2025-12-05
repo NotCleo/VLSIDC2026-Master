@@ -6,10 +6,8 @@
 #include <string.h>
 #include <errno.h>
 
-// ==========================================
 // CONFIGURATION
-// ==========================================
-#define GPIO_BASE 512       // CHANGE THIS to your actual base
+#define GPIO_BASE 512       
 #define SERVO_PIN_OFFSET 12 // Pin 18 (Line 12)
 #define GPIO_PATH "/sys/class/gpio/"
 
@@ -34,7 +32,6 @@ static void hold_angle(int gpio_fd, int angle, int duration_ms) {
     int sleep_time = PWM_PERIOD - pulse_width;
 
     // 2. Calculate how many loops to run
-    // Each loop is 20ms. Duration / 20 = number of cycles.
     int cycles = duration_ms / 20;
 
     for (int i = 0; i < cycles; i++) {
@@ -58,7 +55,7 @@ static void setup_gpio_internal(const char *pin) {
         int fd = open(path, O_WRONLY);
         if (fd == -1) { 
             perror("Servo: Error exporting GPIO"); 
-            return; // Initialization will likely fail later
+            return; 
         }
         write(fd, pin, strlen(pin));
         close(fd);
@@ -112,29 +109,23 @@ void servo_perform_cycle(int gpio_fd, int target_angle) {
     // 3. Return to 0 degrees (neutral/ready position)
     // 4. STOP (servo remains at 0 degrees until next call)
     
-    // Step 1: Move to 0 degrees (if not already there)
+    // Step 1: Move to 0 degrees first
     printf("Servo: Moving to 0° (start position)\n");
     hold_angle(gpio_fd, 0, 500);  // 500ms to ensure it reaches position
     
-    // Step 2: Move to target angle (rejection position) and hold
+    // Step 2: Move to target angle and hold
     printf("Servo: Moving to %d° (rejection position)\n", target_angle);
     hold_angle(gpio_fd, target_angle, 3000);  // Hold for 3 seconds to push item
     
-    // Step 3: Return to 0 degrees (neutral position)
+    // Step 3: Return to 0 degrees 
     printf("Servo: Returning to 0° (neutral position)\n");
     hold_angle(gpio_fd, 0, 1000);  // 1 second to return and settle
     
     // Step 4: Set GPIO LOW to stop sending PWM signals
-    // This ensures the servo stops holding position and won't drain power
     write(gpio_fd, "0", 1);
     
     printf("Servo: Single cycle complete - servo stopped at 0°\n");
     
-    // IMPORTANT: After this function returns, the servo will be:
-    // - Physically at 0 degrees
-    // - Not receiving PWM signals (GPIO is LOW)
-    // - Ready for the next cycle when this function is called again
-    // - Not consuming significant power in idle state
 }
 
 void servo_close(int gpio_fd) {

@@ -6,19 +6,19 @@
 #include <string.h>
 #include <sys/time.h>
 
-// --- Configuration ---
+// Configuration
 #define GPIO_BASE 512
 #define TRIG_OFFSET 5    
 #define ECHO_OFFSET 15   
 #define GPIO_PATH "/sys/class/gpio/"
 
-// --- Internal Variables (Static means only visible in this file) ---
+// Internal Variables (Static means only visible in this file)
 static char TRIG_PIN_STR[16];
 static char ECHO_PIN_STR[16];
 static int trig_fd = -1;
 static int echo_fd = -1;
 
-// --- Internal Helper Functions ---
+// Internal Helper Functions
 
 static void setup_gpio_internal(const char *pin, const char *direction) {
     char path[128];
@@ -50,7 +50,7 @@ static int open_gpio_value(const char *pin) {
     return open(path, O_RDWR);
 }
 
-// --- Public Functions (The API) ---
+// Public Functions  
 
 int sensor_init(void) {
     // Calculate string names

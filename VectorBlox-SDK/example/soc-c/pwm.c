@@ -7,12 +7,11 @@
 #include <errno.h>
 
 // Path to the PWM controller
-// On Icicle Kit, usually pwmchip0 corresponds to the fabric or MSS PWM controller.
+//pwmchip0 is the fabric PWMCore
 #define PWM_CHIP_PATH "/sys/class/pwm/pwmchip0"
 
 // Initialize the Motor PWM (Export, Set Frequency, Enable)
-// channel: The PWM channel
-// period_ns: Frequency (e.g. 1000000ns = 1ms = 1kHz)
+// period_ns: Frequency (12500ns = 80kHz)
 // duty_ns: Initial speed (0 to period_ns)
 int pwm_setup(int channel, int period_ns, int duty_ns) {
     char path[256];
@@ -38,12 +37,11 @@ int pwm_setup(int channel, int period_ns, int duty_ns) {
         }
         close(fd);
         
-        // CRITICAL FIX: Wait for OS to create the directories
+        // Wait for OS to create the directories
         usleep(100000); 
     }
 
     // 2. Set Period (Frequency)
-    // Must be set BEFORE duty cycle if current duty > new period
     snprintf(path, sizeof(path), "%s/pwm%d/period", PWM_CHIP_PATH, channel);
     fd = open(path, O_WRONLY);
     if (fd < 0) { 
@@ -79,7 +77,7 @@ int pwm_setup(int channel, int period_ns, int duty_ns) {
 }
 
 // Function to change ONLY the speed (Duty Cycle)
-// Use this in your loop to change speed without re-initializing
+// This is kept incase we needed to change speed without re-initializing
 int pwm_set_duty(int channel, int duty_ns) {
     char path[256];
     char buffer[50];
