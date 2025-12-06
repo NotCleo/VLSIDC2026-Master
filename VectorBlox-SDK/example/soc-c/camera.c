@@ -18,7 +18,7 @@
 #define QUALITY 90 
 #define DEVICE_PATH "/dev/video0"
 
-// --- Internal Global Variables (Persist between calls) ---
+// --- Internal Global Variables ---
 static int cam_fd = -1;
 static void *buffer_start = NULL;
 static struct v4l2_buffer buf = {0};

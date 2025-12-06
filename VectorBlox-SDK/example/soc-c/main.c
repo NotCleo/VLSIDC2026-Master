@@ -4,7 +4,7 @@
 #include <signal.h>
 #include <fcntl.h>
 #include <string.h>
-#include <time.h>         // Added for random number generation
+#include <time.h>         
 #include "uart.h"
 #include "pwm.h"
 #include "ultrasonic.h"
@@ -12,33 +12,27 @@
 #include "classifier.h"
 #include "servo.h"
 
-// ==========================================
 // CONFIGURATION
-// ==========================================
 #define PWM_CHANNEL 0
 #define PWM_PERIOD_NS 20000000    // 20ms = 50Hz
 #define PWM_DUTY_NS 1500000       // 1.5ms pulse width
-#define DISTANCE_THRESHOLD 8.0    // cm
-#define MODEL_PATH "my_model.vnnx" // Path to your compiled model
+#define DISTANCE_THRESHOLD 8.0    // in cm
+#define MODEL_PATH "my_model.vnnx" // name of the compiled model 
 #define IMAGE_PATH "capture.jpg"
 
 // GPIO Configuration for Pin 22 (Line 13)
-#define GPIO_BASE 512
+#define GPIO_BASE 512 // Base offset of the gpio 
 #define DEFECT_PIN_OFFSET 13      // Line 13 corresponds to Pin 22
 #define GPIO_PATH "/sys/class/gpio/"
 
 // Servo angle for defect rejection
 #define SERVO_REJECT_ANGLE 25
 
-// ==========================================
 // GLOBAL STATE
-// ==========================================
 static volatile int running = 1;
 static int defect_gpio_fd = -1;
 
-// ==========================================
 // HMI HELPER FUNCTIONS
-// ==========================================
 // Helper to send "variable.val=number" to Nextion
 void hmi_set_var(const char *var_name, int value) {
     char cmd_buffer[32];
@@ -46,31 +40,22 @@ void hmi_set_var(const char *var_name, int value) {
     uart_hmi_send(cmd_buffer);
 }
 
-// ==========================================
 // SYSTEM HELPER FUNCTIONS
-// ==========================================
 // Force kill any process holding /dev/video0
 void force_kill_camera(void) {
     // Uses 'fuser' command to find and kill process accessing /dev/video0
-    // -k: kill
-    // -9: SIGKILL (Force kill)
-    // > /dev/null: Silence output (Does not affect functionality)
     system("fuser -k -9 /dev/video0 > /dev/null 2>&1");
-    // Increased wait to 200ms to ensure Kernel releases resources completely
+    // Increased wait to 200ms to ensure Kernel releases resources completely there was an issue earlier without this 
     usleep(200000); 
 }
 
-// ==========================================
 // SIGNAL HANDLER
-// ==========================================
 void signal_handler(int sig) {
     printf("\nReceived signal %d, shutting down...\n", sig);
     running = 0;
 }
 
-// ==========================================
 // GPIO HELPER FUNCTIONS
-// ==========================================
 static void setup_defect_gpio(void) {
     char pin_str[16];
     char path[128];
@@ -125,9 +110,7 @@ static void set_defect_pin_low(void) {
     }
 }
 
-// ==========================================
 // SYSTEM INITIALIZATION
-// ==========================================
 int initialize_system(void) {
     printf("=== System Initialization ===\n");
     
@@ -145,7 +128,7 @@ int initialize_system(void) {
     }
     printf("✓ Ultrasonic sensor initialized\n");
     
-    // 3. Ensure Camera is Free (Force Kill any stuck process)
+    // 3. Ensure Camera is Free and Force kill any existing process
     force_kill_camera();
     printf("✓ Camera resources cleared\n");
     
@@ -163,9 +146,7 @@ int initialize_system(void) {
     return 0;
 }
 
-// ==========================================
 // SYSTEM CLEANUP
-// ==========================================
 void cleanup_system(void) {
     printf("\n=== System Cleanup ===\n");
     
@@ -180,9 +161,9 @@ void cleanup_system(void) {
     
     // Cleanup sensors
     sensor_cleanup();
-    // camera_cleanup(); // Removed here, handled in loop
+    // camera_cleanup(); // Removed here for now, handled in main loop
     
-    // Final force kill to ensure no dangling process
+    // Final force kill to ensure no unwanted process
     force_kill_camera();
     
     classifier_cleanup();
@@ -196,16 +177,15 @@ void cleanup_system(void) {
     printf("✓ System cleaned up\n");
 }
 
-// ==========================================
 // AUTOMATIC INSPECTION LOOP
-// ==========================================
-// This function loops continuously until 'B' is pressed or signal received
+// This function loops continuously until 'STOP' is pressed or signal received
 void run_automatic_mode(int servo_fd) {
     printf("\n--- Entering Automatic Inspection Mode ---\n");
     char bt_buffer[64];
 
     while (running) {
-        // --- PHASE 1: SCANNING ---
+        // --- PHASE 1: SCANNING --- 
+        // Phases here are set in accordance with the progress bar in the HMI 
         
         // Update HMI: Scanning / Idle
         hmi_set_var("state", 0);
@@ -213,7 +193,7 @@ void run_automatic_mode(int servo_fd) {
         hmi_set_var("prdID", 0); 
         
         // Start PWM (Conveyor)
-        printf("Starting PWM (Conveyor)...\n");
+        printf("Starting Belt (PWM)...\n");
         if (pwm_setup(PWM_CHANNEL, PWM_PERIOD_NS, PWM_DUTY_NS) != 0) {
             fprintf(stderr, "ERROR: Failed to start PWM\n");
             break;
@@ -233,7 +213,7 @@ void run_automatic_mode(int servo_fd) {
                 running = 0;
                 break;
             }
-            // Note: We ignore other characters (noise) here
+            // We ignore the other characters to avoid the belt from stopping randomly due to noise
 
             // 2. Check Distance
             distance = sensor_get_distance();
@@ -245,7 +225,7 @@ void run_automatic_mode(int servo_fd) {
                 hmi_set_var("state", 1);
                 
                 // Stop motor IMMEDIATELY upon detection
-                printf("Stopping motor immediately...\n");
+                printf("Stopping belt...\n");
                 pwm_disable(PWM_CHANNEL);
                 
                 object_detected = 1; // Breaks the inner loop
@@ -270,7 +250,7 @@ void run_automatic_mode(int servo_fd) {
         // Update HMI: Processing
         hmi_set_var("state", 2);
         
-        // [UPDATED] Ensure previous session is dead BEFORE we try to init
+        // Ensure previous session is dead BEFORE we try to init
         printf("Ensuring camera device is free...\n");
         force_kill_camera();
 
@@ -293,7 +273,7 @@ void run_automatic_mode(int servo_fd) {
         }
         printf("✓ Image saved to %s\n", IMAGE_PATH);
         
-        // Generate 5-digit Random ID & Send via BT
+        // Generate 5-digit ID & Send via BT
         int unique_id = (rand() % 90000) + 10000;
         snprintf(bt_buffer, sizeof(bt_buffer), "ID:%d\n", unique_id);
         uart_bt_send(bt_buffer);
@@ -376,9 +356,8 @@ void run_automatic_mode(int servo_fd) {
         printf("Cleaning up camera resource...\n");
         camera_cleanup();
         
-        // [UPDATED] Removed redundant force_kill_camera here.
+        // Removed redundant force_kill_camera here.
         // It is now done at the start of the next camera phase.
-
         // Brief delay before next cycle
         printf("\nReady for next item scan in 1 second...\n");
         sleep(1);
@@ -390,9 +369,7 @@ void run_automatic_mode(int servo_fd) {
     }
 }
 
-// ==========================================
 // MAIN FUNCTION
-// ==========================================
 int main(int argc, char **argv) {
     printf("\n");
     printf("╔════════════════════════════════════════╗\n");

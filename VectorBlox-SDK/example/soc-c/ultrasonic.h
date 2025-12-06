@@ -9,7 +9,7 @@ int sensor_init(void);
 // Returns -1.0 if the reading failed/timed out
 double sensor_get_distance(void);
 
-// Closes files and cleans up (optional but good practice)
+// Closes files and cleans up 
 void sensor_cleanup(void);
 
 #endif

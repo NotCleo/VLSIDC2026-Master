@@ -3,7 +3,7 @@
 
 #include <stdint.h>
 
-// 1. Setup the camera, map memory, and start the stream (do this once at startup)
+// 1. Setup the camera, map memory, and start the stream. does this once at startup
 // Returns 0 on success, -1 on error
 int camera_init(void);
 
