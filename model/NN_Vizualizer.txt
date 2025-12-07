@@ -1,0 +1,83 @@
+How to vizualize any Neural Network as a 3d Isomorphic Graph?
+
+1) Say you have a train.py prepared and want to visualize how it would appear as those cool flowgraphs with 3D structures
+
+Navigate to a folder of your choice and perform : git clone https://github.com/HarisIqbal88/PlotNeuralNet.git
+Navigate to the root folder of the cloned repository 
+
+2) Run the following 
+
+import sys
+import os
+
+sys.path.append(os.path.abspath("./")) 
+
+from pycore.tikzeng import *
+from pycore.blocks import *
+
+def to_ResBlock(name, s_label, n_label, offset, to, height, depth, width, caption):
+    return to_Conv(name, s_label, n_label, offset=offset, to=to, 
+                   height=height, depth=depth, width=width, caption=caption)
+
+arch = [
+    to_head('..'),
+    to_cor(),
+    to_begin(),
+
+    #put your image path here
+    to_input('/home/joeld/modelwork/training-dataset/training-defective/defective-27.jpg', name='input'),
+
+    #according to your train.py define all parameters : 
+
+    # Initial Conv (7x7, stride 2) -> 112x112 x 64
+    to_Conv("conv1", "112", "64", offset="(0,0,0)", to="(0,0,0)", 
+            height=40, depth=40, width=4, caption="Conv1"),
+    to_connection("input", "conv1"),
+    
+    # Max Pooling -> 56x56 x 64
+    to_Pool("pool1", offset="(0,0,0)", to="(conv1-east)", 
+            height=32, depth=32, width=2, opacity=0.5, caption="Pool"),
+    
+    # Layer 1: 56x56 x 64
+    to_ResBlock("layer1", "56", "64", offset="(1.5,0,0)", to="(pool1-east)", 
+                height=32, depth=32, width=4, caption="L1"),
+    to_connection("pool1", "layer1"),
+    
+    # Layer 2: 28x28 x 128
+    to_ResBlock("layer2", "28", "128", offset="(1.5,0,0)", to="(layer1-east)", 
+                height=24, depth=24, width=7, caption="L2"),
+    to_connection("layer1", "layer2"),
+    
+    # Layer 3: 14x14 x 256
+    to_ResBlock("layer3", "14", "256", offset="(1.5,0,0)", to="(layer2-east)", 
+                height=16, depth=16, width=10, caption="L3"),
+    to_connection("layer2", "layer3"),
+
+    # Layer 4: 7x7 x 512
+    to_ResBlock("layer4", "7", "512", offset="(1.5,0,0)", to="(layer3-east)", 
+                height=10, depth=10, width=14, caption="L4"),
+    to_connection("layer3", "layer4"),
+
+    # Avg Pool -> 1x1
+    to_Sum("avgpool", offset="(1.5,0,0)", to="(layer4-east)", radius=2.5, opacity=0.6),
+    to_connection("layer4", "avgpool"),
+
+    # FC -> 2 Classes
+    to_SoftMax("output", 2, offset="(1.5,0,0)", to="(avgpool-east)", 
+               width=1, height=1, depth=10, caption="FC: 2"),
+    to_connection("avgpool", "output"),
+    
+    to_end()
+]
+
+def main():
+    namefile = str(sys.argv[0]).split('.')[0]
+    to_generate(arch, namefile + '.tex' )
+
+if __name__ == '__main__':
+    main()
+
+
+
+3) This generates a "Layers" folder, which consists of a bunch of tex files which you can migrate to OverLeaf Tex Compiler along with the tex file that gets generated after running that python script 
+4) Ensure you upload all files to the same OverLeaf Project file and compile to give you the 3D Graph
