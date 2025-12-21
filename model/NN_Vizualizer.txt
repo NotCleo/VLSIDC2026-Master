@@ -7,6 +7,9 @@ Navigate to the root folder of the cloned repository
 
 2) Run the following 
 
+
+NOTE : TO write the below architectural breakdown you can load the onnx file on netron to visualize the nn graph then notedown the parameters
+
 import sys
 import os
 
